@@ -1,0 +1,15 @@
+[
+    {
+        "caption": "ImagePaste: Paste Image From Clipboard",
+        "command": "image_paste"
+    },
+    {
+        "caption": "ImagePaste: Grab and save as png file",
+        "command": "image_grab"
+    },
+    {
+        "caption": "ImagePaste: Preview image",
+        "command": "image_preview"
+    }
+
+]
