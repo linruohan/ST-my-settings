@@ -79,7 +79,7 @@
     "draw_minimap_border": true,
     "draw_shadows": true,
     "draw_white_space": [
-        "none"
+        "all"
     ],
     "enable_tab_scrolling": false,
     "ensure_newline_at_eof_on_save": true,
@@ -178,13 +178,13 @@
         ".Trash",
         ".Trash-*",
     ],
-    "font_face": "xiaohanzhuanshu",
+    "font_face": "Cascadia Mono NF",
     "font_options": [
         // "bold",
         // "gdi",
         // "ss02",
     ],
-    "font_size": 20,
+    "font_size": 16,
     "gutter": true,
     "hide_pointer_while_typing": false,
     "highlight_find_results_in_scrollbar": true,
