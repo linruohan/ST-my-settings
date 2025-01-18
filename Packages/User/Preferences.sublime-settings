@@ -79,7 +79,7 @@
     "draw_minimap_border": true,
     "draw_shadows": true,
     "draw_white_space": [
-        "all"
+        "none"
     ],
     "enable_tab_scrolling": false,
     "ensure_newline_at_eof_on_save": true,
@@ -178,13 +178,13 @@
         ".Trash",
         ".Trash-*",
     ],
-    "font_face": "Cascadia Mono NF",
+    "font_face": "xiaohanzhuanshu",
     "font_options": [
         // "bold",
         // "gdi",
         // "ss02",
     ],
-    "font_size": 16,
+    "font_size": 19,
     "gutter": true,
     "hide_pointer_while_typing": false,
     "highlight_find_results_in_scrollbar": true,
@@ -266,7 +266,7 @@
     // just my own
     // will show some information in the status bar
     "dev_mode": false,
-
+    "save_on_focus_lost":true,
     // plugin: mdpopups
     "mdpopups.sublime_user_lang_map": {
         "jenkinsfile": [["jenkinsfile"], ["scope:source.groovy.jenkinsfile"]],
