@@ -63,6 +63,7 @@
         "LSP-json",
         "LSP-marksman",
         "LSP-ruff",
+        "LSP-rust-analyzer",
         "LSP-typescript",
         "LSP-yaml",
         "Markdown Images",
