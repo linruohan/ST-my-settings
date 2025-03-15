@@ -65,14 +65,14 @@
     ],
     "block_caret": false,
     "caret_extra_bottom": 2,
-    "caret_extra_top": 2,
+    "caret_extra_top": 1,
     "caret_extra_width": 2,
-    "caret_style": "solid",
+    "caret_style": "blink",
     "close_deleted_files": false,
     "close_find_after_find_all": true,
     "close_find_after_replace_all": true,
     "close_windows_when_empty": false,
-    "color_scheme": "Packages/Theme - One Dark/One Dark.tmTheme",
+    "color_scheme": "One Dark.sublime-color-scheme",
     "default_line_ending": "unix",
     "detect_indentation": true,
     "dictionary": "Packages/Language - English/en_US-large.dic",
@@ -289,9 +289,8 @@
         "php",
     ],
     "indent_guide_options": [
-        "solid",
         "draw_normal",
-        "draw_active",
+        "solid",
     ],
     "indent_to_bracket": false,
     "index_exclude_patterns": [
@@ -323,7 +322,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "One Dark.sublime-theme",
+    "theme": "One.sublime-theme",
     "theme_font_options": [
         // "gdi",
     ],
@@ -392,4 +391,33 @@
         ["y", "n"],
         ["yes", "no"],
     ],
+    // theme-one
+    "always_show_minimap_viewport": true,
+    "animation_enabled": false,
+    /*"caret_extra_bottom": 2,*/
+    /*"caret_extra_top": 1,*/
+    /*"caret_style": "blink",*/
+    /*"enable_tab_scrolling": false,*/
+    /*"highlight_line": true,*/
+    /*"highlight_modified_tabs": true,*/
+    /*"indent_guide_options": [
+        "draw_normal",
+        "solid"
+    ],*/
+    /*"line_padding_bottom": 2,*/
+    "line_padding_top": 1,
+    "margin": 0,
+
+    // ST4-specific
+    "highlight_gutter": false,
+    "show_scroll_tabs_buttons": false,
+    "show_tabs_dropdown_button": false,
+    "show_new_tab_button": false,
+    /*"theme": "auto",*/
+    "dark_theme": "One.sublime-theme",
+    "light_theme": "One.sublime-theme",
+
+    /*"color_scheme": "auto",*/
+    "dark_color_scheme": "One Dark.sublime-color-scheme",
+    "light_color_scheme": "One Light.sublime-color-scheme",
 }

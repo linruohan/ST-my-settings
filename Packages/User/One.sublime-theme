@@ -1,0 +1,63 @@
+{
+    "variables": {
+        // darker borders with medium-dark color schemes
+        // "border-color": "color(var(ui-bg) l(- 8%))",
+
+    },
+
+    "rules": [
+        // Highlight the top border of the focused tab instead of the left one
+        {
+            "class": "tab_control",
+            "layer2.inner_margin": [0, 0, 0, 2],
+        },
+        // ST4: Match the color of the tab connector to that of the tab
+        {
+            "class": "tab_connector",
+            "tint_index": 0,
+        },
+        // Hide sidebar's vcs status icons
+        {
+            "class": "vcs_status_badge",
+            "layer0.opacity": 0.0,
+        },
+        // Show panel's close button
+        {
+            "class": "panel_close_button",
+            "content_margin": 8,
+            "layer0.opacity": 1.0
+        },
+        // 命令ctrl+shift+p的每一行
+        {
+            "class": "quick_panel",
+            "row_padding": [2, 1, 2, 1],
+            "layer0.tint": "var(overlay_bg)",
+            "layer0.opacity": 1.0,
+            "dark_content": false,
+        },
+         {
+            "class": "tabset_control",
+            "layer0.opacity": 1.0,
+            "content_margin": [0, 0, 0, 0],
+            "tab_height": 22,
+        },
+        {
+            "class": "tabset_control",
+            "settings": {"file_tab_style": ["", "rounded"]},
+            "tab_overlap": 10,
+            "tab_height": 22,
+            "connector_height": 2,
+        },
+         // Status Bar
+        {
+            "class": "status_bar",
+            "layer0.opacity": 1.0,
+            "content_margin": 0
+        },
+        {
+            "class": "status_container",
+            "content_margin": [1, 0, 0, 0]
+        },
+
+    ]
+}
