@@ -22,17 +22,17 @@
         "caption": "-"
     }, 
     {
+        "checkbox": true, 
         "args": {
             "version": "3.8"
         }, 
-        "checkbox": true, 
         "command": "console_python_version"
     }, 
     {
+        "checkbox": true, 
         "args": {
             "version": "3.3"
         }, 
-        "checkbox": true, 
         "command": "console_python_version"
     }
 ]

@@ -2,10 +2,9 @@
     {
         "caption": "关闭", 
         "args": {
-            "index": -1, 
             "group": -1
         }, 
-        "command": "close_by_index"
+        "command": "close_selected"
     }, 
     {
         "caption": "关闭其它", 
@@ -16,33 +15,6 @@
         "command": "close_others_by_index"
     }, 
     {
-        "caption": "-"
-    }, 
-    {
-        "caption": "关闭已选", 
-        "args": {
-            "index": -1, 
-            "group": -1
-        }, 
-        "command": "close_selected"
-    }, 
-    {
-        "caption": "关闭未选", 
-        "args": {
-            "index": -1, 
-            "group": -1
-        }, 
-        "command": "close_unselected"
-    }, 
-    {
-        "caption": "关闭以下", 
-        "args": {
-            "index": -1, 
-            "group": -1
-        }, 
-        "command": "close_to_right_by_index"
-    }, 
-    {
         "caption": "关闭未改", 
         "args": {
             "index": -1, 
@@ -51,7 +23,15 @@
         "command": "close_unmodified"
     }, 
     {
-        "caption": "关闭以下未改", 
+        "caption": "关闭右侧", 
+        "args": {
+            "index": -1, 
+            "group": -1
+        }, 
+        "command": "close_to_right_by_index"
+    }, 
+    {
+        "caption": "关闭右侧未改", 
         "args": {
             "index": -1, 
             "group": -1

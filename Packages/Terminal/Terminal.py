@@ -58,7 +58,7 @@ def powershell(package_dir):
 
 
 def linux_terminal():
-    ps = 'ps -eo comm,args | grep -E "^(gnome-session|ksmserver|xfce4-session|lxsession|lxqt-session|mate-panel|cinnamon-sessio)" | grep -v grep'  # noqa: E501
+    ps = 'ps -eo comm,args | grep -E "^(gnome-session|ksmserver|xfce4-session|lxsession|mate-panel|cinnamon-sessio)" | grep -v grep'  # noqa: E501
     wm = [x.replace("\n", '') for x in os.popen(ps)]
     if wm:
         # elementary OS: `/usr/lib/gnome-session/gnome-session-binary --session=pantheon`
@@ -74,8 +74,6 @@ def linux_terminal():
             return 'konsole'
         if wm[0].startswith('lxsession'):
             return 'lxterminal'
-        if wm[0].startswith('lxqt-session'):
-            return 'qterminal'
         if wm[0].startswith('mate-panel'):
             return 'mate-terminal'
 
@@ -106,30 +104,17 @@ class TerminalSelector():
         default = None
 
         if os.name == 'nt':
-            # Windows Terminal
-            wt = os.environ['LOCALAPPDATA'] + R'\Microsoft\WindowsApps\wt.exe'
-            # git-bash
-            git_shells = {
-                'git-bash-x64': os.environ['ProgramFiles'] + R'\Git\git-bash.exe',
-                'git-bash-x86': os.environ['ProgramFiles(x86)'] + R'\Git\git-bash.exe',
-                'git-bash-local': os.environ['LOCALAPPDATA'] + R'\Programs\Git\git-bash.exe',
-            }
-
-            if os.path.isfile(wt):
-                default = wt
-            elif os.path.isfile(git_shells['git-bash-x64']):
-                default = git_shells['git-bash-x64']
-            elif os.path.isfile(git_shells['git-bash-x86']):
-                default = git_shells['git-bash-x86']
-            elif os.path.isfile(git_shells['git-bash-local']):
-                default = git_shells['git-bash-local']
-            elif os.path.isfile(os.environ['SYSTEMROOT'] + R'\System32\WindowsPowerShell\v1.0\powershell.exe'):
+            if os.path.exists(os.environ['SYSTEMROOT'] + '\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'):
                 default = powershell(package_dir)
             else:
-                default = os.environ['SYSTEMROOT'] + R'\System32\cmd.exe'
+                default = os.environ['SYSTEMROOT'] + '\\System32\\cmd.exe'
 
         elif sys.platform == 'darwin':
-            default = os.path.join(package_dir, 'Terminal.sh')
+            script = 'Terminal.sh'
+            if get_setting('reuse_window', False):
+                script = 'TerminalReuse.sh'
+
+            default = os.path.join(package_dir, script)
             if not os.access(default, os.X_OK):
                 os.chmod(default, 0o755)
 

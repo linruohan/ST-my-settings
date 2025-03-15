@@ -3,8 +3,8 @@ compdb
 compiledb
 httpie
 ipython
-mypy
-ruff>=0.6
+mypy>=1.15
+ruff>=0.9
 
 build
 pip-tools

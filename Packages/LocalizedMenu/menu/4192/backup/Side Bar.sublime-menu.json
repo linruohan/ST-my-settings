@@ -36,13 +36,6 @@
         "command": "open_containing_folder"
     }, 
     {
-        "caption": "复制文件路径", 
-        "args": {
-            "paths": []
-        }, 
-        "command": "copy_path_sidebar"
-    }, 
-    {
         "caption": "打开链接目录", 
         "args": {
             "dirs": []

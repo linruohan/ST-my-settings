@@ -1,6 +1,7 @@
 [
     {
         "caption": "用此编码保存", 
+        "id": "set_encoding", 
         "children": [
             {
                 "caption": "UTF-8", 
@@ -25,13 +26,6 @@
             }, 
             {
                 "caption": "-"
-            }, 
-            {
-                "caption": "简体中文 (GB18030)", 
-                "args": {
-                    "encoding": "Chinese (GB18030)"
-                }, 
-                "command": "set_encoding"
             }, 
             {
                 "caption": "西方语 (Windows 1252)", 
@@ -195,13 +189,6 @@
                 "command": "set_encoding"
             }, 
             {
-                "caption": "希伯来语 (CP 862)", 
-                "args": {
-                    "encoding": "Hebrew (CP 862)"
-                }, 
-                "command": "set_encoding"
-            }, 
-            {
                 "caption": "希伯来语 (ISO 8859-8)", 
                 "args": {
                     "encoding": "Hebrew (ISO 8859-8)"
@@ -212,13 +199,6 @@
                 "caption": "北欧语 (ISO 8859-10)", 
                 "args": {
                     "encoding": "Nordic (ISO 8859-10)"
-                }, 
-                "command": "set_encoding"
-            }, 
-            {
-                "caption": "北欧语 (Windows 865)", 
-                "args": {
-                    "encoding": "Nordic (Windows 865)"
                 }, 
                 "command": "set_encoding"
             }, 
@@ -260,11 +240,11 @@
                 }, 
                 "command": "set_encoding"
             }
-        ], 
-        "id": "set_encoding"
+        ]
     }, 
     {
         "caption": "用此编码重新打开", 
+        "id": "reopen_with_encoding", 
         "children": [
             {
                 "caption": "UTF-8", 
@@ -289,13 +269,6 @@
             }, 
             {
                 "caption": "-"
-            }, 
-            {
-                "caption": "简体中文 (GB18030)", 
-                "args": {
-                    "encoding": "Chinese (GB18030)"
-                }, 
-                "command": "reopen"
             }, 
             {
                 "caption": "西方语 (Windows 1252)", 
@@ -459,13 +432,6 @@
                 "command": "reopen"
             }, 
             {
-                "caption": "希伯来语 (CP 862)", 
-                "args": {
-                    "encoding": "Hebrew (CP 862)"
-                }, 
-                "command": "reopen"
-            }, 
-            {
                 "caption": "希伯来语 (ISO 8859-8)", 
                 "args": {
                     "encoding": "Hebrew (ISO 8859-8)"
@@ -476,13 +442,6 @@
                 "caption": "北欧语 (ISO 8859-10)", 
                 "args": {
                     "encoding": "Nordic (ISO 8859-10)"
-                }, 
-                "command": "reopen"
-            }, 
-            {
-                "caption": "北欧语 (Windows 865)", 
-                "args": {
-                    "encoding": "Nordic (Windows 865)"
                 }, 
                 "command": "reopen"
             }, 
@@ -524,7 +483,6 @@
                 }, 
                 "command": "reopen"
             }
-        ], 
-        "id": "reopen_with_encoding"
+        ]
     }
 ]

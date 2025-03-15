@@ -1,0 +1,45 @@
+[
+    {
+        "caption": "-", 
+        "id": "repo_commands"
+    }, 
+    {
+        "caption": "打开Git仓库…", 
+        "command": "sublime_merge_open_repo"
+    }, 
+    {
+        "caption": "文件历史…", 
+        "command": "sublime_merge_file_history"
+    }, 
+    {
+        "caption": "-", 
+        "id": "file"
+    }, 
+    {
+        "caption": "打开所在文件夹…", 
+        "args": {
+            "file": "$file_name", 
+            "dir": "$file_path"
+        }, 
+        "command": "open_dir"
+    }, 
+    {
+        "caption": "复制文件路径", 
+        "command": "copy_path"
+    }, 
+    {
+        "caption": "在侧边栏中显示", 
+        "command": "reveal_in_side_bar"
+    }, 
+    {
+        "caption": "作为文本重新打开", 
+        "args": {
+            "type": "text"
+        }, 
+        "command": "force_reopen_as"
+    }, 
+    {
+        "caption": "-", 
+        "id": "end"
+    }
+]

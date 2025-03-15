@@ -88,13 +88,6 @@
         "command": "reveal_in_side_bar"
     }, 
     {
-        "caption": "作为图片重新打开", 
-        "args": {
-            "type": "image"
-        }, 
-        "command": "force_reopen_as"
-    }, 
-    {
         "caption": "-", 
         "id": "end"
     }

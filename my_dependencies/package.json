@@ -4,7 +4,7 @@
     "@babel/eslint-parser": "^7",
     "diagnostic-languageserver": "^1",
     "eslint": "^9",
-    "eslint-config-prettier": "^9",
+    "eslint-config-prettier": "^10",
     "eslint-plugin-prettier": "^5",
     "less": "^4",
     "markdownlint-cli": "^0",

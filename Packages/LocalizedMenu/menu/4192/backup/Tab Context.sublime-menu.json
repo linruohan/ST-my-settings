@@ -8,7 +8,7 @@
         "command": "close_by_index"
     }, 
     {
-        "caption": "关闭其它", 
+        "caption": "关闭其它选项卡", 
         "args": {
             "index": -1, 
             "group": -1
@@ -16,26 +16,7 @@
         "command": "close_others_by_index"
     }, 
     {
-        "caption": "-"
-    }, 
-    {
-        "caption": "关闭已选", 
-        "args": {
-            "index": -1, 
-            "group": -1
-        }, 
-        "command": "close_selected"
-    }, 
-    {
-        "caption": "关闭未选", 
-        "args": {
-            "index": -1, 
-            "group": -1
-        }, 
-        "command": "close_unselected"
-    }, 
-    {
-        "caption": "关闭以下", 
+        "caption": "关闭右侧选项卡", 
         "args": {
             "index": -1, 
             "group": -1
@@ -51,7 +32,7 @@
         "command": "close_unmodified"
     }, 
     {
-        "caption": "关闭以下未改", 
+        "caption": "关闭右侧未改", 
         "args": {
             "index": -1, 
             "group": -1
@@ -64,6 +45,18 @@
             "group": -1
         }, 
         "command": "close_deleted_files"
+    }, 
+    {
+        "caption": "-"
+    }, 
+    {
+        "caption": "拆分视图", 
+        "args": {
+            "add_to_selection": true, 
+            "index": -1, 
+            "group": -1
+        }, 
+        "command": "clone_file"
     }, 
     {
         "caption": "-"

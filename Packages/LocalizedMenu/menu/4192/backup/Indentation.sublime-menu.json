@@ -1,10 +1,10 @@
 [
     {
         "caption": "使用空格缩进", 
+        "checkbox": true, 
         "args": {
             "setting": "translate_tabs_to_spaces"
         }, 
-        "checkbox": true, 
         "command": "toggle_setting"
     }, 
     {
@@ -12,74 +12,74 @@
     }, 
     {
         "caption": "制表符宽度: 1", 
+        "checkbox": true, 
         "args": {
             "setting": "tab_size", 
             "value": 1
         }, 
-        "checkbox": true, 
         "command": "set_setting"
     }, 
     {
         "caption": "制表符宽度: 2", 
+        "checkbox": true, 
         "args": {
             "setting": "tab_size", 
             "value": 2
         }, 
-        "checkbox": true, 
         "command": "set_setting"
     }, 
     {
         "caption": "制表符宽度: 3", 
+        "checkbox": true, 
         "args": {
             "setting": "tab_size", 
             "value": 3
         }, 
-        "checkbox": true, 
         "command": "set_setting"
     }, 
     {
         "caption": "制表符宽度: 4", 
+        "checkbox": true, 
         "args": {
             "setting": "tab_size", 
             "value": 4
         }, 
-        "checkbox": true, 
         "command": "set_setting"
     }, 
     {
         "caption": "制表符宽度: 5", 
+        "checkbox": true, 
         "args": {
             "setting": "tab_size", 
             "value": 5
         }, 
-        "checkbox": true, 
         "command": "set_setting"
     }, 
     {
         "caption": "制表符宽度: 6", 
+        "checkbox": true, 
         "args": {
             "setting": "tab_size", 
             "value": 6
         }, 
-        "checkbox": true, 
         "command": "set_setting"
     }, 
     {
         "caption": "制表符宽度: 7", 
+        "checkbox": true, 
         "args": {
             "setting": "tab_size", 
             "value": 7
         }, 
-        "checkbox": true, 
         "command": "set_setting"
     }, 
     {
         "caption": "制表符宽度: 8", 
+        "checkbox": true, 
         "args": {
             "setting": "tab_size", 
             "value": 8
         }, 
-        "checkbox": true, 
         "command": "set_setting"
     }, 
     {

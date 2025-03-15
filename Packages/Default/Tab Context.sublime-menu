@@ -8,7 +8,7 @@
         "command": "close_by_index"
     }, 
     {
-        "caption": "关闭其它选项卡", 
+        "caption": "关闭其它", 
         "args": {
             "index": -1, 
             "group": -1
@@ -16,7 +16,26 @@
         "command": "close_others_by_index"
     }, 
     {
-        "caption": "关闭右侧选项卡", 
+        "caption": "-"
+    }, 
+    {
+        "caption": "关闭已选", 
+        "args": {
+            "index": -1, 
+            "group": -1
+        }, 
+        "command": "close_selected"
+    }, 
+    {
+        "caption": "关闭未选", 
+        "args": {
+            "index": -1, 
+            "group": -1
+        }, 
+        "command": "close_unselected"
+    }, 
+    {
+        "caption": "关闭右侧", 
         "args": {
             "index": -1, 
             "group": -1
@@ -52,9 +71,10 @@
     {
         "caption": "拆分视图", 
         "args": {
-            "add_to_selection": true, 
             "index": -1, 
-            "group": -1
+            "add_to_selection": true, 
+            "group": -1, 
+            "retain_viewport_position": true
         }, 
         "command": "clone_file"
     }, 
