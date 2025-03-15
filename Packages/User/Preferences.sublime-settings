@@ -72,7 +72,7 @@
     "close_find_after_find_all": true,
     "close_find_after_replace_all": true,
     "close_windows_when_empty": false,
-    "color_scheme": "wicked_rainbow.sublime-color-scheme",
+    "color_scheme": "Packages/Theme - One Dark/One Dark.tmTheme",
     "default_line_ending": "unix",
     "detect_indentation": true,
     "dictionary": "Packages/Language - English/en_US-large.dic",
@@ -323,7 +323,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "Default.sublime-theme",
+    "theme": "One Dark.sublime-theme",
     "theme_font_options": [
         // "gdi",
     ],
