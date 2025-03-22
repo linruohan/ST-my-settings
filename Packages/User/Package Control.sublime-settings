@@ -67,6 +67,7 @@
         "LSP-typescript",
         "LSP-yaml",
         "Markdown Images",
+        "MarkdownEditing",
         "MarkdownPreview",
         "MultiEditUtils",
         "nginx",
