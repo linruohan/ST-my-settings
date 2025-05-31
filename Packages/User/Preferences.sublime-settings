@@ -72,7 +72,7 @@
     "close_find_after_find_all": true,
     "close_find_after_replace_all": true,
     "close_windows_when_empty": false,
-    "color_scheme": "One Dark.sublime-color-scheme",
+    "color_scheme": "MarkdownEditor.sublime-color-scheme",
     "default_line_ending": "unix",
     "detect_indentation": true,
     "dictionary": "Packages/Language - English/en_US-large.dic",
@@ -322,7 +322,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "One.sublime-theme",
+    "theme": "Default.sublime-theme",
     "theme_font_options": [
         // "gdi",
     ],
@@ -414,10 +414,10 @@
     "show_tabs_dropdown_button": false,
     "show_new_tab_button": false,
     /*"theme": "auto",*/
-    "dark_theme": "One.sublime-theme",
-    "light_theme": "One.sublime-theme",
+    "dark_theme": "Default Dark.sublime-theme",
+    "light_theme": "Default.sublime-theme",
 
     /*"color_scheme": "auto",*/
-    "dark_color_scheme": "One Dark.sublime-color-scheme",
-    "light_color_scheme": "One Light.sublime-color-scheme",
+    "dark_color_scheme": "MarkdownEditor.sublime-color-scheme",
+    "light_color_scheme": "MarkdownEditor-Focus.sublime-color-scheme",
 }
