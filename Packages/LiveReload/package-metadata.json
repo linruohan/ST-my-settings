@@ -1,0 +1,1 @@
+{"name": "LiveReload", "version": "0.1.3", "sublime_text": ">=3000", "platforms": ["*"], "python_version": "3.3", "url": "https://github.com/alepez/LiveReload-sublimetext3", "issues": null, "author": ["alepez"], "description": "LiveReload plugin for SublimeText", "labels": [], "libraries": [], "install_time": 1755313651.2386138, "release_time": "2016-10-05 12:10:53"}
