@@ -410,6 +410,18 @@
             "scope": "markup.heading.6",
         },
         {
+            "name": "Markdown - Heading 7",
+            "background": "color(var(Teal700) alpha(1))",
+            "foreground": "var(Black)",
+            "scope": "markup.heading.7",
+        },
+        {
+            "name": "Markdown - Heading 8",
+            "background": "color(var(Teal800) alpha(1))",
+            "foreground": "var(Black)",
+            "scope": "markup.heading.8",
+        },
+        {
             "name": "Markdown: Blockquote",
             "scope": "markup.quote",
             "foreground": "#999999"

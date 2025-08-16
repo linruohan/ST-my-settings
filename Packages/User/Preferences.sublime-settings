@@ -186,7 +186,7 @@
         // "gdi",
         // "ss02",
     ],
-    "font_size": 16,
+    "font_size": 17,
     "gutter": true,
     "hide_pointer_while_typing": false,
     "highlight_find_results_in_scrollbar": true,
@@ -229,7 +229,6 @@
         "jQuery",
         "JsPrettier",
         "Less",
-        "LiveReload",
         "LSP-bash",
         "LSP-clangd",
         "LSP-css",
@@ -243,7 +242,6 @@
         "LSP-ruff",
         "LSP-typescript",
         "LSP-yaml",
-        "MarkdownPreview",
         "MultiEditUtils",
         "nginx",
         "OpenUri",
@@ -322,7 +320,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "Default.sublime-theme",
+    "theme": "auto",
     "theme_font_options": [
         // "gdi",
     ],
@@ -414,7 +412,7 @@
     "show_tabs_dropdown_button": false,
     "show_new_tab_button": false,
     /*"theme": "auto",*/
-    "dark_theme": "Default Dark.sublime-theme",
+    "dark_theme": "Default.sublime-theme",
     "light_theme": "Default.sublime-theme",
 
     /*"color_scheme": "auto",*/
