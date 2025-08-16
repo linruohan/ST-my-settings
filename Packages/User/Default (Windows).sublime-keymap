@@ -225,7 +225,7 @@
     },
     // new line
     {
-        "keys": ["ctrl+enter"],
+        "keys": ["ctrl+shift+enter"],
         "command": "run_macro_file",
         "args": { "file": "res://Packages/Default/Add Line.sublime-macro" }
     },
