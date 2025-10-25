@@ -72,14 +72,14 @@
     "close_find_after_find_all": true,
     "close_find_after_replace_all": true,
     "close_windows_when_empty": false,
-    "color_scheme": "wicked_rainbow.sublime-color-scheme",
+    "color_scheme": "MarkdownEditor.sublime-color-scheme",
     "default_line_ending": "unix",
     "detect_indentation": true,
     "dictionary": "Packages/Language - English/en_US-large.dic",
     "draw_minimap_border": true,
     "draw_shadows": true,
     "draw_white_space": [
-        "all"
+        "none"
     ],
     "enable_tab_scrolling": false,
     "ensure_newline_at_eof_on_save": true,
@@ -180,13 +180,13 @@
         ".Trash",
         ".Trash-*",
     ],
-    "font_face": "Cascadia Mono NF",
+    "font_face": "XHZS",
     "font_options": [
         // "bold",
         // "gdi",
         // "ss02",
     ],
-    "font_size": 11,
+    "font_size": 17,
     "gutter": true,
     "hide_pointer_while_typing": false,
     "highlight_find_results_in_scrollbar": true,
@@ -249,7 +249,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "Adaptive.sublime-theme",
+    "theme": "auto",
     "theme_font_options": [
         // "gdi",
     ],
@@ -268,7 +268,7 @@
     // just my own
     // will show some information in the status bar
     "dev_mode": false,
-
+    "save_on_focus_lost":true,
     // plugin: mdpopups
     "mdpopups.sublime_user_lang_map": {
         "jenkinsfile": [["jenkinsfile"], ["scope:source.groovy.jenkinsfile"]],
@@ -322,4 +322,33 @@
         ["y", "n"],
         ["yes", "no"],
     ],
+    // theme-one
+    "always_show_minimap_viewport": true,
+    "animation_enabled": false,
+    /*"caret_extra_bottom": 2,*/
+    /*"caret_extra_top": 1,*/
+    /*"caret_style": "blink",*/
+    /*"enable_tab_scrolling": false,*/
+    /*"highlight_line": true,*/
+    /*"highlight_modified_tabs": true,*/
+    /*"indent_guide_options": [
+        "draw_normal",
+        "solid"
+    ],*/
+    /*"line_padding_bottom": 2,*/
+    "line_padding_top": 1,
+    "margin": 0,
+
+    // ST4-specific
+    "highlight_gutter": false,
+    "show_scroll_tabs_buttons": false,
+    "show_tabs_dropdown_button": false,
+    "show_new_tab_button": false,
+    /*"theme": "auto",*/
+    "dark_theme": "Default.sublime-theme",
+    "light_theme": "Default.sublime-theme",
+
+    /*"color_scheme": "auto",*/
+    "dark_color_scheme": "MarkdownEditor.sublime-color-scheme",
+    "light_color_scheme": "MarkdownEditor-Focus.sublime-color-scheme",
 }

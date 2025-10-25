@@ -5,15 +5,15 @@
         //////////
         // base //
         //////////
-        "Black"           : "#000" ,
-        "BlackLight"      : "#111" ,
-        "BlackLighter"    : "#222" ,
-        "BlackLightest"   : "#333" ,
-        "BlueSaturated"   : "#00F" ,
-        "CyanSaturated"   : "#0FF" ,
+        "Black"           : "#1a1b26" ,
+        "BlackLight"      : "#1a1b24" ,
+        "BlackLighter"    : "#1a1b22" ,
+        "BlackLightest"   : "#1a1b20" ,
+        "BlueSaturated"   : "#7aa2f7" ,
+        "CyanSaturated"   : "#7dcfff" ,
         "GreenSaturated"  : "#0F0" ,
         "PinkSaturated"   : "#F0F" ,
-        "RedSaturated"    : "#F00" ,
+        "RedSaturated"    : "#f7768e" ,
         "White"           : "#FFF" ,
         "WhiteDark"       : "#EEE" ,
         "WhiteDarker"     : "#DDD" ,
@@ -510,38 +510,38 @@
         },
         {
             "name": "Markdown - Heading 1",
-            "background": "color(var(Red) alpha(0.2))",
-            "foreground": "var(Red)",
+            "background": "color(var(Purple) alpha(1))",
+            "foreground": "var(Black)",
             "scope": "markup.heading.1",
         },
         {
             "name": "Markdown - Heading 2",
-            "background": "color(var(Orange) alpha(0.2))",
-            "foreground": "var(Orange)",
+            "background": "color(var(Pink) alpha(1))",
+            "foreground": "var(Black)",
             "scope": "markup.heading.2",
         },
         {
             "name": "Markdown - Heading 3",
-            "background": "color(var(Yellow) alpha(0.2))",
-            "foreground": "var(Yellow)",
+            "background": "color(var(Yellow) alpha(1))",
+            "foreground": "var(Black)",
             "scope": "markup.heading.3",
         },
         {
             "name": "Markdown - Heading 4",
-            "background": "color(var(Green) alpha(0.2))",
-            "foreground": "var(Green)",
+            "background": "color(var(Green) alpha(1))",
+            "foreground": "var(Black)",
             "scope": "markup.heading.4",
         },
         {
             "name": "Markdown - Heading 5",
-            "background": "color(var(Cyan) alpha(0.2))",
-            "foreground": "var(Cyan)",
+            "background": "color(var(Cyan) alpha(1))",
+            "foreground": "var(Black)",
             "scope": "markup.heading.5",
         },
         {
             "name": "Markdown - Heading 6",
-            "background": "color(var(Purple) alpha(0.2))",
-            "foreground": "var(Purple)",
+            "background": "color(var(Teal600) alpha(1))",
+            "foreground": "var(Black)",
             "scope": "markup.heading.6",
         },
         {
@@ -904,14 +904,6 @@
             "foreground": "var(--foreground)",
             "name": "INI punctuation: Assign",
             "scope": "punctuation.separator.mapping.key-value.ini",
-        },
-        ////////////////////
-        // Sublime Syntax //
-        ////////////////////
-        {
-            "foreground": "var(Yellow900)",
-            "name": "Sublime Syntax: scope separator",
-            "scope": "punctuation.separator.context-name.sublime-syntax",
         },
         /////////
         // Log //
