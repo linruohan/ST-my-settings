@@ -72,7 +72,7 @@
     "close_find_after_find_all": true,
     "close_find_after_replace_all": true,
     "close_windows_when_empty": false,
-    "color_scheme": "MarkdownEditor.sublime-color-scheme",
+    "color_scheme": "wicked_rainbow.sublime-color-scheme",
     "default_line_ending": "unix",
     "detect_indentation": true,
     "dictionary": "Packages/Language - English/en_US-large.dic",
@@ -180,7 +180,7 @@
         ".Trash",
         ".Trash-*",
     ],
-    "font_face": "XHZS",
+    "font_face": "Cascadia Mono NF",
     "font_options": [
         // "bold",
         // "gdi",
@@ -249,7 +249,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "auto",
+    "theme": "Adaptive.sublime-theme",
     "theme_font_options": [
         // "gdi",
     ],
@@ -268,7 +268,7 @@
     // just my own
     // will show some information in the status bar
     "dev_mode": false,
-    "save_on_focus_lost":true,
+
     // plugin: mdpopups
     "mdpopups.sublime_user_lang_map": {
         "jenkinsfile": [["jenkinsfile"], ["scope:source.groovy.jenkinsfile"]],

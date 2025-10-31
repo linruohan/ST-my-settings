@@ -510,6 +510,77 @@
         },
         {
             "name": "Markdown - Heading 1",
+            "background": "color(var(Red) alpha(0.2))",
+            "foreground": "var(Red)",
+            "scope": "markup.heading.1",
+        },
+        {
+            "name": "Markdown - Heading 2",
+            "background": "color(var(Orange) alpha(0.2))",
+            "foreground": "var(Orange)",
+            "scope": "markup.heading.2",
+        },
+        {
+            "name": "Markdown - Heading 3",
+            "background": "color(var(Yellow) alpha(0.2))",
+            "foreground": "var(Yellow)",
+            "scope": "markup.heading.3",
+        },
+        {
+            "name": "Markdown - Heading 4",
+            "background": "color(var(Green) alpha(0.2))",
+            "foreground": "var(Green)",
+            "scope": "markup.heading.4",
+        },
+        {
+            "name": "Markdown - Heading 5",
+            "background": "color(var(Cyan) alpha(0.2))",
+            "foreground": "var(Cyan)",
+            "scope": "markup.heading.5",
+        },
+        {
+            "name": "Markdown - Heading 6",
+            "background": "color(var(Purple) alpha(0.2))",
+            "foreground": "var(Purple)",
+            "scope": "markup.heading.6",
+        },
+        {
+            "foreground": "var(Red)",
+            "name": "Markdown - List - Punctuation",
+            "scope": "markup.list.numbered.bullet | punctuation.definition.list_item",
+        },
+        {
+            "foreground": "var(Amber100)",
+            "name": "Markdown - List - Paragraph",
+            "scope": "meta.paragraph.list",
+        },
+        {
+            "foreground": "var(Blue)",
+            "name": "Markdown - Link - Description",
+            "scope": "meta.link.inline.description | meta.link.reference.description",
+        },
+        {
+            "foreground": "var(Teal300)",
+            "name": "Markdown - Image - Description",
+            "scope": "meta.image.inline.description | meta.image.reference.description",
+        },
+        {
+            "foreground": "var(Lime900)",
+            "name": "Markdown - Link - href",
+            "scope": "markup.underline.link",
+        },
+        {
+            "foreground": "var(Grey500)",
+            "name": "Markdown - Punctuation",
+            "scope": "punctuation.definition.image.begin | punctuation.definition.image.end | punctuation.definition.link.begin | punctuation.definition.link.end | punctuation.definition.metadata.begin | punctuation.definition.metadata.end | punctuation.definition.raw.begin | punctuation.definition.raw.end | punctuation.definition.raw.code-fence.begin | punctuation.definition.raw.code-fence.end",
+        },
+        {
+            "foreground": "var(Green)",
+            "name": "Markdown - Inline",
+            "scope": "markup.raw.inline.markdown",
+        },
+        {
+            "name": "Markdown - Heading 1",
             "background": "color(var(Purple) alpha(1))",
             "foreground": "var(Black)",
             "scope": "markup.heading.1",
@@ -904,6 +975,14 @@
             "foreground": "var(--foreground)",
             "name": "INI punctuation: Assign",
             "scope": "punctuation.separator.mapping.key-value.ini",
+        },
+        ////////////////////
+        // Sublime Syntax //
+        ////////////////////
+        {
+            "foreground": "var(Yellow900)",
+            "name": "Sublime Syntax: scope separator",
+            "scope": "punctuation.separator.context-name.sublime-syntax",
         },
         /////////
         // Log //

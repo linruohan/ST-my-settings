@@ -1,3 +1,0 @@
-[submodule "typings/LSP"]
-	path = typings/LSP
-	url = https://github.com/sublimelsp/LSP.git
