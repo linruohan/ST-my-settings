@@ -38,7 +38,7 @@ def revise_node_electron_version() -> None:
         tuple[GLIBC_VER_TUPLE, ELECTRON_VER_STR, NODE_VER_STR], ...
     ] = (
         # ((min_glibc_version), "electron_version", "node_version"),
-        ((2, 25), "39.0.0", "22.20.0"),
+        ((2, 25), "40.0.0-alpha.4", "24.11.0"),
         ((2, 18), "29.4.6", "20.9.0"),
         ((2, 17), "28.3.3", "18.18.2"),
     )
