@@ -249,7 +249,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "Adaptive.sublime-theme",
+    "theme": "auto",
     "theme_font_options": [
         // "gdi",
     ],
