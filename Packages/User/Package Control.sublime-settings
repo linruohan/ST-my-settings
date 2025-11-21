@@ -1,14 +1,12 @@
 {
-    "install_prereleases":
-    [
+    "install_prereleases": [
         "ColorHelper",
         "LaTeXTools",
         "Package Control",
         "PackageDev",
-        "PowerShell",
+        "PowerShell"
     ],
-    "installed_packages":
-    [
+    "installed_packages": [
         "AceJump-Chinese",
         "Advanced Substation Alpha (ASS)",
         "AlignTab",
@@ -86,24 +84,19 @@
         "Sass",
         "ScopeHunter",
         "SelectUntil",
-        "Sort Lines (Numerically)",
         "SublimeLinter",
         "SublimeLinter-contrib-markdownlint",
         "SublimeLinter-contrib-sublime-syntax",
         "SublimeLinter-php",
         "Terminal",
-        "TOML",
         "Twig",
         "Verilog",
         "Vue",
         "WindowsContextMenu",
-        "YamlPipelines",
+        "YamlPipelines"
     ],
-    "repositories":
-    [
-        "https://raw.githubusercontent.com/jfcherng-sublime/ST-my-package-control/master/repository.json",
+    "repositories": [
+        "https://raw.githubusercontent.com/jfcherng-sublime/ST-my-package-control/master/repository.json"
     ],
-    "in_process_packages":
-    [
-    ],
+    "in_process_packages": []
 }

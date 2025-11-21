@@ -32,7 +32,7 @@
         "syntaxes",
         "todo",
         "unittests",
-        "Vue",
+        "Vue"
     ],
     "auto_complete_cycle": true,
     "auto_complete_preserve_order": "none",
@@ -40,8 +40,8 @@
     "auto_complete_triggers": [
         {
             "selector": "source.sass | source.scss",
-            "characters": "$",
-        },
+            "characters": "$"
+        }
     ],
     "auto_find_in_selection": true,
     "binary_file_patterns": [
@@ -61,7 +61,7 @@
         // project root ignore
         "//branch-*/",
         "branch-build/",
-        "public/build/",
+        "public/build/"
     ],
     "block_caret": false,
     "caret_extra_bottom": 2,
@@ -78,9 +78,7 @@
     "dictionary": "Packages/Language - English/en_US-large.dic",
     "draw_minimap_border": true,
     "draw_shadows": true,
-    "draw_white_space": [
-        "none"
-    ],
+    "draw_white_space": ["all"],
     "enable_tab_scrolling": false,
     "ensure_newline_at_eof_on_save": true,
     "file_exclude_patterns": [
@@ -155,7 +153,7 @@
         "*.class",
         "*.psd",
         "*.db",
-        "*.sublime-workspace",
+        "*.sublime-workspace"
     ],
     "find_selected_text": true,
     "folder_exclude_patterns": [
@@ -178,29 +176,27 @@
         ".hg",
         "CVS",
         ".Trash",
-        ".Trash-*",
+        ".Trash-*"
     ],
-    "font_face": "XHZS",
+    "font_face": "Cascadia Mono NF",
     "font_options": [
         // "bold",
         // "gdi",
         // "ss02",
     ],
-    "font_size": 17,
+    "font_size": 11,
     "gutter": true,
     "hide_pointer_while_typing": false,
     "highlight_find_results_in_scrollbar": true,
     "highlight_line": true,
     "highlight_modified_tabs": true,
     "hungry_delete_empty_line": false,
-    "ignored_packages": [
-        "Vintage",
-    ],
+    "ignored_packages": ["Vintage"],
     "ignored_snippets": [
         "C++/Snippets/*",
         "EditorConfig/*",
         "JsPrettier/Snippets/*",
-        "LiveReload/snippets/*",
+        "LiveReload/snippets/*"
     ],
     "ignored_words": [
         "args",
@@ -212,13 +208,9 @@
         "https",
         "inheritdoc",
         "param",
-        "php",
+        "php"
     ],
-    "indent_guide_options": [
-        "solid",
-        "draw_normal",
-        "draw_active",
-    ],
+    "indent_guide_options": ["solid", "draw_normal", "draw_active"],
     "indent_to_bracket": false,
     "index_exclude_patterns": [
         "//branch-*/",
@@ -227,7 +219,7 @@
         "*.tmp",
         "*.dmp",
         // default
-        "*.log",
+        "*.log"
     ],
     "index_files": true,
     "line_numbers": true,
@@ -236,11 +228,7 @@
     "match_tags": false,
     // "mini_auto_complete": true,
     "preview_on_click": "only_left",
-    "rulers": [
-        80,
-        100,
-        120
-    ],
+    "rulers": [80, 100, 120],
     "scroll_past_end": 0.4,
     "scroll_context_lines": 4,
     "selection_description_column_type": "real",
@@ -249,7 +237,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "auto",
+    "theme": "Adaptive.sublime-theme",
     "theme_font_options": [
         // "gdi",
     ],
@@ -271,19 +259,19 @@
 
     // plugin: mdpopups
     "mdpopups.sublime_user_lang_map": {
-        "jenkinsfile": [["jenkinsfile"], ["scope:source.groovy.jenkinsfile"]],
+        "jenkinsfile": [["jenkinsfile"], ["scope:source.groovy.jenkinsfile"]]
     },
     // plugin: CommandAndMenu
     "repo.remote_to_web_url": [
         // Realtek Gerrit
         {
             "search": "ssh://(?:[^@]*@)?(?P<domain>[^:/]+\\.(?:realtek|rtkbf)\\.com):29418/(?P<project>.+)",
-            "replace": "https://\\g<domain>/gerrit/admin/repos/\\g<project>",
+            "replace": "https://\\g<domain>/gerrit/admin/repos/\\g<project>"
         },
         {
             "search": "(?P<scheme>https?)://(?:[^@]*@)?(?P<domain>[^:/]+\\.(?:realtek|rtkbf)\\.com)/gerrit/(?P<project>.+)",
-            "replace": "\\g<scheme>://\\g<domain>/gerrit/admin/repos/\\g<project>",
-        },
+            "replace": "\\g<scheme>://\\g<domain>/gerrit/admin/repos/\\g<project>"
+        }
     ],
     // plugin: ToggleWord
     "toggle_word.groups": [
@@ -320,7 +308,7 @@
         ["wide", "narrow"],
         ["width", "height"],
         ["y", "n"],
-        ["yes", "no"],
+        ["yes", "no"]
     ],
     // theme-one
     "always_show_minimap_viewport": true,
@@ -350,5 +338,5 @@
 
     /*"color_scheme": "auto",*/
     "dark_color_scheme": "MarkdownEditor.sublime-color-scheme",
-    "light_color_scheme": "MarkdownEditor-Focus.sublime-color-scheme",
+    "light_color_scheme": "MarkdownEditor-Focus.sublime-color-scheme"
 }
