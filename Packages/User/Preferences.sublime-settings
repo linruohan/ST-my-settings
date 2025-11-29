@@ -72,7 +72,7 @@
     "close_find_after_find_all": true,
     "close_find_after_replace_all": true,
     "close_windows_when_empty": false,
-    "color_scheme": "wicked_rainbow.sublime-color-scheme",
+    "color_scheme": "auto",
     "default_line_ending": "unix",
     "detect_indentation": true,
     "dictionary": "Packages/Language - English/en_US-large.dic",
@@ -338,5 +338,5 @@
 
     /*"color_scheme": "auto",*/
     "dark_color_scheme": "MarkdownEditor.sublime-color-scheme",
-    "light_color_scheme": "MarkdownEditor-Focus.sublime-color-scheme",
+    "light_color_scheme": "MarkdownEditor.sublime-color-scheme",
 }
