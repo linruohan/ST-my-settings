@@ -1,219 +1,422 @@
 %YAML 1.2
 ---
-# http://www.sublimetext.com/docs/syntax.html
+# https://www.sublimetext.com/docs/syntax.html
+# https://man7.org/linux/man-pages/man5/ssh_config.5.html
+# https://man.openbsd.org/ssh_config.5
 name: SSH Config
+scope: source.ssh_config
+version: 2
+extends: SSH Crypto.sublime-syntax
+
 file_extensions:
   - ssh_config
-  - sshd_config
-scope: source.ssh-config
+
 contexts:
-  prototype:
-    - match: '#'
-      scope: punctuation.definition.comment.ssh-config
-      push:
-        - meta_scope: comment.line.number-sign.ssh-config
-        - match: \n
-          pop: true
   main:
-    - match: |
-        (?x)\b(?:
-          AcceptEnv
-          | AddKeysToAgent
-          | AddressFamily
-          | AllowAgentForwarding
-          | AllowGroups
-          | AllowStreamLocalForwarding
-          | AllowTcpForwarding
-          | AllowUsers
-          | AuthenticationMethods
-          | AuthorizedKeysCommand
-          | AuthorizedKeysCommandUser
-          | AuthorizedKeysFile
-          | AuthorizedPrincipalsCommand
-          | AuthorizedPrincipalsCommandUser
-          | AuthorizedPrincipalsFile
-          | Banner
-          | BatchMode
-          | BindAddress
-          | BindInterface
-          | CanonicalDomains
-          | CanonicalizeFallbackLocal
-          | CanonicalizeHostname
-          | CanonicalizeMaxDots
-          | CanonicalizePermittedCNAMEs
-          | CertificateFile
-          | ChallengeResponseAuthentication
-          | CheckHostIP
-          | ChrootDirectory
-          | CientAliveCountMax
-          | CientAliveInterval
-          | Cipher
-          | Ciphers
-          | ClearAllForwardings
-          | Compression
-          | CompressionLevel
-          | ConnectionAttempts
-          | ConnectTimeout
-          | ControlMaster
-          | ControlPath
-          | ControlPersist
-          | DenyGroups
-          | DenyUsers
-          | DisableForwarding
-          | DynamicForward
-          | EnableSSHKeysign
-          | EscapeChar
-          | ExitOnForwardFailure
-          | ExposeAuthInfo
-          | FingerprintHash
-          | ForceCommand
-          | ForwardAgent
-          | ForwardX11
-          | ForwardX11Timeout
-          | ForwardX11Trusted
-          | GatewayPorts
-          | GlobalKnownHostsFile
-          | GSSAPIAuthentication
-          | GSSAPICleanupCredentials
-          | GSSAPIClientIdentity
-          | GSSAPIDelegateCredentials
-          | GSSAPIKeyExchange
-          | GSSAPIRenewalForcesRekey
-          | GSSAPIServerIdentity
-          | GSSAPIStrictAcceptorCheck
-          | GSSAPITrustDns
-          | HashKnownHosts
-          | HostbasedAcceptedKeyTypes
-          | HostbasedAuthentication
-          | HostbasedKeyTypes
-          | HostbasedUsesNameFromPacketOnly
-          | HostCertificate
-          | HostKey
-          | HostKeyAgent
-          | HostkeyAlgorithms
-          | HostKeyAlgorithms
-          | HostKeyAlias
-          | HostName
-          | IdentitiesOnly
-          | IdentityAgent
-          | IdentityFile
-          | IgnoreRhosts
-          | IgnoreUnknown
-          | IgnoreUserKnownHosts
-          | Include
-          | IPQoS
-          | KbdInteractiveAuthentication
-          | KbdInteractiveDevices
-          | KerberosAuthentication
-          | KerberosGetAFSToken
-          | KerberosOrLocalPasswd
-          | KerberosTicketCleanup
-          | kexalgorithms
-          | KexAlgorithms
-          | ListenAddress
-          | LocalCommand
-          | LocalForward
-          | LoginGraceTime
-          | LogLevel
-          | MACs
-          | Match
-          | MaxAuthTries
-          | MaxSessions
-          | MaxStartups
-          | NoHostAuthenticationForLocalhost
-          | NumberOfPasswordPrompts
-          | PasswordAuthentication
-          | PermitEmptyPasswords
-          | PermitLocalCommand
-          | PermitOpen
-          | PermitRootLogin
-          | PermitTTY
-          | PermitTunnel
-          | PermitUserEnvironment
-          | PermitUserRC
-          | PidFile
-          | PKCS11Provider
-          | Port
-          | PreferredAuthentications
-          | PrintLastLog
-          | PrintMotd
-          | Protocol
-          | ProxyCommand
-          | ProxyJump
-          | ProxyUseFdpass
-          | PubkeyAcceptedAlgorithms
-          | PubkeyAcceptedKeyTypes
-          | PubkeyAuthentication
-          | RDomain
-          | RekeyLimit
-          | RemoteCommand
-          | RemoteForward
-          | RequestTTY
-          | RevokedHostKeys
-          | RevokedKeys
-          | RhostsRSAAuthentication
-          | RSAAuthentication
-          | SendEnv
-          | ServerAliveCountMax
-          | ServerAliveInterval
-          | StreamLocalBindMask
-          | StreamLocalBindUnlink
-          | StrictHostKeyChecking
-          | StrictModes
-          | Subsystem
-          | SyslogFacility
-          | TCPKeepAlive
-          | TrustedUserCAKeys
-          | Tunnel
-          | TunnelDevice
-          | UpdateHostKeys
-          | UseBlacklistedKeys
-          | UseDNS
-          | UseKeychain
-          | UsePAM
-          | UsePrivilegedPort
-          | User
-          | UserKnownHostsFile
-          | VerifyHostKeyDNS
-          | VersionAddendum
-          | VisualHostKey
-          | X11DisplayOffset
-          | X11Forwarding
-          | X11UseLocalhost
-          | XAuthLocation
-        )\b
-      scope: keyword.other.ssh-config
-    - match: '(^[ \t]+)?(?=#)'
-      captures:
-        1: punctuation.whitespace.comment.leading.ssh-config
+    - include: comments
+    - include: host-block
+    - include: match
+    - include: naked-parameters
+
+  parameters:
+    - include: comments
+    - include: parameter-hostname
+    - include: parameter-localcommand
+    - include: parameter-proxycommand
+    - include: parameter-proxyjump
+    - include: parameter-knownhostscommand
+    - include: parameter-with-boolean-values
+    - include: parameter-with-boolean-values-plus-ask
+    - include: parameter-generic
+
+  tokens:
+    - match: '%%'
+      scope: constant.character.escape.ssh_config
+    - match: '{{tokens_standard}}'
+      scope: constant.other.placeholder.ssh_config
+
+  pop-before-match-parameter:
+    - include: pop-before-nl
+    - match: '(?=\s*{{match_parameters}})'
+      pop: 1
+
+  pop-before-next-host:
+    - match: '(?=^\s*(?xi: Host | Match )\b)'
+      pop: 1
+
+  naked-parameters:
+    - match: (?=\S)
       push:
-        - match: (?!\G)
-          pop: true
-    - match: '(^[ \t]+)?(?=//)'
+        - meta_scope: meta.block.naked.ssh_config
+        - include: pop-before-next-host
+        - include: parameters
+
+  host-pattern:
+    - meta_content_scope: entity.name.label.host-alias.ssh_config
+    - include: punctuation-dot-sequence
+    - include: wildcards
+    - match: (?=\s|,)
+      pop: 1
+
+  host-patterns:
+    # https://man7.org/linux/man-pages/man5/ssh_config.5.html#PATTERNS
+    # https://man.openbsd.org/ssh_config.5#PATTERNS
+    - include: operator-exclamation
+    - include: punctuation-comma-sequence
+    - match: (?=\S)
+      push: host-pattern
+
+  environment-variables:
+    # https://man7.org/linux/man-pages/man5/ssh_config.5.html#ENVIRONMENT_VARIABLES
+    - include: scope:source.shell#parameter-expansions
+
+###[ HOST ]####################################################################
+
+  host-block:
+    - match: ^\s*((?i:Host))\b
       captures:
-        1: punctuation.whitespace.comment.leading.ssh-config
+        1: keyword.declaration.host-alias.ssh_config
+      set: host-aliases
+
+  host-aliases:
+    - meta_scope: meta.block.host.ssh_config
+    - match: (?=\n)
+      set: host-body
+    - include: host-patterns
+
+  host-body:
+    - meta_scope: meta.block.host.ssh_config
+    - include: pop-before-next-host
+    - include: parameters
+
+###[ MATCH ]###################################################################
+
+  match:
+    - match: ^\s*((?i:Match))\b
+      captures:
+        1: keyword.control.conditional.ssh_config
+      set: match-conditions
+
+  match-conditions:
+    - meta_scope: meta.block.match.ssh_config
+    - meta_content_scope: meta.statement.conditional.ssh_config
+
+    - match: \n
+      set: match-body
+
+    - include: operator-exclamation
+    # Match predicates with no arguments
+    - include: match-all
+    - match: '\b(?xi: canonical | final )\b'
+      scope: keyword.other.ssh_config
+
+    # Match predicates with shell
+    # quoted shell
+    - match: '\b((?xi: exec ))\b\s*(\")'
+      captures:
+        1: keyword.other.ssh_config
+        2: string.quoted.double.ssh_config
+           punctuation.definition.string.begin.ssh_config
+      escape: (?<!\\)\"(?=\s*(?:#.*)?)
+      escape_captures:
+        0: meta.block.match.ssh_config
+           meta.statement.conditional.ssh_config
+           string.quoted.double.ssh_config
+           punctuation.definition.string.end.ssh_config
+      embed_scope: string.quoted.double.ssh_config
+      embed: scope:source.shell.embedded.ssh
+    # unquoted shell
+    - match: '\b((?xi: exec ))\b[ \t]+'
+      captures:
+        1: keyword.other.ssh_config
+      embed: scope:source.shell.embedded.ssh
+      escape: '(?=\s*(?:{{match_parameters}}|$))'
+
+    # Match predicates with host arguments
+    - match: '\b(?xi: (?:original)? host )\b'
+      scope: keyword.other.ssh_config
       push:
-        - match: (?!\G)
-          pop: true
-        - match: //
-          captures:
-            0: punctuation.definition.comment.ssh-config
+        - include: pop-before-match-parameter
+        - include: punctuation-comma-sequence
+        - include: host-patterns
+
+    # Match predicates with generic string arguments
+    - match: '\b(?xi: (?:local)? user | tagged | version | command | sessiontype )\b'
+      scope: keyword.other.ssh_config
+      push:
+        - include: pop-before-match-parameter
+        - include: string-patterns
+
+    # Match predicates with CIDR arguments
+    - match: '\b(?xi: localnetwork )\b'
+      scope: keyword.other.ssh_config
+      push:
+        - include: pop-before-match-parameter
+        - include: punctuation-comma-sequence
+        - include: ip-addresses-with-cidr
+
+  match-body:
+    - meta_content_scope: meta.block.match.ssh_config
+    - include: pop-before-next-host
+    - include: parameters
+
+###[ PARAMETERS ]##############################################################
+
+  parameter-hostname:
+    - match: ^\s*((?i:HostName))\b\s*(=)?
+      captures:
+        1: meta.mapping.key.ssh_config keyword.declaration.host.ssh_config
+        2: keyword.operator.assignment.ssh_config
+      push:
+        - meta_content_scope: meta.string.host.ssh_config
+        - include: pop-nl
+        - include: ip-addresses
+        - match: (?=\S+)
           push:
-            - meta_scope: comment.line.double-slash.ssh-config
-            - match: \n
-              pop: true
-    - match: (?:^| |\t)(Host)\s+((.*))$
+            - meta_content_scope: string.unquoted.hostname.ssh_config
+            - include: pop-before-nl
+            - include: punctuation-dot-sequence
+            - match: '{{tokens_hostname}}'
+              scope: constant.character.escape.ssh_config
+            - match: '\s+(\S+)'
+              captures:
+                1: invalid.illegal.ssh_config
+
+  parameter-proxyjump:
+    - match: ^\s*((?i:ProxyJump))\b\s*(=)?
       captures:
-        1: storage.type.ssh-config
-        2: entity.name.section.ssh-config
-        3: meta.toc-list.ssh-config
-    - match: '\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b'
-      scope: constant.numeric.ssh-config
-    - match: '\b[0-9]+\b'
-      scope: constant.numeric.ssh-config
-    - match: \byes\b
-      scope: constant.language.boolean.true.ssh-config
-    - match: \bno\b
-      scope: constant.language.boolean.false.ssh-config
-    - match: '\b[A-Z_]+\b'
-      scope: constant.language.ssh-config
+        1: meta.mapping.key.ssh_config keyword.other.ssh_config
+        2: keyword.operator.assignment.ssh_config
+      push:
+        - meta_content_scope: meta.mapping.value.ssh_config
+        - include: pop-nl
+        - include: none-command-values
+        - match: '"'
+          scope: string.quoted.double.ssh_config
+                 punctuation.definition.string.begin.ssh_config
+          escape: '(")|(?=\n|$)'
+          escape_captures:
+            1: meta.mapping.value.ssh_config
+               string.quoted.double.ssh_config
+               punctuation.definition.string.end.ssh_config
+          embed_scope: string.quoted.double.ssh_config
+          embed: proxyjump-values
+        - match: (?=\S)
+          escape: (?=\n|$)
+          embed: proxyjump-values
+
+  proxyjump-values:
+    - include: ip-addresses
+    - include: punctuation-comma-sequence
+
+    # user
+    - match: (?=[\w%]+@)
+      push:
+        - meta_content_scope: meta.string.user.ssh_config string.unquoted.ssh_config
+        - match: '%%'
+          scope: constant.character.escape.ssh_config
+        - match: '{{tokens_proxycommand}}'
+          scope: constant.other.placeholder.ssh_config
+        - match: '@'
+          scope: punctuation.separator.ssh_config
+          pop: 1
+
+    # port
+    - match: ':(?={{zero_to_65535}}(?![\w:]))'
+      scope: punctuation.separator.ssh_config
+      push:
+        - match: (?=\D)
+          pop: 1
+        - include: port-numbers
+
+    # host or host nickname
+    - match: (?=\S+)
+      push:
+        - meta_content_scope: string.unquoted.hostname.ssh_config
+        - match: (?=[\s,:"])
+          pop: 1
+        - include: punctuation-dot-sequence
+        - match: '%%'
+          scope: constant.character.escape.ssh_config
+        - match: '{{tokens_proxycommand}}'
+          scope: constant.other.placeholder.ssh_config
+
+  parameter-proxycommand:
+    - match: ^\s*((?i:ProxyCommand))\b\s*(=)?
+      captures:
+        1: meta.mapping.key.ssh_config keyword.other.ssh_config
+        2: keyword.operator.assignment.ssh_config
+      push:
+        - meta_content_scope: meta.mapping.value.ssh_config
+        - include: pop-nl
+        - include: none-command-values
+        - match: '"'
+          scope: string.quoted.double.ssh_config
+                 punctuation.definition.string.begin.ssh_config
+          escape: '(")|(?=\n|$)'
+          escape_captures:
+            1: meta.mapping.value.ssh_config
+               string.quoted.double.ssh_config
+               punctuation.definition.string.end.ssh_config
+          embed_scope: string.quoted.double.ssh_config
+                       source.shell.embedded.ssh.proxycommand
+          embed: scope:source.shell.embedded.ssh.proxycommand
+        - match: (?=\S)
+          escape: (?=\n|$)
+          embed: scope:source.shell.embedded.ssh.proxycommand
+
+  parameter-localcommand:
+    - match: ^\s*((?i:LocalCommand))\b\s*(=)?
+      captures:
+        1: meta.mapping.key.ssh_config keyword.other.ssh_config
+        2: keyword.operator.assignment.ssh_config
+      push:
+        - meta_content_scope: meta.mapping.value.ssh_config
+        - include: pop-nl
+        - include: none-command-values
+        - match: '"'
+          scope: string.quoted.double.ssh_config
+                 punctuation.definition.string.begin.ssh_config
+          escape: '(")|(?=$)'
+          escape_captures:
+            1: meta.mapping.value.ssh_config
+               string.quoted.double.ssh_config
+               punctuation.definition.string.end.ssh_config
+          embed_scope: string.quoted.double.ssh_config
+                       source.shell.embedded.ssh.localcommand
+          embed: scope:source.shell.embedded.ssh.localcommand
+        - match: (?=\S)
+          escape: (?=$)
+          embed: scope:source.shell.embedded.ssh.localcommand
+
+  parameter-knownhostscommand:
+    - match: ^\s*((?i:KnownHostsCommand))\b\s*(=)?
+      captures:
+        1: meta.mapping.key.ssh_config keyword.other.ssh_config
+        2: keyword.operator.assignment.ssh_config
+      push:
+        - meta_content_scope: meta.mapping.value.ssh_config
+        - include: pop-nl
+        - include: none-command-values
+        - match: '"'
+          scope: string.quoted.double.ssh_config
+                 punctuation.definition.string.begin.ssh_config
+          escape: '(")|(?=$)'
+          escape_captures:
+            1: meta.mapping.value.ssh_config
+               string.quoted.double.ssh_config
+               punctuation.definition.string.end.ssh_config
+          embed_scope: string.quoted.double.ssh_config
+                       source.shell.embedded.ssh.knownhostscommand
+          embed: scope:source.shell.embedded.ssh.knownhostscommand
+        - match: (?=\S)
+          escape: (?=$)
+          embed: scope:source.shell.embedded.ssh.knownhostscommand
+
+  parameter-with-boolean-values:
+    - match: |-
+        (?xi:
+          ^\s*
+          (
+            (?: Pubkey | HostBased | Password | ChallengeResponse
+            | KbdInteractive | (?:Rhosts)? RSA
+            ) Authentication # Auth
+          | ForwardAgent | ForwardX11(?:Trusted)? | ClearAllForwardings
+          | ExitOnForwardFailure # Fwds
+          | BatchMode | CanonicalizeFallbackLocal | CheckHostIP | Compression
+          | EnableEscapeCommandLine | EnableSSHKeySign
+          | ForkAfterAuthentication | GatewayPorts | HashKnownHosts
+          | IdentitiesOnly | NoHostAuthenticationForLocalhost
+          | PermitLocalCommand | ProxyUseFdpass | RefuseConnection | StdinNull
+          | StreamLocalBindUnlink | TCPKeepAlive
+          | UseKeychain | UsePrivilegedPort | VisualHostKey
+          | GSSAPI (?:
+              Authentication | KeyExchange | DelegateCredentials
+              | RenewalForcesRekey | TrustDNS ) # GSSAPI
+          )
+          \b[ \t]*(=)?
+        )
+      captures:
+        1: meta.mapping.key.ssh_config keyword.other.ssh_config
+        2: keyword.operator.assignment.ssh_config
+      with_prototype:
+        - include: boolean-with-typing
+        - match: '[^"\s]+'
+          scope: invalid.illegal.sshd_config
+      push: possibly-quoted-value
+
+  parameter-with-boolean-values-plus-ask:
+    - match: |-
+        (?xi:
+          ^\s*
+          ( ControlMaster | StrictHostKeyChecking | UpdateHostKeys
+          | VerifyHostKeyDNS
+          )
+          \b[ \t]*(=)?
+        )
+      captures:
+        1: meta.mapping.key.ssh_config keyword.other.ssh_config
+        2: keyword.operator.assignment.ssh_config
+      with_prototype:
+        - include: boolean-with-typing
+        - include: ask
+        # Consume "ask" while typing as well, but unscoped
+        - match: \bas?\b
+        - match: '[^"\s]+'
+          scope: invalid.illegal.sshd_config
+      push: possibly-quoted-value
+
+  parameter-generic:
+    # the `1` is for "X11"
+    - match: ^\s*([a-zA-Z1]+)\b[ \t]*(=)?
+      captures:
+        1: meta.mapping.key.ssh_config keyword.other.ssh_config
+        2: keyword.operator.assignment.ssh_config
+      with_prototype:
+        - include: generic-parameter-values
+      push: possibly-quoted-value
+
+  ask:
+  - match: \bask\b
+    scope: constant.language.ssh_config
+
+  generic-parameter-values:
+    - include: environment-variables
+    - include: none
+    - include: boolean
+    - include: any
+    - include: ask
+    - include: tokens
+    - include: wildcards
+    - include: operator-exclamation
+    - include: punctuation-comma-sequence
+    - include: ssh-key-types
+    - include: ssh-ciphers
+    - include: ssh-kex-algorithms
+    - include: ssh-mac-algorithms
+    - include: ipv6-square-bracket
+    - include: ip-addresses-with-cidr
+    - include: time-values
+    - include: bytes-values
+    - include: log-level
+    - include: paths
+    - match: \b\d+(?=[\s,"])
+      scope: meta.number.integer.ssh_config
+             constant.numeric.value.ssh_config
+
+###############################################################################
+
+variables:
+  # https://man7.org/linux/man-pages/man5/ssh_config.5.html#TOKENS
+  # https://man.openbsd.org/ssh_config.5#TOKENS
+  tokens_standard: (?:%[%CdhikLlnpru])
+  tokens_knownhosts: (?:{{tokens_standard}}|%[%fHIKt])
+  tokens_hostname: (?:%[%h])
+  tokens_proxycommand: (?:%[%hnpr])
+  tokens_all: (?:{{tokens_knownhosts}}|%T)
+  tokens_localcommand: '{{tokens_all}}'
+  match_parameters: |-
+    \b(?xi:
+      all | canonical | final | exec | localnetwork | host | originalhost
+    | tagged | command | user | localuser | version | sessiontype
+    )\b
