@@ -40,7 +40,7 @@
     "auto_complete_triggers": [
         {
             "selector": "source.sass | source.scss",
-            "characters": "$",
+            "characters": "$"
         }
     ],
     "auto_find_in_selection": true,
@@ -72,12 +72,13 @@
     "close_find_after_find_all": true,
     "close_find_after_replace_all": true,
     "close_windows_when_empty": false,
-    "color_scheme": "Mariana.sublime-color-scheme",
+    "color_scheme": "wicked_rainbow.sublime-color-scheme",
     "default_line_ending": "unix",
     "detect_indentation": true,
     "dictionary": "Packages/Language - English/en_US-large.dic",
     "draw_minimap_border": true,
     "draw_shadows": true,
+    "draw_white_space": ["all"],
     "enable_tab_scrolling": false,
     "ensure_newline_at_eof_on_save": true,
     "file_exclude_patterns": [
@@ -177,21 +178,20 @@
         ".Trash",
         ".Trash-*"
     ],
-    "font_face": "XHZS",
+    "font_face": "Cascadia Mono NF",
     "font_options": [
         // "bold",
         // "gdi",
         // "ss02",
     ],
-    "font_size": 17,
+    "font_size": 11,
     "gutter": true,
     "hide_pointer_while_typing": false,
     "highlight_find_results_in_scrollbar": true,
     "highlight_line": true,
     "highlight_modified_tabs": true,
     "hungry_delete_empty_line": false,
-    "ignored_packages": ["Vintage",
-    ],
+    "ignored_packages": ["Vintage"],
     "ignored_snippets": [
         "C++/Snippets/*",
         "EditorConfig/*",
@@ -210,6 +210,7 @@
         "param",
         "php"
     ],
+    "indent_guide_options": ["solid", "draw_normal", "draw_active"],
     "indent_guide_options": ["solid", "draw_normal", "draw_active"],
     "indent_to_bracket": false,
     "index_exclude_patterns": [
@@ -237,7 +238,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "Default.sublime-theme",
+    "theme": "Adaptive.sublime-theme",
     "theme_font_options": [
         // "gdi",
     ],
@@ -259,18 +260,18 @@
 
     // plugin: mdpopups
     "mdpopups.sublime_user_lang_map": {
-        "jenkinsfile": [["jenkinsfile"], ["scope:source.groovy.jenkinsfile"]],
+        "jenkinsfile": [["jenkinsfile"], ["scope:source.groovy.jenkinsfile"]]
     },
     // plugin: CommandAndMenu
     "repo.remote_to_web_url": [
         // Realtek Gerrit
         {
             "search": "ssh://(?:[^@]*@)?(?P<domain>[^:/]+\\.(?:realtek|rtkbf)\\.com):29418/(?P<project>.+)",
-            "replace": "https://\\g<domain>/gerrit/admin/repos/\\g<project>",
+            "replace": "https://\\g<domain>/gerrit/admin/repos/\\g<project>"
         },
         {
             "search": "(?P<scheme>https?)://(?:[^@]*@)?(?P<domain>[^:/]+\\.(?:realtek|rtkbf)\\.com)/gerrit/(?P<project>.+)",
-            "replace": "\\g<scheme>://\\g<domain>/gerrit/admin/repos/\\g<project>",
+            "replace": "\\g<scheme>://\\g<domain>/gerrit/admin/repos/\\g<project>"
         }
     ],
     // plugin: ToggleWord
@@ -338,5 +339,5 @@
 
     /*"color_scheme": "auto",*/
     "dark_color_scheme": "MarkdownEditor.sublime-color-scheme",
-    "light_color_scheme": "MarkdownEditor.sublime-color-scheme",
+    "light_color_scheme": "MarkdownEditor.sublime-color-scheme"
 }
