@@ -1,29 +1,11 @@
 import sublime
 from ..protocol import Command as Command, DocumentUri as DocumentUri
 from .core.active_request import ActiveRequest as ActiveRequest
-from .core.constants import (
-    DOCUMENT_HIGHLIGHT_KIND_NAMES as DOCUMENT_HIGHLIGHT_KIND_NAMES,
-    HOVER_ENABLED_KEY as HOVER_ENABLED_KEY,
-    REGIONS_INITIALIZE_FLAGS as REGIONS_INITIALIZE_FLAGS,
-    RegionKey as RegionKey,
-    RequestFlags as RequestFlags,
-    SHOW_DEFINITIONS_KEY as SHOW_DEFINITIONS_KEY,
-)
-from .core.protocol import (
-    Notification as Notification,
-    Request as Request,
-    ResolvedCodeLens as ResolvedCodeLens,
-)
-from .core.sessions import (
-    AbstractViewListener as AbstractViewListener,
-    Session as Session,
-)
+from .core.constants import DOCUMENT_HIGHLIGHT_KIND_NAMES as DOCUMENT_HIGHLIGHT_KIND_NAMES, HOVER_ENABLED_KEY as HOVER_ENABLED_KEY, REGIONS_INITIALIZE_FLAGS as REGIONS_INITIALIZE_FLAGS, RegionKey as RegionKey, RequestFlags as RequestFlags, SHOW_DEFINITIONS_KEY as SHOW_DEFINITIONS_KEY
+from .core.protocol import Request as Request, ResolvedCodeLens as ResolvedCodeLens
+from .core.sessions import AbstractViewListener as AbstractViewListener, Session as Session
 from .core.settings import userprefs as userprefs
-from .core.views import (
-    DIAGNOSTIC_SEVERITY as DIAGNOSTIC_SEVERITY,
-    make_command_link as make_command_link,
-    range_to_region as range_to_region,
-)
+from .core.views import DIAGNOSTIC_SEVERITY as DIAGNOSTIC_SEVERITY, make_command_link as make_command_link, range_to_region as range_to_region
 from .diagnostics import DiagnosticsAnnotationsView as DiagnosticsAnnotationsView
 from .session_buffer import SessionBuffer as SessionBuffer
 from _typeshed import Incomplete
@@ -37,15 +19,12 @@ class TagData:
     key: Incomplete
     regions: Incomplete
     scope: Incomplete
-    def __init__(
-        self, key: str, regions: list[sublime.Region] = [], scope: str = ""
-    ) -> None: ...
+    def __init__(self, key: str, regions: list[sublime.Region] = [], scope: str = '') -> None: ...
 
 class SessionView:
     """
     Holds state per session per view.
     """
-
     HOVER_PROVIDER_KEY: str
     AC_TRIGGERS_KEY: str
     COMPLETION_PROVIDER_KEY: str
@@ -60,9 +39,7 @@ class SessionView:
     _code_lens_phantoms: Incomplete
     code_lenses_needs_refresh: bool
     _session_buffer: Incomplete
-    def __init__(
-        self, listener: AbstractViewListener, session: Session, uri: DocumentUri
-    ) -> None: ...
+    def __init__(self, listener: AbstractViewListener, session: Session, uri: DocumentUri) -> None: ...
     def on_before_remove(self) -> None: ...
     def on_initialized(self) -> None: ...
     @property
@@ -85,29 +62,16 @@ class SessionView:
           - gutter icons from region keys which were initialized _first_ are drawn
         For more context, see https://github.com/sublimelsp/LSP/issues/1593.
         """
-
     def _clear_auto_complete_triggers(self, settings: sublime.Settings) -> None:
         '''Remove all of our modifications to the view\'s "auto_complete_triggers"'''
-
     def _setup_auto_complete_triggers(self, settings: sublime.Settings) -> None:
         """Register trigger characters from static capabilities of the server."""
-
-    def _register_auto_complete_triggers(
-        self, registration_id: str, trigger_chars: list[str]
-    ) -> None:
+    def _register_auto_complete_triggers(self, registration_id: str, trigger_chars: list[str]) -> None:
         """Register trigger characters from a dynamic server registration."""
-
     def _unregister_auto_complete_triggers(self, registration_id: str) -> None:
         """Remove trigger characters that were previously dynamically registered."""
-
-    def _apply_auto_complete_triggers(
-        self,
-        settings: sublime.Settings,
-        trigger_chars: list[str],
-        registration_id: str | None = None,
-    ) -> None:
+    def _apply_auto_complete_triggers(self, settings: sublime.Settings, trigger_chars: list[str], registration_id: str | None = None) -> None:
         """This method actually modifies the auto_complete_triggers entries for the view."""
-
     def _increment_hover_count(self) -> None: ...
     def _decrement_hover_count(self) -> None: ...
     def reset_show_definitions(self) -> None: ...
@@ -116,31 +80,20 @@ class SessionView:
     def get_view_for_group(self, group: int) -> sublime.View | None: ...
     def get_capability_async(self, capability_path: str) -> Any | None: ...
     def get_request_flags(self) -> RequestFlags: ...
-    def on_capability_added_async(
-        self, registration_id: str, capability_path: str, options: dict[str, Any]
-    ) -> None: ...
-    def on_capability_removed_async(
-        self, registration_id: str, discarded_capabilities: dict[str, Any]
-    ) -> None: ...
+    def on_capability_added_async(self, registration_id: str, capability_path: str, options: dict[str, Any]) -> None: ...
+    def on_capability_removed_async(self, registration_id: str, discarded_capabilities: dict[str, Any]) -> None: ...
     def has_capability_async(self, capability_path: str) -> bool: ...
     def shutdown_async(self) -> None: ...
     def diagnostics_key(self, severity: int, multiline: bool) -> str: ...
     def diagnostics_tag_scope(self, tag: int) -> str | None: ...
     def present_diagnostics_async(self, is_view_visible: bool) -> None: ...
     def _redraw_diagnostics_async(self) -> None: ...
-    def _draw_diagnostics(
-        self,
-        severity: int,
-        max_severity_level: int,
-        flags: sublime.RegionFlags,
-        multiline: bool,
-    ) -> None: ...
+    def _draw_diagnostics(self, severity: int, max_severity_level: int, flags: sublime.RegionFlags, multiline: bool) -> None: ...
     def on_request_started_async(self, request_id: int, request: Request) -> None: ...
     def on_request_finished_async(self, request_id: int) -> None: ...
+    def on_request_canceled_async(self, request_id: int) -> None: ...
     def on_request_progress(self, request_id: int, params: dict[str, Any]) -> None: ...
-    def on_text_changed_async(
-        self, change_count: int, changes: Iterable[sublime.TextChange]
-    ) -> None: ...
+    def on_text_changed_async(self, change_count: int, changes: Iterable[sublime.TextChange]) -> None: ...
     def on_revert_async(self) -> None: ...
     def on_reload_async(self) -> None: ...
     def purge_changes_async(self) -> None: ...

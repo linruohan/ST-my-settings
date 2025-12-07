@@ -2,23 +2,10 @@ import sublime
 from ..protocol import CodeAction, CodeActionKind, Command, Diagnostic as Diagnostic
 from .core.promise import Promise as Promise
 from .core.protocol import Error as Error, Request as Request
-from .core.registry import (
-    LspTextCommand as LspTextCommand,
-    LspWindowCommand as LspWindowCommand,
-    windows as windows,
-)
-from .core.sessions import (
-    AbstractViewListener as AbstractViewListener,
-    SessionBufferProtocol as SessionBufferProtocol,
-)
+from .core.registry import LspTextCommand as LspTextCommand, LspWindowCommand as LspWindowCommand, windows as windows
+from .core.sessions import AbstractViewListener as AbstractViewListener, SessionBufferProtocol as SessionBufferProtocol
 from .core.settings import userprefs as userprefs
-from .core.views import (
-    entire_content_region as entire_content_region,
-    first_selection_region as first_selection_region,
-    format_code_actions_for_quick_panel as format_code_actions_for_quick_panel,
-    kind_contains_other_kind as kind_contains_other_kind,
-    text_document_code_action_params as text_document_code_action_params,
-)
+from .core.views import entire_content_region as entire_content_region, first_selection_region as first_selection_region, format_code_actions_for_quick_panel as format_code_actions_for_quick_panel, kind_contains_other_kind as kind_contains_other_kind, text_document_code_action_params as text_document_code_action_params
 from .save_command import LspSaveCommand as LspSaveCommand, SaveTask as SaveTask
 from _typeshed import Incomplete
 from abc import ABCMeta, abstractmethod
@@ -34,46 +21,23 @@ def is_command(action: CodeActionOrCommand) -> TypeGuard[Command]: ...
 
 class CodeActionsManager:
     """Manager for per-location caching of code action responses."""
-
     _response_cache: tuple[str, Promise[list[CodeActionsByConfigName]]] | None
     menu_actions_cache_key: str | None
     refactor_actions_cache: list[tuple[str, CodeAction]]
     source_actions_cache: list[tuple[str, CodeAction]]
     def __init__(self) -> None: ...
-    def request_for_region_async(
-        self,
-        view: sublime.View,
-        region: sublime.Region,
-        session_buffer_diagnostics: list[
-            tuple[SessionBufferProtocol, list[Diagnostic]]
-        ],
-        only_kinds: list[CodeActionKind] | None = None,
-        manual: bool = False,
-    ) -> Promise[list[CodeActionsByConfigName]]:
+    def request_for_region_async(self, view: sublime.View, region: sublime.Region, session_buffer_diagnostics: list[tuple[SessionBufferProtocol, list[Diagnostic]]], only_kinds: list[CodeActionKind] | None = None, manual: bool = False) -> Promise[list[CodeActionsByConfigName]]:
         """
         Requests code actions with provided diagnostics and specified region. If there are
         no diagnostics for given session, the request will be made with empty diagnostics list.
         """
-
-    def _collect_code_actions_async(
-        self,
-        listener: AbstractViewListener,
-        request_factory: Callable[[SessionBufferProtocol], Request | None],
-        response_filter: Callable[
-            [SessionBufferProtocol, list[CodeActionOrCommand]],
-            list[CodeActionOrCommand],
-        ],
-    ) -> Promise[list[CodeActionsByConfigName]]: ...
-    def request_on_save_async(
-        self, view: sublime.View, on_save_actions: dict[str, bool]
-    ) -> Generator[Promise[CodeActionsByConfigName]]: ...
+    def _collect_code_actions_async(self, listener: AbstractViewListener, request_factory: Callable[[SessionBufferProtocol], Request | None], response_filter: Callable[[SessionBufferProtocol, list[CodeActionOrCommand]], list[CodeActionOrCommand]]) -> Promise[list[CodeActionsByConfigName]]: ...
+    def request_on_save_async(self, view: sublime.View, on_save_actions: dict[str, bool]) -> Generator[Promise[CodeActionsByConfigName]]: ...
 
 actions_manager: Incomplete
 
 def get_session_kinds(sb: SessionBufferProtocol) -> list[CodeActionKind]: ...
-def get_matching_on_save_kinds(
-    user_actions: dict[str, bool], session_kinds: list[CodeActionKind]
-) -> list[CodeActionKind]:
+def get_matching_on_save_kinds(user_actions: dict[str, bool], session_kinds: list[CodeActionKind]) -> list[CodeActionKind]:
     """
     Filters user-enabled or disabled actions so that only ones matching the session kinds
     are returned. Returned kinds are those that are enabled and are not overridden by more
@@ -92,51 +56,26 @@ class CodeActionOnSaveTask(SaveTask):
     The amount of time the task is allowed to run is defined by user-controlled setting. If the task
     runs longer, the native save will be triggered before waiting for results.
     """
-
     @classmethod
     def is_applicable(cls, view: sublime.View) -> bool: ...
     @classmethod
     def _get_code_actions_on_save(cls, view: sublime.View) -> dict[str, bool]: ...
     def run_async(self) -> None: ...
-    def _process_next_request(
-        self, request_iterator: Iterator[Promise[CodeActionsByConfigName]]
-    ) -> None: ...
-    def _handle_response_async(
-        self,
-        response: CodeActionsByConfigName,
-        request_iterator: Iterator[Promise[CodeActionsByConfigName]],
-    ) -> None: ...
+    def _process_next_request(self, request_iterator: Iterator[Promise[CodeActionsByConfigName]]) -> None: ...
+    def _handle_response_async(self, response: CodeActionsByConfigName, request_iterator: Iterator[Promise[CodeActionsByConfigName]]) -> None: ...
 
 class LspCodeActionsCommand(LspTextCommand):
     capability: str
-    def is_visible(
-        self,
-        event: dict | None = None,
-        point: int | None = None,
-        only_kinds: list[CodeActionKind] | None = None,
-    ) -> bool: ...
-    def run(
-        self,
-        edit: sublime.Edit,
-        event: dict | None = None,
-        only_kinds: list[CodeActionKind] | None = None,
-        code_actions_by_config: list[CodeActionsByConfigName] | None = None,
-    ) -> None: ...
+    def is_visible(self, event: dict | None = None, point: int | None = None, only_kinds: list[CodeActionKind] | None = None) -> bool: ...
+    def run(self, edit: sublime.Edit, event: dict | None = None, only_kinds: list[CodeActionKind] | None = None, code_actions_by_config: list[CodeActionsByConfigName] | None = None) -> None: ...
     def _run_async(self, only_kinds: list[CodeActionKind] | None = None) -> None: ...
-    def _handle_code_actions(
-        self, response: list[CodeActionsByConfigName], run_first: bool = False
-    ) -> None: ...
-    def _show_code_actions(
-        self, actions: list[tuple[ConfigName, CodeActionOrCommand]]
-    ) -> None: ...
-    def _handle_select(
-        self, index: int, actions: list[tuple[ConfigName, CodeActionOrCommand]]
-    ) -> None: ...
+    def _handle_code_actions(self, response: list[CodeActionsByConfigName], run_first: bool = False) -> None: ...
+    def _show_code_actions(self, actions: list[tuple[ConfigName, CodeActionOrCommand]]) -> None: ...
+    def _handle_select(self, index: int, actions: list[tuple[ConfigName, CodeActionOrCommand]]) -> None: ...
     def _handle_response_async(self, session_name: str, response: Any) -> None: ...
 
 class LspMenuActionCommand(LspWindowCommand, metaclass=ABCMeta):
     """Handles a particular kind of code actions with the purpose to list them as items in a submenu."""
-
     capability: str
     @property
     @abstractmethod

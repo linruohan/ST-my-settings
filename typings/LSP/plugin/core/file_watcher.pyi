@@ -8,12 +8,8 @@ FileWatcherEventType: Incomplete
 FilePath = str
 FileWatcherEvent = tuple[FileWatcherEventType, FilePath]
 
-def lsp_watch_kind_to_file_watcher_event_types(
-    kind: WatchKind,
-) -> list[FileWatcherEventType]: ...
-def file_watcher_event_type_to_lsp_file_change_type(
-    kind: FileWatcherEventType,
-) -> FileChangeType: ...
+def lsp_watch_kind_to_file_watcher_event_types(kind: WatchKind) -> list[FileWatcherEventType]: ...
+def file_watcher_event_type_to_lsp_file_change_type(kind: FileWatcherEventType) -> FileChangeType: ...
 
 class FileWatcherProtocol(Protocol):
     def on_file_event_async(self, events: list[FileWatcherEvent]) -> None:
@@ -31,17 +27,9 @@ class FileWatcher(metaclass=ABCMeta):
     The interface implements the file watcher and notifies the `handler` (through the `on_file_event_async` method)
     on file event changes.
     """
-
     @classmethod
     @abstractmethod
-    def create(
-        cls,
-        root_path: str,
-        patterns: list[str],
-        events: list[FileWatcherEventType],
-        ignores: list[str],
-        handler: FileWatcherProtocol,
-    ) -> FileWatcher:
+    def create(cls, root_path: str, patterns: list[str], events: list[FileWatcherEventType], ignores: list[str], handler: FileWatcherProtocol) -> FileWatcher:
         """
         Creates a new instance of the file watcher.
 
@@ -51,7 +39,6 @@ class FileWatcher(metaclass=ABCMeta):
 
         :returns: A new instance of file watcher.
         """
-
     @abstractmethod
     def destroy(self) -> None:
         """

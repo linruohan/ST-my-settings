@@ -1,11 +1,7 @@
 import contextlib
 import socket
 import sublime
-from ...protocol import (
-    ServerCapabilities as ServerCapabilities,
-    TextDocumentSyncKind,
-    TextDocumentSyncOptions as TextDocumentSyncOptions,
-)
+from ...protocol import ServerCapabilities as ServerCapabilities, TextDocumentSyncKind, TextDocumentSyncOptions as TextDocumentSyncOptions
 from .collections import DottedDict as DottedDict
 from .constants import LANGUAGE_IDENTIFIERS as LANGUAGE_IDENTIFIERS
 from .file_watcher import FileWatcherEventType as FileWatcherEventType
@@ -29,29 +25,19 @@ class FileWatcherConfig(TypedDict, total=False):
 def basescope2languageid(base_scope: str) -> str: ...
 @contextlib.contextmanager
 def runtime(token: str) -> Generator[None, None, None]: ...
-
-T = TypeVar("T")
+T = TypeVar('T')
 
 def diff(old: Iterable[T], new: Iterable[T]) -> tuple[set[T], set[T]]:
     """
     Return a tuple of (added, removed) items
     """
-
 def matches_pattern(path: str, patterns: Any) -> bool: ...
-def sublime_pattern_to_glob(
-    pattern: str, is_directory_pattern: bool, root_path: str | None = None
-) -> str:
+def sublime_pattern_to_glob(pattern: str, is_directory_pattern: bool, root_path: str | None = None) -> str:
     """
     Convert a Sublime Text pattern (http://www.sublimetext.com/docs/file_patterns.html)
     to a glob pattern that utilizes globstar extension.
     """
-
-def debounced(
-    f: Callable[[], Any],
-    timeout_ms: int = 0,
-    condition: Callable[[], bool] = ...,
-    async_thread: bool = False,
-) -> None:
+def debounced(f: Callable[[], Any], timeout_ms: int = 0, condition: Callable[[], bool] = ..., async_thread: bool = False) -> None:
     """
     Possibly run a function at a later point in time, either on the async thread or on the main thread.
 
@@ -65,9 +51,7 @@ def debounced(
 class SettingsRegistration:
     __slots__: Incomplete
     _settings: Incomplete
-    def __init__(
-        self, settings: sublime.Settings, on_change: Callable[[], None]
-    ) -> None: ...
+    def __init__(self, settings: sublime.Settings, on_change: Callable[[], None]) -> None: ...
     def __del__(self) -> None: ...
 
 class DebouncerNonThreadSafe:
@@ -80,17 +64,11 @@ class DebouncerNonThreadSafe:
     This implementation is not thread safe. You must ensure that `debounce()` is called from the same thread as
     was chosen during initialization through the `async_thread` argument.
     """
-
     _async_thread: Incomplete
     _current_id: int
     _next_id: int
     def __init__(self, async_thread: bool) -> None: ...
-    def debounce(
-        self,
-        f: Callable[[], None],
-        timeout_ms: int = 0,
-        condition: Callable[[], bool] = ...,
-    ) -> None:
+    def debounce(self, f: Callable[[], None], timeout_ms: int = 0, condition: Callable[[], bool] = ...) -> None:
         """
         Possibly run a function at a later point in time on the thread chosen during initialization.
 
@@ -98,15 +76,10 @@ class DebouncerNonThreadSafe:
         :param      timeout_ms:    The time in milliseconds after which to possibly to run the function
         :param      condition:     The condition that must evaluate to True in order to run the function
         """
-
     def cancel_pending(self) -> None: ...
 
-def read_dict_setting(
-    settings_obj: sublime.Settings, key: str, default: dict
-) -> dict: ...
-def read_list_setting(
-    settings_obj: sublime.Settings, key: str, default: list
-) -> list: ...
+def read_dict_setting(settings_obj: sublime.Settings, key: str, default: dict) -> dict: ...
+def read_list_setting(settings_obj: sublime.Settings, key: str, default: list) -> list: ...
 
 class Settings:
     diagnostics_additional_delay_auto_complete_ms: Incomplete
@@ -152,9 +125,7 @@ class Settings:
     show_view_status: Incomplete
     def __init__(self, s: sublime.Settings) -> None: ...
     def update(self, s: sublime.Settings) -> None: ...
-    def highlight_style_region_flags(
-        self, style_str: str
-    ) -> tuple[sublime.RegionFlags, sublime.RegionFlags]: ...
+    def highlight_style_region_flags(self, style_str: str) -> tuple[sublime.RegionFlags, sublime.RegionFlags]: ...
     @staticmethod
     def _style_str_to_flag(style_str: str) -> sublime.RegionFlags | None: ...
     def diagnostics_highlight_style_flags(self) -> list[sublime.RegionFlags | None]:
@@ -166,7 +137,7 @@ class ClientStates:
     STOPPING: int
 
 class DocumentFilter:
-    """
+    '''
     A document filter denotes a document through properties like language, scheme or pattern. An example is a filter
     that applies to TypeScript files on disk. Another example is a filter that applies to JSON files with name
     package.json:
@@ -176,18 +147,12 @@ class DocumentFilter:
 
     Sublime Text doesn\'t understand what a language ID is, so we have to maintain a global translation map from language
     IDs to selectors. Sublime Text also has no support for patterns. We use the wcmatch library for this.
-    """
-
+    '''
     __slots__: Incomplete
     scheme: Incomplete
     pattern: Incomplete
     language: Incomplete
-    def __init__(
-        self,
-        language: str | None = None,
-        scheme: str | None = None,
-        pattern: str | None = None,
-    ) -> None: ...
+    def __init__(self, language: str | None = None, scheme: str | None = None, pattern: str | None = None) -> None: ...
     def __call__(self, view: sublime.View) -> bool:
         """Does this filter match the view? An empty filter matches any view."""
 
@@ -196,7 +161,6 @@ class DocumentSelector:
     A DocumentSelector is a list of DocumentFilters. A view matches a DocumentSelector if and only if any one of its
     filters matches against the view.
     """
-
     __slots__: Incomplete
     filters: Incomplete
     def __init__(self, document_selector: list[dict[str, Any]]) -> None: ...
@@ -216,10 +180,7 @@ def method_to_capability(method: str) -> tuple[str, str]:
         textDocument/references --> (referencesProvider, referencesProvider.id)
         textDocument/didOpen --> (textDocumentSync.didOpen, textDocumentSync.didOpen.id)
     """
-
-def normalize_text_sync(
-    textsync: TextDocumentSyncOptions | TextDocumentSyncKind | None,
-) -> dict[str, Any]:
+def normalize_text_sync(textsync: TextDocumentSyncOptions | TextDocumentSyncKind | None) -> dict[str, Any]:
     """
     Brings legacy text sync capabilities to the most modern format
     """
@@ -232,17 +193,8 @@ class Capabilities(DottedDict):
     Dynamic capabilities can be registered at any moment with client/registerCapability and client/unregisterCapability
     (from Server -> Client).
     """
-
-    def register(
-        self,
-        registration_id: str,
-        capability_path: str,
-        registration_path: str,
-        options: dict[str, Any],
-    ) -> None: ...
-    def unregister(
-        self, registration_id: str, capability_path: str, registration_path: str
-    ) -> dict[str, Any] | None: ...
+    def register(self, registration_id: str, capability_path: str, registration_path: str, options: dict[str, Any]) -> None: ...
+    def unregister(self, registration_id: str, capability_path: str, registration_path: str) -> dict[str, Any] | None: ...
     def assign(self, d: ServerCapabilities) -> None: ...
     def should_notify_did_open(self) -> bool: ...
     def text_sync_kind(self) -> TextDocumentSyncKind: ...
@@ -271,14 +223,7 @@ class TransportConfig:
     tcp_port: Incomplete
     env: Incomplete
     listener_socket: Incomplete
-    def __init__(
-        self,
-        name: str,
-        command: list[str],
-        tcp_port: int | None,
-        env: dict[str, str],
-        listener_socket: socket.socket | None,
-    ) -> None: ...
+    def __init__(self, name: str, command: list[str], tcp_port: int | None, env: dict[str, str], listener_socket: socket.socket | None) -> None: ...
 
 class ClientConfig:
     name: Incomplete
@@ -299,49 +244,21 @@ class ClientConfig:
     status_key: Incomplete
     semantic_tokens: Incomplete
     diagnostics_mode: Incomplete
-    def __init__(
-        self,
-        name: str,
-        selector: str,
-        priority_selector: str | None = None,
-        schemes: list[str] | None = None,
-        command: list[str] | None = None,
-        binary_args: list[str] | None = None,
-        tcp_port: int | None = None,
-        auto_complete_selector: str | None = None,
-        enabled: bool = True,
-        init_options: DottedDict = ...,
-        settings: DottedDict = ...,
-        env: dict[str, str | list[str]] = {},
-        experimental_capabilities: dict[str, Any] | None = None,
-        disabled_capabilities: DottedDict = ...,
-        file_watcher: FileWatcherConfig = {},
-        semantic_tokens: dict[str, str] | None = None,
-        diagnostics_mode: str = "open_files",
-        path_maps: list[PathMap] | None = None,
-    ) -> None: ...
+    def __init__(self, name: str, selector: str, priority_selector: str | None = None, schemes: list[str] | None = None, command: list[str] | None = None, binary_args: list[str] | None = None, tcp_port: int | None = None, auto_complete_selector: str | None = None, enabled: bool = True, init_options: DottedDict = ..., settings: DottedDict = ..., env: dict[str, str | list[str]] = {}, experimental_capabilities: dict[str, Any] | None = None, disabled_capabilities: DottedDict = ..., file_watcher: FileWatcherConfig = {}, semantic_tokens: dict[str, str] | None = None, diagnostics_mode: str = 'open_files', path_maps: list[PathMap] | None = None) -> None: ...
     @classmethod
-    def from_sublime_settings(
-        cls, name: str, s: sublime.Settings, file: str
-    ) -> ClientConfig: ...
+    def from_sublime_settings(cls, name: str, s: sublime.Settings, file: str) -> ClientConfig: ...
     @classmethod
     def from_dict(cls, name: str, d: dict[str, Any]) -> ClientConfig: ...
     @classmethod
-    def from_config(
-        cls, src_config: ClientConfig, override: dict[str, Any]
-    ) -> ClientConfig: ...
-    def resolve_transport_config(
-        self, variables: dict[str, str]
-    ) -> TransportConfig: ...
+    def from_config(cls, src_config: ClientConfig, override: dict[str, Any]) -> ClientConfig: ...
+    def resolve_transport_config(self, variables: dict[str, str]) -> TransportConfig: ...
     def set_view_status(self, view: sublime.View, message: str) -> None: ...
     def erase_view_status(self, view: sublime.View) -> None: ...
     def match_view(self, view: sublime.View, scheme: str) -> bool: ...
     def map_client_path_to_server_uri(self, path: str) -> str: ...
     def map_server_uri_to_client_path(self, uri: str) -> str: ...
     def is_disabled_capability(self, capability_path: str) -> bool: ...
-    def filter_out_disabled_capabilities(
-        self, capability_path: str, options: dict[str, Any]
-    ) -> dict[str, Any]: ...
+    def filter_out_disabled_capabilities(self, capability_path: str, options: dict[str, Any]) -> dict[str, Any]: ...
     def __repr__(self) -> str: ...
     def __eq__(self, other: Any) -> bool: ...
 

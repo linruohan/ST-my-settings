@@ -2,18 +2,12 @@ import sublime
 from ..protocol import CodeLens as CodeLens, Command as Command, Range as Range
 from .core.constants import CODE_LENS_ENABLED_KEY as CODE_LENS_ENABLED_KEY
 from .core.protocol import Error as Error, ResolvedCodeLens as ResolvedCodeLens
-from .core.registry import (
-    LspTextCommand as LspTextCommand,
-    LspWindowCommand as LspWindowCommand,
-    windows as windows,
-)
+from .core.registry import LspTextCommand as LspTextCommand, LspWindowCommand as LspWindowCommand, windows as windows
 from .core.views import range_to_region as range_to_region
 from _typeshed import Incomplete
 from typing_extensions import TypeGuard
 
-def is_resolved(
-    code_lens: CodeLens | ResolvedCodeLens,
-) -> TypeGuard[ResolvedCodeLens]: ...
+def is_resolved(code_lens: CodeLens | ResolvedCodeLens) -> TypeGuard[ResolvedCodeLens]: ...
 
 class HashableRange:
     data: Incomplete
@@ -34,11 +28,9 @@ class CodeLensCache:
     code_lenses: dict[HashableRange, list[CachedCodeLens]]
     def __init__(self) -> None: ...
     def handle_response_async(self, code_lenses: list[CodeLens]) -> None: ...
-    def unresolved_visible_code_lenses(
-        self, view: sublime.View
-    ) -> list[CachedCodeLens]: ...
+    def unresolved_visible_code_lenses(self, view: sublime.View) -> list[CachedCodeLens]: ...
     def code_lenses_with_command(self) -> list[ResolvedCodeLens]:
-        """Returns only the code lenses that are either resolved, or have a cached command."""
+        """ Returns only the code lenses that are either resolved, or have a cached command. """
 
 class LspToggleCodeLensesCommand(LspWindowCommand):
     capability: str
