@@ -1,4 +1,11 @@
-from ...protocol import CodeActionKind, CompletionItemKind, DiagnosticSeverity, DocumentHighlightKind, MessageType, SymbolKind
+from ...protocol import (
+    CodeActionKind,
+    CompletionItemKind,
+    DiagnosticSeverity,
+    DocumentHighlightKind,
+    MessageType,
+    SymbolKind,
+)
 from .typing import StrEnum as StrEnum
 from _typeshed import Incomplete
 from enum import IntFlag
@@ -10,6 +17,7 @@ ST_PACKAGES_PATH: Incomplete
 ST_PLATFORM: Incomplete
 ST_VERSION: Incomplete
 ST_STORAGE_PATH: Incomplete
+MARKO_MD_PARSER_VERSION: str | None
 
 class RequestFlags(IntFlag):
     """
@@ -17,17 +25,19 @@ class RequestFlags(IntFlag):
     This is used for multi-session configurations, where the best session is selected for each of the relevant features
     below and the corresponding request is made only by that one session.
     """
+
     NONE = 0
     DOCUMENT_COLOR = 1
     INLAY_HINT = 2
     SEMANTIC_TOKENS = 4
 
 class RegionKey(StrEnum):
-    """ Key names for use with the `View.add_regions` method. """
-    CODE_ACTION = 'lsp_code_action'
-    DOCUMENT_LINK = 'lsp_document_link'
-    HOVER_HIGHLIGHT = 'lsp_hover_highlight'
-    REFERENCE_HIGHLIGHT = 'lsp_reference_highlight'
+    """Key names for use with the `View.add_regions` method."""
+
+    CODE_ACTION = "lsp_code_action"
+    DOCUMENT_LINK = "lsp_document_link"
+    HOVER_HIGHLIGHT = "lsp_hover_highlight"
+    REFERENCE_HIGHLIGHT = "lsp_reference_highlight"
 
 CODE_LENS_ENABLED_KEY: str
 HOVER_ENABLED_KEY: str

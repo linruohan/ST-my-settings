@@ -615,9 +615,35 @@
     // plugin: my_plugin_38
     { "keys": ["ctrl+shift+,"], "command": "goto_symbol", "args": { "step": -1, "cycle": false } },
     { "keys": ["ctrl+shift+."], "command": "goto_symbol", "args": { "step": 1, "cycle": false } },
+    { "keys": ["ctrl+alt+shift+e"], "command": "encrypt_selected" },
+    { "keys": ["ctrl+alt+shift+d"], "command": "decrypt_selected" },
     /*******************
      *   My commands   *
      *******************/
+    {
+        "keys": ["alt+d", "alt+c"],
+        "command": "decorate_inline_comment",
+        "context": [{ "key": "selector", "operator": "equal", "operand": "comment" }]
+    },
+    { "keys": ["pause"], "command": "exec", "args": { "kill": true } },
+    { "keys": ["alt+a", "alt+r", "alt+i"], "command": "arithmetic" },
+    {
+        "keys": ["f5"],
+        "command": "cli_runner_show_result",
+        "context": [{ "key": "setting.is_from_cli_runner" }]
+    },
+    {
+        "keys": ["alt+g"],
+        "command": "cli_runner",
+        "args": { "initial_text": "git ", "cwd": "$file_dir" }
+    },
+    // CNY to TWD
+    {
+        // choose which history to paste
+        "keys": ["alt+p", "alt+p"],
+        "command": "private_clipboard_manager",
+        "args": { "operation": "paste" },
+    },
     {
         "keys": ["alt+d", "alt+c"],
         "command": "decorate_inline_comment",
