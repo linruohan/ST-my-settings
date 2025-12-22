@@ -1,14 +1,14 @@
 [
     {
         "caption": "Expand JSON",
-        "command": "expand_json"
+        "command": "expand_json",
     },
     {
         "caption": "Flatten JSON",
-        "command": "flatten_json"
+        "command": "flatten_json",
     },
     {
         "caption": "Sort Lines (Numerically)",
-        "command": "sort_numerically"
-    }
+        "command": "sort_numerically",
+    },
 ]

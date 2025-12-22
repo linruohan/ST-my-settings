@@ -179,57 +179,17 @@
         "args": { "by": "word_ends", "forward": true }
     },
     // movement (tab/group)
-    {
-        "keys": ["ctrl+super+j"],
-        "command": "step_tab_cycle",
-        "args": { "steps": -1 }
-    },
-    {
-        "keys": ["ctrl+super+l"],
-        "command": "step_tab_cycle",
-        "args": { "steps": 1 }
-    },
-    {
-        "keys": ["alt+super+j"],
-        "command": "focus_neighboring_group",
-        "args": { "forward": false }
-    },
-    {
-        "keys": ["alt+super+l"],
-        "command": "focus_neighboring_group",
-        "args": { "forward": true }
-    },
-    {
-        "keys": ["alt+super+shift+j"],
-        "command": "move_to_neighboring_group",
-        "args": { "forward": false }
-    },
-    {
-        "keys": ["alt+super+shift+l"],
-        "command": "move_to_neighboring_group",
-        "args": { "forward": true }
-    },
+    { "keys": ["ctrl+super+j"], "command": "step_tab_cycle", "args": { "steps": -1 } },
+    { "keys": ["ctrl+super+l"], "command": "step_tab_cycle", "args": { "steps": 1 } },
+    { "keys": ["alt+super+j"], "command": "focus_neighboring_group", "args": { "forward": false } },
+    { "keys": ["alt+super+l"], "command": "focus_neighboring_group", "args": { "forward": true } },
+    { "keys": ["alt+super+shift+j"], "command": "move_to_neighboring_group", "args": { "forward": false } },
+    { "keys": ["alt+super+shift+l"], "command": "move_to_neighboring_group", "args": { "forward": true } },
     // scroll (line/page)
-    {
-        "keys": ["ctrl+super+i"],
-        "command": "scroll_lines",
-        "args": { "amount": 3.0 }
-    },
-    {
-        "keys": ["ctrl+super+k"],
-        "command": "scroll_lines",
-        "args": { "amount": -3.0 }
-    },
-    {
-        "keys": ["super+i"],
-        "command": "move",
-        "args": { "by": "pages", "forward": false }
-    },
-    {
-        "keys": ["super+k"],
-        "command": "move",
-        "args": { "by": "pages", "forward": true }
-    },
+    { "keys": ["ctrl+super+i"], "command": "scroll_lines", "args": { "amount": 3.0 } },
+    { "keys": ["ctrl+super+k"], "command": "scroll_lines", "args": { "amount": -3.0 } },
+    { "keys": ["super+i"], "command": "move", "args": { "by": "pages", "forward": false } },
+    { "keys": ["super+k"], "command": "move", "args": { "by": "pages", "forward": true } },
     { "keys": ["alt+`"], "command": "selection_to_top" },
     // cursor expansion
     {
@@ -744,23 +704,14 @@
     { "keys": ["alt+e", "alt+m"], "command": "select_emoji" },
     // plugin: FileManager
     { "keys": ["alt+shift+o", "alt+shift+b"], "command": "fm_open_in_browser" },
-    {
-        "keys": ["alt+shift+o", "alt+shift+e"],
-        "command": "fm_open_in_explorer"
-    },
+    { "keys": ["alt+shift+o", "alt+shift+e"], "command": "fm_open_in_explorer" },
     // plugin: Find Cursor
-    {
-        "keys": ["alt+f", "alt+c"],
-        "command": "find_cursor",
-        "args": { "reverse": false, "pan": false }
-    },
+    { "keys": ["alt+f", "alt+c"], "command": "find_cursor", "args": { "reverse": false, "pan": false } },
     // plugin: Indent XML
     {
         "keys": ["ctrl+alt+f"],
         "command": "indent_xml",
-        "context": [
-            { "key": "selector", "operator": "equal", "operand": "text.xml" }
-        ]
+        "context": [{ "key": "selector", "operator": "equal", "operand": "text.xml" }]
     },
     // plugin: Insert Nums
     { "keys": ["alt+m", "alt+i"], "command": "prompt_insert_nums" },
@@ -882,19 +833,13 @@
         "keys": ["alt+i"],
         "command": "lsp_signature_help_navigate",
         "args": { "forward": false },
-        "context": [
-            { "key": "setting.lsp_active" },
-            { "key": "lsp.signature_help_multiple_choices_available" }
-        ]
+        "context": [{ "key": "setting.lsp_active" }, { "key": "lsp.signature_help_multiple_choices_available" }]
     },
     {
         "keys": ["alt+k"],
         "command": "lsp_signature_help_navigate",
         "args": { "forward": true },
-        "context": [
-            { "key": "setting.lsp_active" },
-            { "key": "lsp.signature_help_multiple_choices_available" }
-        ]
+        "context": [{ "key": "setting.lsp_active" }, { "key": "lsp.signature_help_multiple_choices_available" }]
     },
     {
         "keys": ["alt+f", "alt+d"],
@@ -929,67 +874,70 @@
         "keys": ["alt+m", "alt+p"],
         "command": "markdown_preview",
         "args": { "target": "browser", "parser": "markdown" },
-        "context": [
-            {
-                "key": "selector",
-                "operator": "equal",
-                "operand": "text.html.markdown"
-            }
-        ]
+        "context": [{ "key": "selector", "operator": "equal", "operand": "text.html.markdown" }]
     },
     // plugin: MultiEditUtils
     { "keys": ["shift+escape"], "command": "jump_to_last_region" },
     {
         "keys": ["alt+r", "alt+e"],
         "command": "remove_empty_regions",
-        "context": [
-            {
-                "key": "setting.is_widget",
-                "operator": "equal",
-                "operand": false
-            }
-        ]
+        "context": [{ "key": "setting.is_widget", "operator": "equal", "operand": false }]
     },
     {
         "keys": ["alt+r", "alt+c"],
         "command": "cycle_through_regions",
-        "context": [
-            {
-                "key": "setting.is_widget",
-                "operator": "equal",
-                "operand": false
-            }
-        ]
+        "context": [{ "key": "setting.is_widget", "operator": "equal", "operand": false }]
     },
     {
         "keys": ["alt+r", "alt+n"],
         "command": "normalize_region_ends",
-        "context": [
-            {
-                "key": "setting.is_widget",
-                "operator": "equal",
-                "operand": false
-            }
-        ]
+        "context": [{ "key": "setting.is_widget", "operator": "equal", "operand": false }]
     },
     {
         "keys": ["alt+r", "alt+s"],
         "command": "split_selection",
+        "context": [{ "key": "setting.is_widget", "operator": "equal", "operand": false }]
+    },
+    // plugin: OpenUri
+    { "keys": ["alt+o", "alt+u"], "command": "open_uri_from_cursors", "args": { "browser": "" } },
+    // plugin: php-cs-fix
+    {
+        "keys": ["ctrl+alt+f"],
+        "command": "phpcs_fix_this_file",
+        "args": { "tool": "Fixer" },
+        "context": [{ "key": "selector", "operator": "equal", "operand": "embedding.php | text.html.php | source.php" }]
+    },
+    // plugin: Project Manager
+    { "keys": ["ctrl+alt+p"], "command": "project_manager" },
+    // plugin: Scope Hunter
+    { "keys": ["ctrl+alt+shift+p"], "command": "get_selection_scope" },
+    // plugin: SelectUntil
+    { "keys": ["alt+s", "alt+u"], "command": "select_until", "args": { "extend": true } },
+    // plugin: fmt
+    {
+        "keys": ["ctrl+alt+f"],
+        "command": "fmt_format_buffer",
         "context": [
             {
-                "key": "setting.is_widget",
+                "key": "selector",
                 "operator": "equal",
-                "operand": false
+                "operand": "(source.python | source.shell.bash | source.js | source.jsx | source.ts | source.tsx) - text.html.markdown"
             }
         ]
     },
-    // plugin: OpenUri
-    {
-        "keys": ["alt+o", "alt+u"],
-        "command": "open_uri_from_cursors",
-        "args": { "browser": "" }
-    },
-    // plugin: php-cs-fix
+    // plugin: Terminal
+    { "keys": ["alt+shift+o", "alt+shift+t"], "command": "open_terminal" },
+    { "keys": ["ctrl+alt+shift+t"], "command": "open_terminal_project_folder" },
+    // plugin: ToggleWord
+    { "keys": ["alt+t"], "command": "toggle_word" },
+    // plugin: my_plugin_38
+    { "keys": ["ctrl+shift+,"], "command": "goto_symbol", "args": { "step": -1, "cycle": false } },
+    { "keys": ["ctrl+shift+."], "command": "goto_symbol", "args": { "step": 1, "cycle": false } },
+    { "keys": ["ctrl+alt+shift+e"], "command": "encrypt_selected" },
+    { "keys": ["ctrl+alt+shift+d"], "command": "decrypt_selected" },
+    /*******************
+     *   My commands   *
+     *******************/
     {
         "keys": ["ctrl+alt+f"],
         "command": "phpcs_fix_this_file",
@@ -1074,9 +1022,7 @@
     {
         "keys": ["alt+d", "alt+c"],
         "command": "decorate_inline_comment",
-        "context": [
-            { "key": "selector", "operator": "equal", "operand": "comment" }
-        ]
+        "context": [{ "key": "selector", "operator": "equal", "operand": "comment" }]
     },
     { "keys": ["pause"], "command": "exec", "args": { "kill": true } },
     { "keys": ["alt+a", "alt+r", "alt+i"], "command": "arithmetic" },

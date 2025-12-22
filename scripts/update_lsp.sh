@@ -36,6 +36,7 @@ stubgen.exe --include-private --include-docstrings "${TMP_DIR}/LSP" -o "${TYPING
 pushd "${TYPINGS_DIR}" || exit
     rm -f test_* sublime.pyi sublime_plugin.pyi setup.pyi server.pyi release.pyi mdpopups.pyi
 popd || exit
+rm -rf .mypy_cache
 
 pushd "${TMP_DIR}/LSP" || exit
 

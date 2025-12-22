@@ -59,6 +59,7 @@ from .constants import (
 from .diagnostics_storage import DiagnosticsStorage as DiagnosticsStorage
 from .edit import (
     WorkspaceChanges as WorkspaceChanges,
+    WorkspaceEditSummary as WorkspaceEditSummary,
     apply_text_edits as apply_text_edits,
     parse_workspace_edit as parse_workspace_edit,
 )
@@ -923,7 +924,7 @@ class Session(TransportCallbacks):
         progress: bool = False,
         view: sublime.View | None = None,
         is_refactoring: bool = False
-    ) -> Promise:
+    ) -> Promise[None]:
         """Run a command from any thread. Your .then() continuations will run in Sublime's worker thread."""
 
     def _reset_is_executing_refactoring_command(self) -> None: ...
@@ -984,15 +985,15 @@ class Session(TransportCallbacks):
         *,
         label: str | None = None,
         is_refactoring: bool = False
-    ) -> Promise[None]:
+    ) -> Promise[WorkspaceEditSummary]:
         """
-        Apply workspace edits, and return a promise that resolves on the async thread again after the edits have been
-        applied.
+        Apply a WorkspaceEdit, and return a promise that resolves on the async thread again after the edits have been
+        applied. The resolved promise contains a summary of the changes in the WorkspaceEdit.
         """
 
     def apply_parsed_workspace_edits(
         self, changes: WorkspaceChanges, is_refactoring: bool = False
-    ) -> Promise[None]: ...
+    ) -> Promise[WorkspaceEditSummary]: ...
     def _get_view_state_actions(
         self, uri: DocumentUri, auto_save: str
     ) -> ViewStateActions:
