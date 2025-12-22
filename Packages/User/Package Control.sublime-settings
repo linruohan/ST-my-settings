@@ -101,5 +101,9 @@
     ],
     "in_process_packages":
     [
+        "AutoFilePath",
+        "AutomaticPackageReloader",
+        "AutoSetSyntax",
+        "BetterFindBuffer",
     ],
 }
