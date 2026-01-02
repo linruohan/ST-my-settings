@@ -92,12 +92,8 @@ class ToggleGroupCollection(UserList[ToggleGroup]):
         search_offset = search_region.begin()
         string = view.substr(search_region)
         for word_info in self.sorted_word_infos:
-            for m in re.finditer(
-                re.escape(word_info.word), string, flags=re.IGNORECASE
-            ):
-                found_region = sublime.Region(
-                    search_offset + m.start(), search_offset + m.end()
-                )
+            for m in re.finditer(re.escape(word_info.word), string, flags=re.IGNORECASE):
+                found_region = sublime.Region(search_offset + m.start(), search_offset + m.end())
                 if found_region.contains(caret_pt):
                     return word_info, found_region
         return None
@@ -120,9 +116,7 @@ class ToggleWordCommand(sublime_plugin.TextCommand):
         search_radius = len(group_collection.longest_word)
         for region in reversed(self.view.sel()):
             if (search_region := region).empty():
-                search_region = sublime.Region(
-                    region.b - search_radius, region.b + search_radius
-                )
+                search_region = sublime.Region(region.b - search_radius, region.b + search_radius)
             self._toggle_word(
                 self.view,
                 edit,
@@ -140,11 +134,7 @@ class ToggleWordCommand(sublime_plugin.TextCommand):
         group_collection: ToggleGroupCollection,
         caret_pt: int = -1,
     ) -> None:
-        if not (
-            find_result := group_collection.find(
-                view, search_region=search_region, caret_pt=caret_pt
-            )
-        ):
+        if not (find_result := group_collection.find(view, search_region=search_region, caret_pt=caret_pt)):
             return
         word_info, found_region = find_result
 
@@ -155,6 +145,4 @@ class ToggleWordCommand(sublime_plugin.TextCommand):
             if source_text == set_case(word_info.word):
                 view.replace(edit, found_region, set_case(word_info_next.word))
                 return
-        print(
-            f"[ToggleWord][ERROR] No matching case converter found for source text: {source_text}"
-        )
+        print(f"[ToggleWord][ERROR] No matching case converter found for source text: {source_text}")

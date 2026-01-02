@@ -621,23 +621,22 @@
      *   My commands   *
      *******************/
     {
-        "keys": ["alt+d", "alt+c"],
-        "command": "decorate_inline_comment",
-        "context": [{ "key": "selector", "operator": "equal", "operand": "comment" }]
+        "keys": ["ctrl+alt+f"],
+        "command": "phpcs_fix_this_file",
+        "args": { "tool": "Fixer" },
+        "context": [{ "key": "selector", "operator": "equal", "operand": "embedding.php | source.php" }]
     },
-    { "keys": ["pause"], "command": "exec", "args": { "kill": true } },
-    { "keys": ["alt+a", "alt+r", "alt+i"], "command": "arithmetic" },
+    // plugin: Private Clipboard Manager
     {
-        "keys": ["f5"],
-        "command": "cli_runner_show_result",
-        "context": [{ "key": "setting.is_from_cli_runner" }]
+        "keys": ["alt+p", "alt+c"],
+        "command": "private_clipboard_manager",
+        "args": { "operation": "copy" },
     },
     {
-        "keys": ["alt+g"],
-        "command": "cli_runner",
-        "args": { "initial_text": "git ", "cwd": "$file_dir" }
+        "keys": ["alt+p", "alt+x"],
+        "command": "private_clipboard_manager",
+        "args": { "operation": "cut" },
     },
-    // CNY to TWD
     {
         // choose which history to paste
         "keys": ["alt+p", "alt+p"],

@@ -19,9 +19,7 @@ class MyTextInputHandlerDemoCommand(sublime_plugin.TextCommand):
             return
 
         if window := self.view.window():
-            window.run_command(
-                "show_overlay", {"overlay": "command_palette", "command": self.name()}
-            )
+            window.run_command("show_overlay", {"overlay": "command_palette", "command": self.name()})
 
     def input_description(self) -> str:
         return "Here's input_description"

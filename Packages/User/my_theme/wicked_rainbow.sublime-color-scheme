@@ -5,15 +5,15 @@
         //////////
         // base //
         //////////
-        "Black"           : "#1a1b26" ,
-        "BlackLight"      : "#1a1b24" ,
-        "BlackLighter"    : "#1a1b22" ,
-        "BlackLightest"   : "#1a1b20" ,
-        "BlueSaturated"   : "#7aa2f7" ,
-        "CyanSaturated"   : "#7dcfff" ,
+        "Black"           : "#000" ,
+        "BlackLight"      : "#111" ,
+        "BlackLighter"    : "#222" ,
+        "BlackLightest"   : "#333" ,
+        "BlueSaturated"   : "#00F" ,
+        "CyanSaturated"   : "#0FF" ,
         "GreenSaturated"  : "#0F0" ,
         "PinkSaturated"   : "#F0F" ,
-        "RedSaturated"    : "#f7768e" ,
+        "RedSaturated"    : "#F00" ,
         "White"           : "#FFF" ,
         "WhiteDark"       : "#EEE" ,
         "WhiteDarker"     : "#DDD" ,

@@ -7,7 +7,8 @@
         "PackageDev",
         "PowerShell",
     ],
-    "installed_packages": [
+    "installed_packages":
+    [
         "AceJump-Chinese",
         "Advanced Substation Alpha (ASS)",
         "AlignTab",
@@ -16,6 +17,7 @@
         "AutoSetSyntax",
         "BetterFindBuffer",
         "BootstrapAutocomplete",
+        "BracketHighlighter",
         "Case Conversion",
         "CMake",
         "Codec",
@@ -53,7 +55,6 @@
         "LSP",
         "LSP-bash",
         "LSP-clangd",
-        "LSP-copilot",
         "LSP-css",
         "LSP-dockerfile",
         "LSP-eslint",

@@ -61,7 +61,7 @@
         // project root ignore
         "//branch-*/",
         "branch-build/",
-        "public/build/"
+        "public/build/",
     ],
     "block_caret": false,
     "caret_extra_bottom": 2,
@@ -78,8 +78,7 @@
     "dictionary": "Packages/Language - English/en_US-large.dic",
     "draw_minimap_border": true,
     "draw_shadows": true,
-    "draw_white_space": [
-    ],
+    "draw_white_space": [],
     "enable_tab_scrolling": false,
     "ensure_newline_at_eof_on_save": true,
     "file_exclude_patterns": [
@@ -185,7 +184,7 @@
         // "gdi",
         // "ss02",
     ],
-    "font_size": 18,
+    "font_size": 15,
     "gutter": true,
     "hide_pointer_while_typing": false,
     "highlight_find_results_in_scrollbar": true,
@@ -319,35 +318,6 @@
         ["wide", "narrow"],
         ["width", "height"],
         ["y", "n"],
-        ["yes", "no"]
+        ["yes", "no"],
     ],
-    // theme-one
-    "always_show_minimap_viewport": true,
-    "animation_enabled": false,
-    /*"caret_extra_bottom": 2,*/
-    /*"caret_extra_top": 1,*/
-    /*"caret_style": "blink",*/
-    /*"enable_tab_scrolling": false,*/
-    /*"highlight_line": true,*/
-    /*"highlight_modified_tabs": true,*/
-    /*"indent_guide_options": [
-        "draw_normal",
-        "solid"
-    ],*/
-    /*"line_padding_bottom": 2,*/
-    "line_padding_top": 1,
-    "margin": 0,
-
-    // ST4-specific
-    "highlight_gutter": false,
-    "show_scroll_tabs_buttons": false,
-    "show_tabs_dropdown_button": false,
-    "show_new_tab_button": false,
-    /*"theme": "auto",*/
-    "dark_theme": "Default.sublime-theme",
-    "light_theme": "Default.sublime-theme",
-
-    /*"color_scheme": "auto",*/
-    "dark_color_scheme": "wicked_rainbow.sublime-color-scheme",
-    "light_color_scheme": "wicked_rainbow.sublime-color-scheme",
 }
