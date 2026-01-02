@@ -79,6 +79,7 @@
     "draw_minimap_border": true,
     "draw_shadows": true,
     "draw_white_space": [
+        "all"
     ],
     "enable_tab_scrolling": false,
     "ensure_newline_at_eof_on_save": true,
@@ -179,13 +180,13 @@
         ".Trash",
         ".Trash-*",
     ],
-    "font_face": "XHZS",
+    "font_face": "Cascadia Mono NF",
     "font_options": [
         // "bold",
         // "gdi",
         // "ss02",
     ],
-    "font_size": 18,
+    "font_size": 11,
     "gutter": true,
     "hide_pointer_while_typing": false,
     "highlight_find_results_in_scrollbar": true,
@@ -193,10 +194,6 @@
     "highlight_modified_tabs": true,
     "hungry_delete_empty_line": false,
     "ignored_packages": [
-        "AutoFilePath",
-        "AutomaticPackageReloader",
-        "AutoSetSyntax",
-        "BetterFindBuffer",
         "Vintage",
     ],
     "ignored_snippets": [
@@ -232,7 +229,7 @@
         // default
         "*.log",
     ],
-    "index_files": false,
+    "index_files": true,
     "line_numbers": true,
     "line_padding_bottom": 2,
     "match_brackets": false,
@@ -252,7 +249,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "auto",
+    "theme": "Adaptive.sublime-theme",
     "theme_font_options": [
         // "gdi",
     ],
