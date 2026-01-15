@@ -166,6 +166,9 @@
         {"name": "mdcodeinline", "position": 509},
         {"name": "mdcodeblock", "position": 510},
         {"name": "latexmath_inline", "position": 511},
+        {"name": "single_quote", "position": 1001},
+        {"name": "double_quote", "position": 1002},
+        {"name": "backtick_quote", "position": 1003},
     ],
     "user_brackets": [
         /////////////////////////////

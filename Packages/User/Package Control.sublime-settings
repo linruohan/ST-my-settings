@@ -55,6 +55,7 @@
         "LSP",
         "LSP-bash",
         "LSP-clangd",
+        "LSP-copilot",
         "LSP-css",
         "LSP-dockerfile",
         "LSP-eslint",

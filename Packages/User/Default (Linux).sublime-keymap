@@ -665,7 +665,7 @@
         "keys": ["alt+f", "alt+g"],
         "command": "arithmetic",
         "args": {
-            "expr": "int(round(x*4.4*1.2, -1))"
+            "expr": "int(round(x*4.6*1.2, -1))"
         }
     },
     // get an 8-char fingerprint of the current content
