@@ -33,9 +33,11 @@ def revise_node_electron_version() -> None:
         ((2, 17), "17.9.1"),
     )
     # @see https://github.com/electron/electron/releases
-    electron_min_reqs: tuple[tuple[GLIBC_VER_TUPLE, ELECTRON_VER_STR, NODE_VER_STR], ...] = (
+    electron_min_reqs: tuple[
+        tuple[GLIBC_VER_TUPLE, ELECTRON_VER_STR, NODE_VER_STR], ...
+    ] = (
         # ((min_glibc_version), "electron_version", "node_version"),
-        ((2, 25), "40.0.0-beta.3", "24.11.1"),
+        ((2, 25), "40.0.0", "24.11.1"),
         ((2, 18), "29.4.6", "20.9.0"),
         ((2, 17), "28.3.3", "18.18.2"),
     )
@@ -47,7 +49,9 @@ def revise_node_electron_version() -> None:
     else:
         print("[ERROR] glibc is too old for Node.js...")
 
-    if electron_min_req := first_true(electron_min_reqs, pred=lambda x: glibc_ver >= x[0]):
+    if electron_min_req := first_true(
+        electron_min_reqs, pred=lambda x: glibc_ver >= x[0]
+    ):
         node_runtime.ELECTRON_RUNTIME_VERSION = electron_min_req[1]
         node_runtime.ELECTRON_NODE_VERSION = electron_min_req[2]
     else:
