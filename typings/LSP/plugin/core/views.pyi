@@ -143,7 +143,6 @@ def format_diagnostic_for_panel(diagnostic: Diagnostic) -> tuple[str, int | None
                 When the last three elements are not optional, show an inline phantom
                 using the information given.
     """
-def format_diagnostic_source_and_code(diagnostic: Diagnostic) -> str: ...
 def diagnostic_source_and_code(diagnostic: Diagnostic) -> tuple[str, str | None, str | None]: ...
 def location_to_human_readable(config: ClientConfig, base_dir: str | None, location: Location | LocationLink) -> str:
     """

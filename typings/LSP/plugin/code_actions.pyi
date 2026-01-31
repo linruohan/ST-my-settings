@@ -10,7 +10,8 @@ from .save_command import LspSaveCommand as LspSaveCommand, SaveTask as SaveTask
 from _typeshed import Incomplete
 from abc import ABCMeta, abstractmethod
 from collections.abc import Callable as Callable, Generator, Iterator
-from typing import Any, TypeGuard
+from typing import Any
+from typing_extensions import TypeGuard
 
 ConfigName = str
 CodeActionOrCommand = CodeAction | Command

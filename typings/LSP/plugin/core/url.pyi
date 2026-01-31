@@ -1,7 +1,9 @@
 import sublime
+from ...protocol import DocumentUri as DocumentUri
 from .constants import ST_INSTALLED_PACKAGES_PATH as ST_INSTALLED_PACKAGES_PATH, ST_PACKAGES_PATH as ST_PACKAGES_PATH
 from typing import Any
 
+def normalize_uri(uri: DocumentUri) -> DocumentUri: ...
 def filename_to_uri(file_name: str) -> str:
     """
     Convert a file name obtained from view.file_name() into an URI

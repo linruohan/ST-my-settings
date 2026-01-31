@@ -17,6 +17,7 @@ from .core.types import ClientConfig as ClientConfig, FEATURES_TIMEOUT as FEATUR
 from .core.url import parse_uri as parse_uri, view_to_uri as view_to_uri
 from .core.views import MarkdownLangMap as MarkdownLangMap, diagnostic_severity as diagnostic_severity, first_selection_region as first_selection_region, format_code_actions_for_quick_panel as format_code_actions_for_quick_panel, format_diagnostic_for_html as format_diagnostic_for_html, make_link as make_link, range_to_region as range_to_region, show_lsp_popup as show_lsp_popup, text_document_identifier as text_document_identifier, text_document_position_params as text_document_position_params, update_lsp_popup as update_lsp_popup
 from .core.windows import WindowManager as WindowManager
+from .diagnostics import get_diagnostics_identifiers as get_diagnostics_identifiers
 from .folding_range import folding_range_to_range as folding_range_to_range
 from .hover import code_actions_content as code_actions_content
 from .session_buffer import SessionBuffer as SessionBuffer

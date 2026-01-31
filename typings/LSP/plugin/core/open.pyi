@@ -1,6 +1,6 @@
 import sublime
 from ...protocol import DocumentUri as DocumentUri, Range as Range
-from .constants import ST_PLATFORM as ST_PLATFORM, ST_VERSION as ST_VERSION
+from .constants import ST_PACKAGES_PATH as ST_PACKAGES_PATH, ST_PLATFORM as ST_PLATFORM, ST_VERSION as ST_VERSION
 from .logging import exception_log as exception_log
 from .promise import Promise as Promise, ResolveFunc as ResolveFunc
 from .protocol import UINT_MAX as UINT_MAX
@@ -22,6 +22,12 @@ def open_file(window: sublime.Window, uri: DocumentUri, flags: sublime.NewFileFl
     Open a file asynchronously.
     It is only safe to call this function from the UI thread.
     The provided uri MUST be a file URI
+    """
+def open_resource(window: sublime.Window, uri: DocumentUri, group: int = -1) -> sublime.View | None:
+    """
+    Open a resource file.
+    It is only safe to call this function from the UI thread.
+    The provided uri MUST be a res URI
     """
 def center_selection(view: sublime.View, r: Range) -> sublime.View: ...
 def open_in_browser(uri: str) -> None: ...
