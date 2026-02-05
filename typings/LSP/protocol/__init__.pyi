@@ -1,7 +1,7 @@
 from ..plugin.core.typing import StrEnum
 from _typeshed import Incomplete
 from enum import IntEnum, IntFlag
-from typing import Literal, TypedDict
+from typing import Any, Literal, Mapping, TypedDict
 from typing_extensions import NotRequired
 
 URI = str
@@ -439,7 +439,7 @@ WorkspaceDocumentDiagnosticReport: Incomplete
 TextDocumentContentChangeEvent: Incomplete
 MarkedString: Incomplete
 DocumentFilter: Incomplete
-LSPObject: Incomplete
+LSPObject = Mapping[str, Any]
 GlobPattern: Incomplete
 TextDocumentFilter: Incomplete
 NotebookDocumentFilter: Incomplete

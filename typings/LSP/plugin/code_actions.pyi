@@ -1,5 +1,5 @@
 import sublime
-from ..protocol import CodeAction, CodeActionKind, Command, Diagnostic as Diagnostic
+from ..protocol import CodeAction, CodeActionKind, CodeActionParams as CodeActionParams, Command, Diagnostic as Diagnostic
 from .core.promise import Promise as Promise
 from .core.protocol import Error as Error, Request as Request
 from .core.registry import LspTextCommand as LspTextCommand, LspWindowCommand as LspWindowCommand, windows as windows
@@ -32,7 +32,7 @@ class CodeActionsManager:
         Requests code actions with provided diagnostics and specified region. If there are
         no diagnostics for given session, the request will be made with empty diagnostics list.
         """
-    def _collect_code_actions_async(self, listener: AbstractViewListener, request_factory: Callable[[SessionBufferProtocol], Request | None], response_filter: Callable[[SessionBufferProtocol, list[CodeActionOrCommand]], list[CodeActionOrCommand]]) -> Promise[list[CodeActionsByConfigName]]: ...
+    def _collect_code_actions_async(self, listener: AbstractViewListener, request_factory: Callable[[SessionBufferProtocol], Request[CodeActionParams, list[CodeActionOrCommand] | None] | None], response_filter: Callable[[SessionBufferProtocol, list[CodeActionOrCommand]], list[CodeActionOrCommand]]) -> Promise[list[CodeActionsByConfigName]]: ...
     def request_on_save_async(self, view: sublime.View, on_save_actions: dict[str, bool]) -> Generator[Promise[CodeActionsByConfigName]]: ...
 
 actions_manager: Incomplete

@@ -1,7 +1,7 @@
 import sublime
 import sublime_plugin
 import weakref
-from ..protocol import PrepareRenameResult as PrepareRenameResult, Range as Range, RenameParams as RenameParams, WorkspaceEdit as WorkspaceEdit
+from ..protocol import PrepareRenameParams as PrepareRenameParams, PrepareRenameResult as PrepareRenameResult, Range as Range, RenameParams as RenameParams, WorkspaceEdit as WorkspaceEdit
 from .core.edit import show_summary_message as show_summary_message
 from .core.protocol import Request as Request
 from .core.registry import LspTextCommand as LspTextCommand, get_position as get_position
