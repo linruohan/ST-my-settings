@@ -1,12 +1,18 @@
 from _typeshed import Incomplete
 from typing import Any, Generator
 
+def deep_merge(base: dict[str, Any], update: dict[str, Any]) -> None:
+    """Recursively merge update dict with base dict."""
+
 class DottedDict:
     __slots__: Incomplete
     _d: dict[str, Any]
     def __init__(self, d: dict[str, Any] | None = None) -> None:
         """
         Construct a DottedDict, optionally from an existing dictionary.
+
+        The dots within the first-level keys (only) of the passed dict will be interpreted as nesting triggers and the
+        resulting dict will have those transformed into nested keys.
 
         :param      d:    An existing dictionary.
         """
@@ -67,6 +73,9 @@ class DottedDict:
         """
         Overwrite and/or add new key-value pairs to the collection.
 
+        The dots within the first-level keys (only) of the passed dict will be interpreted as nesting triggers and the
+        resulting dict will have those transformed into nested keys.
+
         :param      d:    The overriding dictionary. Can contain nested dictionaries.
         """
     def get_resolved(self, variables: dict[str, str]) -> dict[str, Any]:
@@ -77,6 +86,12 @@ class DottedDict:
 
         :returns:   A copy of the underlying dictionary, but with the variables replaced
         """
-    def _update_recursive(self, current: dict[str, Any], prefix: str) -> None: ...
+    def _merge(self, path: str, value: Any) -> None:
+        """
+        Update a value in the dictionary (merge if value is a dict).
+
+        :param      path:   The path, e.g. foo.bar.baz
+        :param      value:  The value
+        """
     def __repr__(self) -> str: ...
     def __eq__(self, other: Any) -> bool: ...
