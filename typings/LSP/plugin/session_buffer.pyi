@@ -1,7 +1,7 @@
 import sublime
-from ..protocol import CodeLens as CodeLens, ColorInformation as ColorInformation, Diagnostic as Diagnostic, DocumentDiagnosticParams as DocumentDiagnosticParams, DocumentDiagnosticReport as DocumentDiagnosticReport, DocumentLink as DocumentLink, DocumentUri as DocumentUri, FullDocumentDiagnosticReport as FullDocumentDiagnosticReport, InlayHint as InlayHint, InlayHintParams as InlayHintParams, RelatedFullDocumentDiagnosticReport as RelatedFullDocumentDiagnosticReport, SemanticTokens as SemanticTokens, SemanticTokensDelta as SemanticTokensDelta, TextDocumentSyncKind, UnchangedDocumentDiagnosticReport as UnchangedDocumentDiagnosticReport
+from ..protocol import CodeLens as CodeLens, ColorInformation as ColorInformation, Diagnostic as Diagnostic, DiagnosticTag as DiagnosticTag, DocumentDiagnosticParams as DocumentDiagnosticParams, DocumentDiagnosticReport as DocumentDiagnosticReport, DocumentLink as DocumentLink, DocumentUri as DocumentUri, FullDocumentDiagnosticReport as FullDocumentDiagnosticReport, InlayHint as InlayHint, InlayHintParams as InlayHintParams, RelatedFullDocumentDiagnosticReport as RelatedFullDocumentDiagnosticReport, SemanticTokens as SemanticTokens, SemanticTokensDelta as SemanticTokensDelta, TextDocumentSyncKind, UnchangedDocumentDiagnosticReport as UnchangedDocumentDiagnosticReport
 from .code_lens import CodeLensCache as CodeLensCache, LspToggleCodeLensesCommand as LspToggleCodeLensesCommand
-from .core.constants import DOCUMENT_LINK_FLAGS as DOCUMENT_LINK_FLAGS, RegionKey as RegionKey, RequestFlags as RequestFlags, SEMANTIC_TOKENS_MAP as SEMANTIC_TOKENS_MAP, SEMANTIC_TOKEN_FLAGS as SEMANTIC_TOKEN_FLAGS
+from .core.constants import CODE_LENS_ANNOTATION_SCOPE as CODE_LENS_ANNOTATION_SCOPE, DIAGNOSTIC_TAG_SCOPES as DIAGNOSTIC_TAG_SCOPES, DOCUMENT_LINK_FLAGS as DOCUMENT_LINK_FLAGS, RegionKey as RegionKey, RequestFlags as RequestFlags, SEMANTIC_TOKENS_MAP as SEMANTIC_TOKENS_MAP, SEMANTIC_TOKEN_FLAGS as SEMANTIC_TOKEN_FLAGS
 from .core.promise import Promise as Promise
 from .core.protocol import Request as Request, ResolvedCodeLens as ResolvedCodeLens, ResponseError as ResponseError
 from .core.sessions import Session as Session, SessionViewProtocol as SessionViewProtocol, is_diagnostic_server_cancellation_data as is_diagnostic_server_cancellation_data
@@ -37,13 +37,13 @@ class PendingDocumentDiagnosticRequest:
 
 class SemanticTokensData:
     __slots__: Incomplete
-    data: list[int]
-    result_id: str | None
-    active_region_keys: set[int]
-    tokens: list[SemanticToken]
+    data: Incomplete
+    result_id: Incomplete
+    active_region_keys: Incomplete
+    tokens: Incomplete
     view_change_count: int
     needs_refresh: bool
-    pending_response: int | None
+    pending_response: Incomplete
     def __init__(self) -> None: ...
 
 class SessionBuffer:
@@ -57,26 +57,27 @@ class SessionBuffer:
     opened: bool
     capabilities: Incomplete
     _session: Incomplete
-    _session_views: WeakSet[SessionViewProtocol]
+    _session_views: Incomplete
     _last_known_uri: Incomplete
     _id: Incomplete
-    _pending_changes: PendingChanges | None
-    _diagnostics: list[tuple[Diagnostic, sublime.Region]]
-    diagnostics_data_per_severity: dict[tuple[int, bool], DiagnosticSeverityData]
-    _diagnostics_versions: dict[DiagnosticsIdentifier, int]
+    _pending_changes: Incomplete
+    _diagnostics: Incomplete
+    diagnostics_data_per_severity: Incomplete
+    _diagnostics_versions: Incomplete
     diagnostics_flags: int
     _diagnostics_are_visible: bool
+    supported_diagnostic_tags: Incomplete
     document_diagnostic_needs_refresh: bool
-    _document_diagnostic_pending_requests: dict[DiagnosticsIdentifier, PendingDocumentDiagnosticRequest | None]
+    _document_diagnostic_pending_requests: Incomplete
     _last_synced_version: int
     _last_text_change_time: float
     _diagnostics_debouncer_async: Incomplete
     _color_phantoms: Incomplete
-    _document_links: list[DocumentLink]
+    _document_links: Incomplete
     semantic_tokens: Incomplete
-    _semantic_region_keys: dict[str, int]
+    _semantic_region_keys: Incomplete
     _semantic_highlighting_supported_by_color_scheme: bool
-    _supported_custom_tokens: set[str]
+    _supported_custom_tokens: Incomplete
     _last_semantic_region_key: int
     _inlay_hints_phantom_set: Incomplete
     inlay_hints_needs_refresh: bool
@@ -84,8 +85,9 @@ class SessionBuffer:
     _is_saving: bool
     _has_changed_during_save: bool
     _code_lenses: Incomplete
-    _dynamically_registered_commands: dict[str, list[str]]
-    _supported_commands: set[str]
+    code_lens_annotation_color: str
+    _dynamically_registered_commands: Incomplete
+    _supported_commands: Incomplete
     def __init__(self, session_view: SessionViewProtocol, buffer_id: int, uri: DocumentUri) -> None: ...
     @property
     def session(self) -> Session: ...
@@ -127,11 +129,13 @@ class SessionBuffer:
     def on_pre_save_async(self, view: sublime.View) -> None: ...
     def on_post_save_async(self, view: sublime.View, new_uri: DocumentUri) -> None: ...
     def on_userprefs_changed_async(self) -> None: ...
+    def on_color_scheme_changed(self, view: sublime.View) -> None: ...
     def some_view(self) -> sublime.View | None: ...
     def _if_view_unchanged(self, f: Callable[Concatenate[sublime.View, P], None], version: int) -> Callable[P, None]:
         """
         Ensures that the view is at the same version when we were called, before calling the `f` function.
         """
+    def _update_color_scheme_rules(self, view: sublime.View) -> None: ...
     def _update_supported_commands(self) -> None: ...
     def _get_request_flags(self, view: sublime.View) -> RequestFlags: ...
     def _do_color_boxes_async(self, view: sublime.View, version: int) -> None: ...
@@ -160,11 +164,6 @@ class SessionBuffer:
     def set_semantic_tokens_pending_refresh(self, needs_refresh: bool = True) -> None: ...
     def get_semantic_tokens(self) -> list[SemanticToken]: ...
     def clear_semantic_tokens_async(self) -> None: ...
-    def evaluate_semantic_tokens_color_scheme_support(self, view: sublime.View) -> None:
-        """
-        Check whether semantic highlighting is supported by the color scheme and which of the custom token types from
-        this server are supported.
-        """
     def do_inlay_hints_async(self, view: sublime.View) -> None: ...
     def _on_inlay_hints_async(self, response: list[InlayHint] | None) -> None: ...
     def present_inlay_hints(self, phantoms: list[sublime.Phantom]) -> None: ...

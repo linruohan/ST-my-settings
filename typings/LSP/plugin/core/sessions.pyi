@@ -1,6 +1,7 @@
 import sublime
 import weakref
-from ...protocol import ApplyWorkspaceEditParams as ApplyWorkspaceEditParams, ClientCapabilities as ClientCapabilities, CodeAction, Command, ConfigurationItem as ConfigurationItem, ConfigurationParams as ConfigurationParams, Diagnostic as Diagnostic, DiagnosticServerCancellationData as DiagnosticServerCancellationData, DidChangeWatchedFilesRegistrationOptions as DidChangeWatchedFilesRegistrationOptions, DidChangeWorkspaceFoldersParams as DidChangeWorkspaceFoldersParams, DocumentLink as DocumentLink, DocumentUri as DocumentUri, ExecuteCommandParams, FileEvent as FileEvent, FileSystemWatcher as FileSystemWatcher, GeneralClientCapabilities as GeneralClientCapabilities, InitializeParams as InitializeParams, InitializeResult as InitializeResult, LSPAny, Location as Location, LocationLink as LocationLink, LogMessageParams as LogMessageParams, PreviousResultId as PreviousResultId, ProgressParams as ProgressParams, ProgressToken as ProgressToken, PublishDiagnosticsParams as PublishDiagnosticsParams, Range as Range, RegistrationParams as RegistrationParams, ShowDocumentParams as ShowDocumentParams, ShowMessageParams as ShowMessageParams, ShowMessageRequestParams as ShowMessageRequestParams, SignatureHelpTriggerKind, TextDocumentClientCapabilities as TextDocumentClientCapabilities, TextDocumentSyncKind as TextDocumentSyncKind, TextEdit as TextEdit, UnregistrationParams as UnregistrationParams, WatchKind as WatchKind, WindowClientCapabilities as WindowClientCapabilities, WorkDoneProgressBegin, WorkDoneProgressCreateParams as WorkDoneProgressCreateParams, WorkspaceClientCapabilities as WorkspaceClientCapabilities, WorkspaceDiagnosticParams as WorkspaceDiagnosticParams, WorkspaceDiagnosticReport as WorkspaceDiagnosticReport, WorkspaceDocumentDiagnosticReport as WorkspaceDocumentDiagnosticReport, WorkspaceEdit as WorkspaceEdit, WorkspaceFullDocumentDiagnosticReport as WorkspaceFullDocumentDiagnosticReport
+from ...protocol import ApplyWorkspaceEditParams as ApplyWorkspaceEditParams, ApplyWorkspaceEditResult as ApplyWorkspaceEditResult, ClientCapabilities as ClientCapabilities, CodeAction, Command, ConfigurationItem as ConfigurationItem, ConfigurationParams as ConfigurationParams, Diagnostic as Diagnostic, DiagnosticServerCancellationData as DiagnosticServerCancellationData, DidChangeWatchedFilesRegistrationOptions as DidChangeWatchedFilesRegistrationOptions, DidChangeWorkspaceFoldersParams as DidChangeWorkspaceFoldersParams, DocumentLink as DocumentLink, DocumentUri as DocumentUri, ExecuteCommandParams, FileEvent as FileEvent, FileSystemWatcher as FileSystemWatcher, GeneralClientCapabilities as GeneralClientCapabilities, InitializeParams as InitializeParams, InitializeResult as InitializeResult, LSPAny, Location as Location, LocationLink as LocationLink, LogMessageParams as LogMessageParams, MessageActionItem as MessageActionItem, PreviousResultId as PreviousResultId, ProgressParams as ProgressParams, ProgressToken as ProgressToken, PublishDiagnosticsParams as PublishDiagnosticsParams, Range as Range, RegistrationParams as RegistrationParams, ShowDocumentParams as ShowDocumentParams, ShowDocumentResult as ShowDocumentResult, ShowMessageParams as ShowMessageParams, ShowMessageRequestParams as ShowMessageRequestParams, SignatureHelpTriggerKind, TextDocumentClientCapabilities as TextDocumentClientCapabilities, TextDocumentSyncKind as TextDocumentSyncKind, TextEdit as TextEdit, UnregistrationParams as UnregistrationParams, WatchKind as WatchKind, WindowClientCapabilities as WindowClientCapabilities, WorkDoneProgressBegin, WorkDoneProgressCreateParams as WorkDoneProgressCreateParams, WorkspaceClientCapabilities as WorkspaceClientCapabilities, WorkspaceDiagnosticParams as WorkspaceDiagnosticParams, WorkspaceDiagnosticReport as WorkspaceDiagnosticReport, WorkspaceDocumentDiagnosticReport as WorkspaceDocumentDiagnosticReport, WorkspaceEdit as WorkspaceEdit, WorkspaceFolder as LspWorkspaceFolder, WorkspaceFullDocumentDiagnosticReport as WorkspaceFullDocumentDiagnosticReport
+from ..api import APIHandler as APIHandler, notification_handler as notification_handler, request_handler as request_handler
 from ..diagnostics import DiagnosticsIdentifier as DiagnosticsIdentifier, DiagnosticsStorage as DiagnosticsStorage, WORKSPACE_DIAGNOSTICS_RETRIGGER_DELAY as WORKSPACE_DIAGNOSTICS_RETRIGGER_DELAY
 from .active_request import ActiveRequest as ActiveRequest
 from .collections import DottedDict as DottedDict
@@ -14,7 +15,7 @@ from .promise import PackagedTask as PackagedTask, Promise as Promise
 from .protocol import Error as Error, JSONRPCMessage as JSONRPCMessage, Notification as Notification, Request as Request, ResolvedCodeLens as ResolvedCodeLens, Response as Response, ResponseError as ResponseError
 from .settings import client_configs as client_configs, globalprefs as globalprefs, userprefs as userprefs
 from .transports import Transport as Transport, TransportCallbacks as TransportCallbacks
-from .types import Capabilities as Capabilities, ClientConfig as ClientConfig, ClientStates as ClientStates, DocumentSelector_ as DocumentSelector_, SemanticToken as SemanticToken, SettingsRegistration as SettingsRegistration, debounced as debounced, diff as diff, method_to_capability as method_to_capability, sublime_pattern_to_glob as sublime_pattern_to_glob
+from .types import Capabilities as Capabilities, ClientConfig as ClientConfig, ClientStates as ClientStates, DocumentSelector_ as DocumentSelector_, SemanticToken as SemanticToken, SettingsRegistration as SettingsRegistration, debounced as debounced, diff as diff, method2attr as method2attr, method_to_capability as method_to_capability, sublime_pattern_to_glob as sublime_pattern_to_glob
 from .typing import StrEnum as StrEnum
 from .url import filename_to_uri as filename_to_uri, normalize_uri as normalize_uri, parse_uri as parse_uri
 from .version import __version__ as __version__
@@ -89,6 +90,14 @@ class Manager(metaclass=ABCMeta):
         """
         The given Session has stopped with the given exit code.
         """
+    @abstractmethod
+    def handle_message_request(self, config_name: str, params: ShowMessageRequestParams) -> Promise[MessageActionItem | None]: ...
+    @abstractmethod
+    def handle_show_message(self, config_name: str, params: ShowMessageParams) -> Promise[MessageActionItem | None]: ...
+    @abstractmethod
+    def handle_log_message(self, config_name: str, params: LogMessageParams) -> None: ...
+    @abstractmethod
+    def handle_stderr_log(self, config_name: str, message: str) -> None: ...
 
 def _int_enum_to_list(e: type[IntEnum]) -> list[int]: ...
 def _str_enum_to_list(e: type[StrEnum]) -> list[str]: ...
@@ -121,6 +130,7 @@ class SessionViewProtocol(Protocol):
     def clear_code_lenses_async(self) -> None: ...
     def reset_show_definitions(self) -> None: ...
     def on_userprefs_changed_async(self) -> None: ...
+    def on_color_scheme_changed(self) -> None: ...
     def get_request_flags(self) -> RequestFlags: ...
 
 class SessionBufferProtocol(Protocol):
@@ -146,7 +156,7 @@ class SessionBufferProtocol(Protocol):
     def do_semantic_tokens_async(self, view: sublime.View) -> None: ...
     def set_semantic_tokens_pending_refresh(self, needs_refresh: bool = ...) -> None: ...
     def get_semantic_tokens(self) -> list[SemanticToken]: ...
-    def evaluate_semantic_tokens_color_scheme_support(self, view: sublime.View) -> None: ...
+    def on_color_scheme_changed(self, view: sublime.View) -> None: ...
     def do_inlay_hints_async(self, view: sublime.View) -> None: ...
     def set_inlay_hints_pending_refresh(self, needs_refresh: bool = ...) -> None: ...
     def remove_inlay_hint_phantom(self, phantom_uuid: str) -> None: ...
@@ -197,26 +207,7 @@ class AbstractViewListener(metaclass=ABCMeta):
     @abstractmethod
     def get_request_flags(self, session: Session) -> RequestFlags: ...
 
-class AbstractPlugin(metaclass=ABCMeta):
-    '''
-    Inherit from this class to handle non-standard requests and notifications.
-    Given a request/notification, replace the non-alphabetic characters with an underscore, and prepend it with "m_".
-    This will be the name of your method.
-    For instance, to implement the non-standard eslint/openDoc request, define the Python method
-
-        def m_eslint_openDoc(self, params, request_id):
-            session = self.weaksession()
-            if session:
-                webbrowser.open_tab(params[\'url\'])
-                session.send_response(Response(request_id, None))
-
-    To handle the non-standard eslint/status notification, define the Python method
-
-        def m_eslint_status(self, params):
-            pass
-
-    To understand how this works, see the __getattr__ method of the Session class.
-    '''
+class AbstractPlugin(APIHandler, metaclass=ABCMeta):
     @classmethod
     @abstractmethod
     def name(cls) -> str:
@@ -538,7 +529,6 @@ class Logger(metaclass=ABCMeta):
     def incoming_notification(self, method: str, params: Any, unhandled: bool) -> None: ...
 
 def print_to_status_bar(error: ResponseError) -> None: ...
-def method2attr(method: str) -> str: ...
 
 class _RegistrationData:
     __slots__: Incomplete
@@ -547,7 +537,7 @@ class _RegistrationData:
     capability_path: Incomplete
     selector: Incomplete
     options: Incomplete
-    session_buffers: WeakSet[SessionBufferProtocol]
+    session_buffers: Incomplete
     def __init__(self, registration_id: str, capability_path: str, registration_path: str, options: dict[str, Any]) -> None: ...
     def __del__(self) -> None: ...
     def check_applicable(self, sb: SessionBufferProtocol, *, suppress_requests: bool = False) -> None: ...
@@ -555,12 +545,12 @@ class _RegistrationData:
 _WORK_DONE_PROGRESS_PREFIX: str
 _PARTIAL_RESULT_PROGRESS_PREFIX: str
 
-class Session(TransportCallbacks):
-    transport: Transport | None
-    working_directory: str | None
+class Session(APIHandler, TransportCallbacks['dict[str, Any]']):
+    transport: Incomplete
+    working_directory: Incomplete
     request_id: int
     _logger: Incomplete
-    _response_handlers: dict[int, tuple[Request[Any, Any], Callable[[Any], None], Callable[[ResponseError], None]]]
+    _response_handlers: Incomplete
     config: Incomplete
     config_status_message: str
     manager: Incomplete
@@ -568,26 +558,26 @@ class Session(TransportCallbacks):
     state: Incomplete
     capabilities: Incomplete
     diagnostics: Incomplete
-    diagnostics_result_ids: dict[tuple[DocumentUri, DiagnosticsIdentifier], str | None]
-    workspace_diagnostics_pending_responses: dict[DiagnosticsIdentifier, int | None]
+    diagnostics_result_ids: Incomplete
+    workspace_diagnostics_pending_responses: Incomplete
     exiting: bool
-    _registrations: dict[str, _RegistrationData]
-    _init_callback: InitCallback | None
-    _initialize_error: tuple[int, Exception | None] | None
+    _registrations: Incomplete
+    _init_callback: Incomplete
+    _initialize_error: Incomplete
     _views_opened: int
     _workspace_folders: Incomplete
-    _session_views: WeakSet[SessionViewProtocol]
-    _session_buffers: WeakSet[SessionBufferProtocol]
-    _progress: dict[ProgressToken, WindowProgressReporter | None]
+    _session_views: Incomplete
+    _session_buffers: Incomplete
+    _progress: Incomplete
     _watcher_impl: Incomplete
-    _static_file_watchers: list[FileWatcher]
-    _dynamic_file_watchers: dict[str, list[FileWatcher]]
+    _static_file_watchers: Incomplete
+    _dynamic_file_watchers: Incomplete
     _plugin_class: Incomplete
-    _plugin: AbstractPlugin | None
-    _status_messages: dict[str, str]
+    _plugin: Incomplete
+    _status_messages: Incomplete
     _semantic_tokens_map: Incomplete
     _is_executing_refactoring_command: bool
-    _logged_unsupported_commands: set[str]
+    _logged_unsupported_commands: Incomplete
     def __init__(self, manager: Manager, logger: Logger, workspace_folders: list[WorkspaceFolder], config: ClientConfig, plugin_class: type[AbstractPlugin] | None) -> None: ...
     def __getattr__(self, name: str) -> Any:
         """
@@ -644,7 +634,6 @@ class Session(TransportCallbacks):
     def _handle_initialize_success(self, result: InitializeResult) -> None: ...
     def _handle_initialize_error(self, result: ResponseError) -> None: ...
     def _get_global_ignore_globs(self, root_path: str) -> list[str]: ...
-    def call_manager(self, method: str, *args: Any) -> None: ...
     def on_stderr_message(self, message: str) -> None: ...
     def _supports_workspace_folders(self) -> bool: ...
     def _maybe_send_did_change_configuration(self) -> None: ...
@@ -679,47 +668,34 @@ class Session(TransportCallbacks):
     def _set_selected_sheets(self, sheets: list[sublime.Sheet]) -> None: ...
     def _set_focused_sheet(self, sheet: sublime.Sheet | None) -> None: ...
     def decode_semantic_token(self, types_legend: tuple[str, ...], modifiers_legend: tuple[str, ...], token_type_encoded: int, token_modifiers_encoded: int) -> tuple[str, list[str], str | None]: ...
-    def session_views_by_visibility(self) -> tuple[set[SessionViewProtocol], set[SessionViewProtocol]]: ...
+    def session_buffers_by_visibility(self) -> tuple[list[tuple[SessionBufferProtocol, SessionViewProtocol]], list[SessionBufferProtocol]]: ...
+    def visible_session_views(self) -> set[SessionViewProtocol]: ...
     def do_workspace_diagnostics_async(self) -> None: ...
     def _do_workspace_diagnostics_async(self, identifier: DiagnosticsIdentifier) -> None: ...
     def _on_workspace_diagnostics_async(self, identifier: DiagnosticsIdentifier, response: WorkspaceDiagnosticReport, *, reset_pending_response: bool = True) -> None: ...
     def _on_workspace_diagnostics_error_async(self, identifier: DiagnosticsIdentifier, error: ResponseError) -> None: ...
-    def m_window_showMessageRequest(self, params: ShowMessageRequestParams, request_id: int | str) -> None:
-        """handles the window/showMessageRequest request"""
-    def m_window_showMessage(self, params: ShowMessageParams) -> None:
-        """handles the window/showMessage notification"""
-    def m_window_logMessage(self, params: LogMessageParams) -> None:
-        """handles the window/logMessage notification"""
-    def m_workspace_workspaceFolders(self, params: None, request_id: int | str) -> None:
-        """handles the workspace/workspaceFolders request"""
-    def m_workspace_configuration(self, params: ConfigurationParams, request_id: int | str) -> None:
-        """handles the workspace/configuration request"""
-    def m_workspace_applyEdit(self, params: ApplyWorkspaceEditParams, request_id: int | str) -> None:
-        """handles the workspace/applyEdit request"""
-    def m_workspace_codeLens_refresh(self, params: None, request_id: int | str) -> None:
-        """handles the workspace/codeLens/refresh request"""
-    def m_workspace_semanticTokens_refresh(self, params: None, request_id: int | str) -> None:
-        """handles the workspace/semanticTokens/refresh request"""
-    def m_workspace_inlayHint_refresh(self, params: None, request_id: int | str) -> None:
-        """handles the workspace/inlayHint/refresh request"""
-    def m_workspace_diagnostic_refresh(self, params: None, request_id: int | str) -> None:
-        """handles the workspace/diagnostic/refresh request"""
-    def m_textDocument_publishDiagnostics(self, params: PublishDiagnosticsParams) -> None:
-        """handles the textDocument/publishDiagnostics notification"""
+    def on_window_show_message_request(self, params: ShowMessageRequestParams) -> Promise[MessageActionItem | None]: ...
+    def on_window_show_message(self, params: ShowMessageParams) -> None: ...
+    def on_window_log_message(self, params: LogMessageParams) -> None: ...
+    def on_workspace_workspace_folders(self, _: None) -> Promise[list[LspWorkspaceFolder]]: ...
+    def on_workspace_configuration(self, params: ConfigurationParams) -> Promise[list[LSPAny]]: ...
+    def on_workspace_apply_edit(self, params: ApplyWorkspaceEditParams) -> Promise[ApplyWorkspaceEditResult]: ...
+    def on_workspace_code_lens_refresh(self, _: None) -> Promise[None]: ...
+    def on_workspace_semantic_tokens_refresh(self, _: None) -> Promise[None]: ...
+    def on_workspace_inlay_hint_refresh(self, _: None) -> Promise[None]: ...
+    def on_workspace_diagnostic_refresh(self, _: None) -> Promise[None]: ...
+    def _refresh_diagnostics(self) -> None: ...
+    def on_text_document_publish_diagnostics(self, params: PublishDiagnosticsParams) -> None: ...
     def handle_diagnostics_async(self, uri: DocumentUri, identifier: DiagnosticsIdentifier, version: int | None, diagnostics: list[Diagnostic]) -> None: ...
-    def m_client_registerCapability(self, params: RegistrationParams, request_id: int | str) -> None:
-        """handles the client/registerCapability request"""
-    def m_client_unregisterCapability(self, params: UnregistrationParams, request_id: int | str) -> None:
-        """handles the client/unregisterCapability request"""
+    def on_client_register_capability(self, params: RegistrationParams) -> Promise[None]: ...
+    def on_client_unregister_capability(self, params: UnregistrationParams) -> Promise[None]: ...
     def register_file_system_watchers(self, registration_id: str, watchers: list[FileSystemWatcher]) -> None: ...
     def unregister_file_system_watchers(self, registration_id: str) -> None: ...
-    def m_window_showDocument(self, params: ShowDocumentParams, request_id: int | str) -> None:
-        """handles the window/showDocument request"""
-    def m_window_workDoneProgress_create(self, params: WorkDoneProgressCreateParams, request_id: int | str) -> None:
-        """handles the window/workDoneProgress/create request"""
+    def on_window_show_document(self, params: ShowDocumentParams) -> Promise[ShowDocumentResult]: ...
+    def on_window_work_done_progress_create(self, params: WorkDoneProgressCreateParams) -> Promise[None]: ...
     def _invoke_views(self, request: Request[Any, Any], method: str, *args: Any) -> None: ...
     def _create_window_progress_reporter(self, token: ProgressToken, value: WorkDoneProgressBegin) -> None: ...
-    def m___progress(self, params: ProgressParams) -> None:
+    def on_progress(self, params: ProgressParams) -> None:
         """handles the $/progress notification"""
     def end_async(self) -> None: ...
     def shutdown_session_view_async(self, session_view: SessionViewProtocol) -> None: ...

@@ -18,14 +18,14 @@ class HashableRange:
 
 class CachedCodeLens:
     __slots__: Incomplete
-    data: CodeLens | ResolvedCodeLens
+    data: Incomplete
     range: Incomplete
     cached_command: Incomplete
     def __init__(self, data: CodeLens) -> None: ...
     def on_resolve(self, response: CodeLens | Error) -> None: ...
 
 class CodeLensCache:
-    code_lenses: dict[HashableRange, list[CachedCodeLens]]
+    code_lenses: Incomplete
     def __init__(self) -> None: ...
     def handle_response_async(self, code_lenses: list[CodeLens]) -> None: ...
     def unresolved_visible_code_lenses(self, view: sublime.View) -> list[CachedCodeLens]: ...

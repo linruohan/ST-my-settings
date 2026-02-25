@@ -13,6 +13,9 @@ import sublime_plugin
 
 MY_SECRET_KEY = os.getenv("MY_SECRET_KEY", "")
 
+if not MY_SECRET_KEY:
+    print("⚠️ MY_SECRET_KEY environment variable is not set.")
+
 
 """
 Here is an example PEM block for testing this plugin.
@@ -93,7 +96,10 @@ def decrypt(encrypted_text: str, key: str) -> str:
 class PemBlock:
     text: str
     title: str
-    wrap_at: int = 70
+    wrap_at: int = 80
+
+    def __str__(self) -> str:
+        return self.block
 
     @property
     def header(self) -> str:
@@ -128,6 +134,23 @@ def extract_pem_text(text: str, title: str) -> Generator[tuple[PemBlock, tuple[i
         pem_text = pem_block[len(header) : -len(footer)].strip()
         yield (PemBlock(text=pem_text, title=title), (start_index, end_index))
         start_index = end_index
+
+
+class InsertRawTextBlockCommand(sublime_plugin.TextCommand):
+    def run(self, edit: sublime.Edit) -> None:
+        sel = self.view.sel()
+        if len(sel) != 1:
+            sublime.error_message("You must ONLY have one cursor to insert the block.")
+            return
+        region = sel[0]
+
+        region_text = self.view.substr(region)
+        block_text = PemBlock(text=region_text, title="RAW TEXT").block
+        region_new_begin = region.begin() + block_text.index("\n") + 1
+        region_new = sublime.Region(region_new_begin, region_new_begin + len(region_text))
+        self.view.replace(edit, region, block_text)
+        self.view.sel().clear()
+        self.view.sel().add(region_new)
 
 
 class EncryptSelectedCommand(sublime_plugin.TextCommand):

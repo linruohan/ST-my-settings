@@ -24,8 +24,8 @@ class WorkspaceFolder:
 
 class ProjectFolders:
     _window: Incomplete
-    folders: list[str]
-    _folders_exclude_patterns: list[list[str]]
+    folders: Incomplete
+    _folders_exclude_patterns: Incomplete
     def __init__(self, window: sublime.Window) -> None: ...
     def _update_exclude_patterns(self, folders: list[str]) -> None: ...
     def update(self) -> bool: ...

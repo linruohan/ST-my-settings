@@ -11,14 +11,12 @@ from .core.url import parse_uri as parse_uri
 from .core.views import get_line as get_line
 from .core.windows import WindowManager as WindowManager
 from _typeshed import Incomplete
-from contextlib import contextmanager
 from typing import Any, Callable, Generator, Iterable
 
 TextEditTuple = tuple[tuple[int, int], tuple[int, int], str]
 g_workspace_edit_panel_resolvers: dict[int, Callable[[bool], None]]
 BUTTONS_TEMPLATE: str
 
-@contextmanager
 def temporary_setting(settings: sublime.Settings, key: str, val: Any) -> Generator[None, None, None]: ...
 
 class LspApplyWorkspaceEditCommand(LspWindowCommand):

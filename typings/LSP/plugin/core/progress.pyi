@@ -3,8 +3,8 @@ from _typeshed import Incomplete
 
 class ProgressReporter:
     title: Incomplete
-    _message: str | None
-    _percentage: None | int | float
+    _message: Incomplete
+    _percentage: Incomplete
     def __init__(self, title: str) -> None: ...
     def __del__(self) -> None: ...
     def _render(self) -> str: ...

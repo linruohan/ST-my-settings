@@ -68,7 +68,7 @@ class Promise(Generic[T]):
         Arguments:
             resolve_value: The value to resolve the promise with.
         """
-    resolver: ResolveFunc[TExecutor] | None
+    resolver: Incomplete
     @staticmethod
     def packaged_task() -> PackagedTask[S]: ...
     @staticmethod
@@ -84,7 +84,7 @@ class Promise(Generic[T]):
         """
     resolved: bool
     mutex: Incomplete
-    callbacks: list[ResolveFunc[T]]
+    callbacks: Incomplete
     def __init__(self, executor_func: ExecutorFunc[T]) -> None:
         '''Initialize Promise object.
 

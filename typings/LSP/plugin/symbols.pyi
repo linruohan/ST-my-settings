@@ -47,7 +47,7 @@ class LspSelectionSetCommand(sublime_plugin.TextCommand):
 
 class LspDocumentSymbolsCommand(LspTextCommand):
     capability: str
-    items: list[sublime.ListInputItem]
+    items: Incomplete
     kind: int
     cached: bool
     has_matching_symbols: bool

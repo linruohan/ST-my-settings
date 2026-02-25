@@ -32,7 +32,7 @@ class Node:
     element: Incomplete
     tree_item: Incomplete
     indent_level: Incomplete
-    child_ids: list[str]
+    child_ids: Incomplete
     is_resolved: bool
     def __init__(self, element: T, tree_item: TreeItem, indent_level: int = 0) -> None: ...
 
@@ -47,8 +47,8 @@ class TreeDataProvider(metaclass=ABCMeta):
 
 class TreeViewSheet(sublime.HtmlSheet):
     """ A special HtmlSheet which can render interactive tree data structures. """
-    nodes: dict[str, Node]
-    root_nodes: list[str]
+    nodes: Incomplete
+    root_nodes: Incomplete
     name: Incomplete
     data_provider: Incomplete
     header: Incomplete

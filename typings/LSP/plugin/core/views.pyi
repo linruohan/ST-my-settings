@@ -1,6 +1,6 @@
 import sublime
 import sublime_plugin
-from ...protocol import CodeAction as CodeAction, CodeActionContext as CodeActionContext, CodeActionKind, CodeActionParams as CodeActionParams, Color as Color, ColorInformation as ColorInformation, Command as Command, Diagnostic as Diagnostic, DiagnosticRelatedInformation as DiagnosticRelatedInformation, DiagnosticSeverity, DidChangeTextDocumentParams as DidChangeTextDocumentParams, DidCloseTextDocumentParams as DidCloseTextDocumentParams, DidOpenTextDocumentParams as DidOpenTextDocumentParams, DidSaveTextDocumentParams as DidSaveTextDocumentParams, DocumentColorParams as DocumentColorParams, DocumentFormattingParams as DocumentFormattingParams, DocumentRangeFormattingParams as DocumentRangeFormattingParams, DocumentRangesFormattingParams as DocumentRangesFormattingParams, DocumentUri, FormattingOptions as FormattingOptions, Location, LocationLink, MarkedString as MarkedString, MarkupContent as MarkupContent, Position as Position, Range as Range, SelectionRangeParams as SelectionRangeParams, TextDocumentContentChangeEvent as TextDocumentContentChangeEvent, TextDocumentIdentifier as TextDocumentIdentifier, TextDocumentItem as TextDocumentItem, TextDocumentPositionParams as TextDocumentPositionParams, TextDocumentSaveReason as TextDocumentSaveReason, TextEdit as TextEdit, VersionedTextDocumentIdentifier as VersionedTextDocumentIdentifier, WillSaveTextDocumentParams as WillSaveTextDocumentParams
+from ...protocol import CodeAction as CodeAction, CodeActionContext as CodeActionContext, CodeActionKind, CodeActionParams as CodeActionParams, Color as Color, ColorInformation as ColorInformation, Command as Command, Diagnostic as Diagnostic, DiagnosticRelatedInformation as DiagnosticRelatedInformation, DiagnosticSeverity, DiagnosticTag as DiagnosticTag, DidChangeTextDocumentParams as DidChangeTextDocumentParams, DidCloseTextDocumentParams as DidCloseTextDocumentParams, DidOpenTextDocumentParams as DidOpenTextDocumentParams, DidSaveTextDocumentParams as DidSaveTextDocumentParams, DocumentColorParams as DocumentColorParams, DocumentFormattingParams as DocumentFormattingParams, DocumentRangeFormattingParams as DocumentRangeFormattingParams, DocumentRangesFormattingParams as DocumentRangesFormattingParams, DocumentUri, FormattingOptions as FormattingOptions, Location, LocationLink, MarkedString as MarkedString, MarkupContent as MarkupContent, Position as Position, Range as Range, SelectionRangeParams as SelectionRangeParams, TextDocumentContentChangeEvent as TextDocumentContentChangeEvent, TextDocumentIdentifier as TextDocumentIdentifier, TextDocumentItem as TextDocumentItem, TextDocumentPositionParams as TextDocumentPositionParams, TextDocumentSaveReason as TextDocumentSaveReason, TextEdit as TextEdit, VersionedTextDocumentIdentifier as VersionedTextDocumentIdentifier, WillSaveTextDocumentParams as WillSaveTextDocumentParams
 from .constants import CODE_ACTION_KINDS as CODE_ACTION_KINDS, MARKO_MD_PARSER_VERSION as MARKO_MD_PARSER_VERSION, ST_CACHE_PATH as ST_CACHE_PATH, ST_STORAGE_PATH as ST_STORAGE_PATH, SUBLIME_KIND_SCOPES as SUBLIME_KIND_SCOPES, SublimeKind as SublimeKind
 from .protocol import Notification as Notification, Point as Point, Request as Request
 from .settings import userprefs as userprefs
@@ -17,9 +17,9 @@ DIAGNOSTIC_SEVERITY: list[tuple[str, str, str, str, sublime.RegionFlags, sublime
 
 class DiagnosticSeverityData:
     __slots__: Incomplete
-    regions: list[sublime.Region]
-    regions_with_tag: dict[int, list[sublime.Region]]
-    annotations: list[str]
+    regions: Incomplete
+    regions_with_tag: Incomplete
+    annotations: Incomplete
     icon: Incomplete
     def __init__(self, severity: int) -> None: ...
 
@@ -132,7 +132,7 @@ def lsp_color_to_phantom(view: sublime.View, color_info: ColorInformation) -> su
 def document_color_params(view: sublime.View) -> DocumentColorParams: ...
 def format_severity(severity: int) -> str: ...
 def diagnostic_severity(diagnostic: Diagnostic) -> DiagnosticSeverity: ...
-def format_diagnostics_for_annotation(diagnostics: list[Diagnostic], severity: DiagnosticSeverity, view: sublime.View) -> tuple[list[str], str]: ...
+def format_diagnostics_for_annotation(diagnostics: list[Diagnostic], css_class: str) -> list[str]: ...
 def format_diagnostic_for_panel(diagnostic: Diagnostic) -> tuple[str, int | None, str | None, str | None]:
     """
     Turn an LSP diagnostic into a string suitable for an output panel.

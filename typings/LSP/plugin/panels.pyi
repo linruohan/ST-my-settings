@@ -2,11 +2,9 @@ import sublime
 import sublime_plugin
 from .core.panels import LOG_LINES_LIMIT_SETTING_NAME as LOG_LINES_LIMIT_SETTING_NAME, PanelName as PanelName
 from .core.registry import windows as windows
-from contextlib import contextmanager
 from sublime_plugin import WindowCommand
 from typing import Generator
 
-@contextmanager
 def mutable(view: sublime.View) -> Generator: ...
 def clear_undo_stack(view: sublime.View) -> None: ...
 

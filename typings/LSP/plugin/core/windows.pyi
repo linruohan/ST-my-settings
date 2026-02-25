@@ -1,25 +1,24 @@
 import sublime
 import threading
-from ...protocol import Diagnostic as Diagnostic, DocumentUri as DocumentUri, LogMessageParams as LogMessageParams, ShowMessageParams as ShowMessageParams, ShowMessageRequestParams as ShowMessageRequestParams
+from ...protocol import Diagnostic as Diagnostic, DocumentUri as DocumentUri, LogMessageParams as LogMessageParams, MessageActionItem as MessageActionItem, ShowMessageParams as ShowMessageParams, ShowMessageRequestParams as ShowMessageRequestParams
 from ...third_party import WebsocketServer
 from .configurations import RETRY_COUNT_TIMEDELTA as RETRY_COUNT_TIMEDELTA, RETRY_MAX_COUNT as RETRY_MAX_COUNT, WindowConfigChangeListener as WindowConfigChangeListener, WindowConfigManager as WindowConfigManager
 from .constants import MESSAGE_TYPE_LEVELS as MESSAGE_TYPE_LEVELS
 from .logging import debug as debug, exception_log as exception_log
 from .message_request_handler import MessageRequestHandler as MessageRequestHandler
 from .panels import LOG_LINES_LIMIT_SETTING_NAME as LOG_LINES_LIMIT_SETTING_NAME, MAX_LOG_LINES_LIMIT_OFF as MAX_LOG_LINES_LIMIT_OFF, MAX_LOG_LINES_LIMIT_ON as MAX_LOG_LINES_LIMIT_ON, PanelManager as PanelManager, PanelName as PanelName
+from .promise import Promise as Promise
 from .protocol import Error as Error, Point as Point
 from .sessions import AbstractViewListener as AbstractViewListener, Logger as Logger, Manager as Manager, Session as Session, get_plugin as get_plugin
 from .settings import LspSettingsChangeListener as LspSettingsChangeListener, client_configs as client_configs, userprefs as userprefs
 from .transports import create_transport as create_transport
+from .tree_view import TreeViewSheet as TreeViewSheet
 from .types import ClientConfig as ClientConfig, matches_pattern as matches_pattern, sublime_pattern_to_glob as sublime_pattern_to_glob
 from .url import parse_uri as parse_uri
 from .views import diagnostic_severity as diagnostic_severity, extract_variables as extract_variables, format_diagnostic_for_panel as format_diagnostic_for_panel, make_link as make_link
 from .workspace import ProjectFolders as ProjectFolders, sorted_workspace_folders as sorted_workspace_folders
 from _typeshed import Incomplete
-from collections import deque
-from tree_view import TreeViewSheet as TreeViewSheet
 from typing import Any, Generator
-from weakref import WeakSet
 
 _NO_DIAGNOSTICS_PLACEHOLDER: str
 
@@ -28,17 +27,17 @@ def set_diagnostics_count(view: sublime.View, errors: int, warnings: int) -> Non
 class WindowManager(Manager, WindowConfigChangeListener):
     _window: Incomplete
     _config_manager: Incomplete
-    _sessions: set[Session]
+    _sessions: Incomplete
     _workspace: Incomplete
-    _pending_listeners: deque[AbstractViewListener]
-    _listeners: WeakSet[AbstractViewListener]
-    _new_listener: AbstractViewListener | None
-    _new_session: Session | None
-    _panel_code_phantoms: sublime.PhantomSet | None
-    _server_log: list[tuple[str, str]]
-    panel_manager: PanelManager | None
-    tree_view_sheets: dict[str, TreeViewSheet]
-    formatters: dict[str, str]
+    _pending_listeners: Incomplete
+    _listeners: Incomplete
+    _new_listener: Incomplete
+    _new_session: Incomplete
+    _panel_code_phantoms: Incomplete
+    _server_log: Incomplete
+    panel_manager: Incomplete
+    tree_view_sheets: Incomplete
+    formatters: Incomplete
     suppress_sessions_restart_on_project_update: bool
     total_error_count: int
     total_warning_count: int
@@ -66,7 +65,7 @@ class WindowManager(Manager, WindowConfigChangeListener):
     def start_async(self, config: ClientConfig, initiating_view: sublime.View) -> None: ...
     def _on_post_session_initialize(self, initiating_view: sublime.View, session: Session, is_error: bool = False) -> None: ...
     def _create_logger(self, config_name: str) -> Logger: ...
-    def handle_message_request(self, session: Session, params: ShowMessageRequestParams, request_id: int | str) -> None: ...
+    def handle_message_request(self, config_name: str, params: ShowMessageRequestParams) -> Promise[MessageActionItem | None]: ...
     def restart_sessions_async(self, config_names: list[str]) -> None: ...
     def _end_sessions_async(self, config_names: list[str] | None = None) -> None: ...
     def get_project_path(self, file_path: str) -> str | None: ...
@@ -77,13 +76,13 @@ class WindowManager(Manager, WindowConfigChangeListener):
         This is called **from the main thread** when the plugin unloads. In that case we must destroy all sessions
         from the main thread. That could lead to some dict/list being mutated while iterated over, so be careful
         """
-    def handle_log_message(self, session: Session, params: LogMessageParams) -> None: ...
-    def handle_stderr_log(self, session: Session, message: str) -> None: ...
-    def handle_server_message_async(self, server_name: str, message: str) -> None: ...
-    def log_server_message(self, prefix: str, message: str) -> None: ...
+    def handle_log_message(self, config_name: str, params: LogMessageParams) -> None: ...
+    def handle_stderr_log(self, config_name: str, message: str) -> None: ...
+    def handle_server_message_async(self, config_name: str, message: str) -> None: ...
+    def log_server_message(self, config_name: str, message: str) -> None: ...
     def get_log_lines_limit(self) -> int: ...
     def is_log_lines_limit_enabled(self) -> bool: ...
-    def handle_show_message(self, session: Session, params: ShowMessageParams) -> None: ...
+    def handle_show_message(self, config_name: str, params: ShowMessageParams) -> None: ...
     def on_diagnostics_updated(self) -> None: ...
     def update_diagnostics_panel_async(self) -> None: ...
     def _update_panel_main_thread(self, characters: str, prephantoms: list[tuple[int, int, str, str]]) -> None: ...
@@ -91,7 +90,7 @@ class WindowManager(Manager, WindowConfigChangeListener):
 
 class WindowRegistry(LspSettingsChangeListener):
     _enabled: bool
-    _windows: dict[int, WindowManager]
+    _windows: Incomplete
     def __init__(self) -> None: ...
     def enable(self) -> None: ...
     def disable(self) -> None: ...
@@ -102,8 +101,8 @@ class WindowRegistry(LspSettingsChangeListener):
     def on_userprefs_updated(self) -> None: ...
 
 class RequestTimeTracker:
-    _client_initiated_start_times: dict[int | str, float]
-    _server_initiated_start_times: dict[int | str, float]
+    _client_initiated_start_times: Incomplete
+    _server_initiated_start_times: Incomplete
     def __init__(self) -> None: ...
     def start_tracking(self, request_id: int | str, *, server_initiated: bool) -> None: ...
     def end_tracking(self, request_id: int | str, *, server_initiated: bool) -> str: ...
@@ -160,7 +159,7 @@ class RemoteLogger(Logger):
     def _broadcast_json(self, data: dict[str, Any]) -> None: ...
 
 class RouterLogger(Logger):
-    _loggers: list[Logger]
+    _loggers: Incomplete
     def __init__(self) -> None: ...
     def append(self, logger: Logger) -> None: ...
     def stderr_message(self, *args: Any, **kwargs: Any) -> None: ...

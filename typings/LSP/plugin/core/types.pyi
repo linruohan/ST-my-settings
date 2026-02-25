@@ -1,4 +1,3 @@
-import contextlib
 import socket
 import sublime
 from ...protocol import DocumentSelector as DocumentSelector, DocumentUri as DocumentUri, FileOperationFilter as FileOperationFilter, ServerCapabilities as ServerCapabilities, TextDocumentSyncKind, TextDocumentSyncOptions as TextDocumentSyncOptions, URI as URI
@@ -23,7 +22,6 @@ class FileWatcherConfig(TypedDict, total=False):
     ignores: list[str] | None
 
 def basescope2languageid(base_scope: str) -> str: ...
-@contextlib.contextmanager
 def runtime(token: str) -> Generator[None, None, None]: ...
 T = TypeVar('T')
 
@@ -98,6 +96,7 @@ class Settings:
     log_debug: Incomplete
     log_max_size: Incomplete
     log_server: Incomplete
+    lsp_code_actions_on_format: Incomplete
     lsp_code_actions_on_save: Incomplete
     lsp_format_on_paste: Incomplete
     lsp_format_on_save: Incomplete
@@ -179,6 +178,7 @@ def match_file_operation_filters(filters: list[FileOperationFilter], uri: URI) -
 
 _METHOD_TO_CAPABILITY_EXCEPTIONS: dict[str, tuple[str, str | None]]
 
+def method2attr(method: str) -> str: ...
 def method_to_capability(method: str) -> tuple[str, str]:
     """
     Given a method, returns the corresponding capability path, and the associated path to stash the registration key.
@@ -238,7 +238,7 @@ class ClientConfig:
     name: Incomplete
     selector: Incomplete
     priority_selector: Incomplete
-    schemes: list[str]
+    schemes: Incomplete
     command: Incomplete
     tcp_port: Incomplete
     auto_complete_selector: Incomplete

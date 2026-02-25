@@ -1,6 +1,6 @@
 import sublime
 import weakref
-from ..protocol import CompletionItem, CompletionItemDefaults, CompletionList, EditRangeWithInsertReplace as EditRangeWithInsertReplace, InsertReplaceEdit, MarkedString as MarkedString, MarkupContent as MarkupContent, Range as Range, TextEdit
+from ..protocol import CompletionItem, CompletionItemDefaults, EditRangeWithInsertReplace as EditRangeWithInsertReplace, InsertReplaceEdit, MarkedString as MarkedString, MarkupContent as MarkupContent, Range as Range, TextEdit
 from .core.constants import COMPLETION_KINDS as COMPLETION_KINDS
 from .core.edit import apply_text_edits as apply_text_edits
 from .core.logging import debug as debug
@@ -14,10 +14,10 @@ from _typeshed import Incomplete
 from typing import Any, Callable, Generator
 from typing_extensions import TypeAlias, TypeGuard
 
-SessionName: TypeAlias = str
-CompletionResponse: TypeAlias = list[CompletionItem] | CompletionList | None | Error
+SessionName: TypeAlias
+CompletionResponse: TypeAlias
 ResolvedCompletions: TypeAlias
-CompletionsStore: TypeAlias = tuple[list[CompletionItem], CompletionItemDefaults]
+CompletionsStore: TypeAlias
 
 def format_details(detail: str, cutoff_length: int = 80) -> str: ...
 def format_completion(item: CompletionItem, index: int, can_resolve_completion_items: bool, session_name: str, item_defaults: CompletionItemDefaults, view_id: int) -> sublime.CompletionItem: ...
@@ -42,7 +42,7 @@ class QueryCompletionsTask:
     _triggered_manually: Incomplete
     _on_done_async: Incomplete
     _resolved: bool
-    _pending_completion_requests: dict[int, weakref.ref[Session]]
+    _pending_completion_requests: Incomplete
     def __init__(self, view: sublime.View, location: int, triggered_manually: bool, on_done_async: Callable[[list[sublime.CompletionItem], sublime.AutoCompleteFlags], None]) -> None: ...
     def query_completions_async(self, sessions: list[Session]) -> None: ...
     def _create_completion_request_async(self, session: Session) -> Promise[ResolvedCompletions]: ...

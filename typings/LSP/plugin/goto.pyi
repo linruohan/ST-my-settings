@@ -61,8 +61,8 @@ class DiagnosticUriInputHandler(PreselectedListInputHandler):
     window: Incomplete
     initial_view: Incomplete
     sessions: Incomplete
-    uri: DocumentUri | None
-    _preview: sublime.View | None
+    uri: Incomplete
+    _preview: Incomplete
     _max_severity: Incomplete
     def __init__(self, window: sublime.Window, initial_view: sublime.View, sessions: list[Session], initial_value: DocumentUri | None = None) -> None: ...
     def name(self) -> str: ...

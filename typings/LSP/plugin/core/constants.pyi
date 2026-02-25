@@ -1,4 +1,4 @@
-from ...protocol import CodeActionKind, CompletionItemKind, DiagnosticSeverity, DocumentHighlightKind, MessageType, SymbolKind
+from ...protocol import CodeActionKind, CompletionItemKind, DiagnosticSeverity, DiagnosticTag, DocumentHighlightKind, MessageType, SymbolKind
 from .typing import StrEnum as StrEnum
 from _typeshed import Incomplete
 from enum import IntFlag
@@ -84,6 +84,13 @@ CODE_ACTION_KINDS: dict[CodeActionKind, SublimeKind]
 DOCUMENT_HIGHLIGHT_KIND_NAMES: dict[DocumentHighlightKind, str]
 MESSAGE_TYPE_LEVELS: dict[MessageType, str]
 SUBLIME_KIND_SCOPES: dict[SublimeKind, str]
+DIAGNOSTIC_SEVERITY_SCOPES: dict[DiagnosticSeverity, str]
+DIAGNOSTIC_TAG_SCOPES: dict[DiagnosticTag, str]
 DOCUMENT_HIGHLIGHT_KIND_SCOPES: dict[DocumentHighlightKind, str]
+CODE_ACTION_ANNOTATION_SCOPE: str
+CODE_LENS_ANNOTATION_SCOPE: str
+SIGNATURE_HELP_FUNCTION_SCOPE: str
+SIGNATURE_HELP_ACTIVE_PARAMETER_SCOPE: str
+SIGNATURE_HELP_INACTIVE_PARAMETER_SCOPE: str
 LANGUAGE_IDENTIFIERS: dict[str, str]
 SEMANTIC_TOKENS_MAP: Incomplete

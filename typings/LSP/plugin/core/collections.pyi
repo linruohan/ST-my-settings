@@ -6,7 +6,7 @@ def deep_merge(base: dict[str, Any], update: dict[str, Any]) -> None:
 
 class DottedDict:
     __slots__: Incomplete
-    _d: dict[str, Any]
+    _d: Incomplete
     def __init__(self, d: dict[str, Any] | None = None) -> None:
         """
         Construct a DottedDict, optionally from an existing dictionary.

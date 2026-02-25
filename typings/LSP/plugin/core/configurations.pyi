@@ -5,10 +5,7 @@ from .url import parse_uri as parse_uri
 from .workspace import disable_in_project as disable_in_project, enable_in_project as enable_in_project
 from _typeshed import Incomplete
 from abc import ABCMeta, abstractmethod
-from collections import deque
-from datetime import datetime
 from typing import Generator
-from weakref import WeakSet
 
 RETRY_MAX_COUNT: int
 RETRY_COUNT_TIMEDELTA: Incomplete
@@ -20,10 +17,10 @@ class WindowConfigChangeListener(metaclass=ABCMeta):
 class WindowConfigManager:
     _window: Incomplete
     _global_configs: Incomplete
-    _disabled_for_session: set[str]
-    _crashes: dict[str, deque[datetime]]
-    all: dict[str, ClientConfig]
-    _change_listeners: WeakSet[WindowConfigChangeListener]
+    _disabled_for_session: Incomplete
+    _crashes: Incomplete
+    all: Incomplete
+    _change_listeners: Incomplete
     def __init__(self, window: sublime.Window, global_configs: dict[str, ClientConfig]) -> None: ...
     def add_change_listener(self, listener: WindowConfigChangeListener) -> None: ...
     def get_config(self, config_name: str) -> ClientConfig | None: ...

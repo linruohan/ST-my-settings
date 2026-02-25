@@ -3,11 +3,12 @@ from ..protocol import SelectionRange as SelectionRange
 from .core.protocol import Request as Request
 from .core.registry import LspTextCommand as LspTextCommand, get_position as get_position
 from .core.views import range_to_region as range_to_region, selection_range_params as selection_range_params
+from _typeshed import Incomplete
 from typing import Any
 
 class LspExpandSelectionCommand(LspTextCommand):
     capability: str
-    _regions: list[sublime.Region]
+    _regions: Incomplete
     _change_count: int
     def __init__(self, view: sublime.View) -> None: ...
     def is_enabled(self, event: dict | None = None, point: int | None = None, fallback: bool = False) -> bool: ...
