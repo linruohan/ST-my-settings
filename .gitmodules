@@ -1,0 +1,10 @@
+<<<<<<< HEAD
+||||||| 4629cd0
+[submodule "typings/LSP"]
+	path = typings/LSP
+	url = https://github.com/sublimelsp/LSP.git
+=======
+[submodule "Packages/LSP"]
+	path = Packages/LSP
+	url = https://github.com/sublimelsp/LSP.git
+>>>>>>> jfcherng/master
