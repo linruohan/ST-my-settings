@@ -80,8 +80,7 @@
     "dictionary": "Packages/Language - English/en_US-large.dic",
     "draw_minimap_border": true,
     "draw_shadows": true,
-    "draw_white_space": [
-    ],
+    "draw_white_space": ["all"],
     "enable_tab_scrolling": false,
     "ensure_newline_at_eof_on_save": true,
     "file_exclude_patterns": [
@@ -181,22 +180,20 @@
         ".Trash",
         ".Trash-*",
     ],
-    "font_face": "XHZS",
+    "font_face": "Cascadia Mono NF",
     "font_options": [
         // "bold",
         // "gdi",
         // "ss02",
     ],
-    "font_size": 18,
+    "font_size": 11,
     "gutter": true,
     "hide_pointer_while_typing": false,
     "highlight_find_results_in_scrollbar": true,
     "highlight_line": true,
     "highlight_modified_tabs": true,
     "hungry_delete_empty_line": false,
-    "ignored_packages": [
-        "Vintage",
-    ],
+    "ignored_packages": ["Vintage"],
     "ignored_snippets": [
         "C++/Snippets/*",
         "EditorConfig/*",
@@ -215,11 +212,7 @@
         "param",
         "php",
     ],
-    "indent_guide_options": [
-        "solid",
-        "draw_normal",
-        "draw_active",
-    ],
+    "indent_guide_options": ["solid", "draw_normal", "draw_active"],
     "indent_to_bracket": false,
     "index_exclude_patterns": [
         "//branch-*/",
@@ -237,11 +230,7 @@
     "match_tags": false,
     // "mini_auto_complete": true,
     "preview_on_click": "only_left",
-    "rulers": [
-        80,
-        100,
-        120
-    ],
+    "rulers": [80, 100, 120],
     "scroll_past_end": 0.4,
     "scroll_context_lines": 4,
     "selection_description_column_type": "real",
