@@ -74,7 +74,7 @@
     "close_find_after_find_all": true,
     "close_find_after_replace_all": true,
     "close_windows_when_empty": false,
-    "color_scheme": "wicked_rainbow.sublime-color-scheme",
+    "color_scheme": "Catppuccin Mocha.sublime-color-scheme",
     "default_line_ending": "unix",
     "detect_indentation": true,
     "dictionary": "Packages/Language - English/en_US-large.dic",
@@ -180,7 +180,7 @@
         ".Trash",
         ".Trash-*",
     ],
-    "font_face": "XHZS",
+    "font_face": "SF Mono",//"Maple Mono Normal NF CN",
     "font_options": [
         // "bold",
         // "gdi",
@@ -240,7 +240,7 @@
     "spell_check": false,
     "spelling_selector": "markup.raw - meta.text.cjk, source string.quoted - punctuation - meta.preprocessor.include - meta.text.cjk, source comment - source comment.block.preprocessor - meta.text.cjk, -(source, constant, keyword, storage, support, variable, markup.underline.link, meta.tag, meta.text.cjk)",
     "tab_size": 4,
-    "theme": "Default Dark.sublime-theme",
+    "theme": "auto",
     "theme_font_options": [
         // "gdi",
     ],
@@ -315,6 +315,6 @@
     ],
     "dark_color_scheme": "MarkdownEditor.sublime-color-scheme",
     "light_color_scheme": "MarkdownEditor.sublime-color-scheme",
-    "dark_theme": "Default.sublime-theme",
-    "light_theme": "Default.sublime-theme",
+    "dark_theme": "Default Dark.sublime-theme",
+    "light_theme": "Default Dark.sublime-theme",
 }
