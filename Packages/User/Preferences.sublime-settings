@@ -313,8 +313,8 @@
         ["y", "n"],
         ["yes", "no"],
     ],
-    "dark_color_scheme": "MarkdownEditor.sublime-color-scheme",
-    "light_color_scheme": "MarkdownEditor.sublime-color-scheme",
+    "dark_color_scheme": "Mariana.sublime-color-scheme",
+    "light_color_scheme": "Breakers.sublime-color-scheme",
     "dark_theme": "Default Dark.sublime-theme",
     "light_theme": "Default Dark.sublime-theme",
 }

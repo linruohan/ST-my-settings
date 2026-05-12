@@ -1,28 +1,28 @@
 [
     {
-        "command": "open_context_url", 
-        "caption": "打开URL链接"
+        "caption": "打开URL链接", 
+        "command": "open_context_url"
     }, 
     {
         "caption": "-"
     }, 
     {
-        "command": "cut", 
-        "caption": "剪切"
+        "caption": "剪切", 
+        "command": "cut"
     }, 
     {
-        "command": "copy", 
-        "caption": "复制"
+        "caption": "复制", 
+        "command": "copy"
     }, 
     {
-        "command": "paste", 
-        "caption": "粘贴"
+        "caption": "粘贴", 
+        "command": "paste"
     }, 
     {
         "caption": "-"
     }, 
     {
-        "command": "select_all", 
-        "caption": "全选"
+        "caption": "全选", 
+        "command": "select_all"
     }
 ]

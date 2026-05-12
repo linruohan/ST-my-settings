@@ -1,6 +1,6 @@
 [
-  {
-    "caption": "Browse Command List (py38)",
-    "command": "browse_commands",
-  },
+    {
+        "caption": "Browse Command List (py314)",
+        "command": "browse_commands",
+    },
 ]

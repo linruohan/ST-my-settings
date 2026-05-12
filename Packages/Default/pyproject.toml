@@ -1,7 +1,7 @@
 [tool.ruff]
 preview = true
 line-length = 120
-target-version = 'py38'
+target-version = 'py314'
 exclude = [
   "*/libs/*",
   ".git",

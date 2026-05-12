@@ -1,7 +1,0 @@
-%YAML 1.2
----
-# I don't want to use Doxydoxygen's INI syntax at all...
-name: INI
-scope: source.ini.doxydoxygen
-extends: Packages/INI/INI.sublime-syntax
-hidden: true

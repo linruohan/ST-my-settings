@@ -1,26 +1,26 @@
 [
     {
-        "command": "set_line_ending", 
+        "caption": "Windows (CRLF)", 
         "args": {
             "type": "windows"
         }, 
-        "checkbox": true, 
-        "caption": "Windows (CRLF)"
+        "command": "set_line_ending", 
+        "checkbox": true
     }, 
     {
-        "command": "set_line_ending", 
+        "caption": "Unix (LF)", 
         "args": {
             "type": "unix"
         }, 
-        "checkbox": true, 
-        "caption": "Unix (LF)"
+        "command": "set_line_ending", 
+        "checkbox": true
     }, 
     {
-        "command": "set_line_ending", 
+        "caption": "Mac OS X (CR)", 
         "args": {
             "type": "cr"
         }, 
-        "checkbox": true, 
-        "caption": "Mac OS X (CR)"
+        "command": "set_line_ending", 
+        "checkbox": true
     }
 ]
