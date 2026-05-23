@@ -193,7 +193,8 @@
     "highlight_line": true,
     "highlight_modified_tabs": true,
     "hungry_delete_empty_line": false,
-    "ignored_packages": ["Vintage",
+    "ignored_packages": ["Package Control",
+        "Vintage",
     ],
     "ignored_snippets": [
         "C++/Snippets/*",
@@ -224,7 +225,7 @@
         // default
         "*.log",
     ],
-    "index_files": true,
+    "index_files": false,
     "line_numbers": true,
     "line_padding_bottom": 2,
     "match_brackets": false,
