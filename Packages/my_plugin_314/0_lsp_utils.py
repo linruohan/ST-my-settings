@@ -27,6 +27,10 @@ GLIBC_VER = get_glibc_version()
 
 def revise_node_version_centos7() -> None:
     from lsp_utils import node_runtime
+    from lsp_utils._node import node_constants, node_installer, node_manager, node_runner
+
+    if not GLIBC_VER or sublime.arch() != "x64":
+        return
 
     if not GLIBC_VER or sublime.arch() != "x64":
         return
@@ -44,7 +48,7 @@ def revise_node_version_centos7() -> None:
         #     ),
         # ),
         (
-            (2, 35),
+            (2, 34),
             "24.15.0",
             (
                 "node-v{version}-linux-x64.tar.gz",
@@ -69,54 +73,74 @@ def revise_node_version_centos7() -> None:
         ),
     )
 
-    if node_min_req := first_true(node_min_reqs, pred=lambda x: GLIBC_VER >= x[0]):
-        _, node_runtime_version, (filename, url) = node_min_req
-        filename = filename.format(version=node_runtime_version)
-        url = url.format(version=node_runtime_version, filename=filename)
-
-        node_runtime.NODE_DIST_URL = url
-        node_runtime.NODE_RUNTIME_VERSION = node_runtime_version
-
-        node_runtime.CUSTOM_NODE_DIST_URL = url
-        node_runtime.CUSTOM_NODE_RUNTIME_VERSION = node_runtime_version
-    else:
+    if not (node_min_req := first_true(node_min_reqs, pred=lambda x: GLIBC_VER >= x[0])):
         print("[ERROR] glibc is too old for Node.js...")
+        return
 
-    # -------------------- #
-    # fix NodeRuntimeLocal #
-    # -------------------- #
+    _, node_version, (filename, url) = node_min_req
+    filename = filename.format(version=node_version)
+    url = url.format(version=node_version, filename=filename)
+
+    # ------------------------------------------------------ #
+    # legacy path: node_runtime (NpmClientHandler-based pkgs) #
+    # ------------------------------------------------------ #
+
+    node_runtime.NODE_DIST_URL = url
+    node_runtime.NODE_RUNTIME_VERSION = node_version
+
+    node_runtime.CUSTOM_NODE_DIST_URL = url
+    node_runtime.CUSTOM_NODE_RUNTIME_VERSION = node_version
 
     class MyNodeRuntimeLocal(node_runtime.NodeRuntimeLocal):
         def __init__(
             self,
             base_dir: Path,
-            node_version: str = node_runtime.NODE_RUNTIME_VERSION,
-            node_dist_url: str = node_runtime.NODE_DIST_URL,
+            node_version: str = node_version,
+            node_dist_url: str = url,
         ) -> None:
             super().__init__(base_dir, node_version, node_dist_url)
-
-    node_runtime.NodeRuntimeLocal = MyNodeRuntimeLocal
-
-    # ----------------- #
-    # fix NodeInstaller #
-    # ----------------- #
 
     class MyNodeInstaller(node_runtime.NodeInstaller):
         def __init__(
             self,
             base_dir: Path,
-            node_version: str = node_runtime.NODE_RUNTIME_VERSION,
-            node_dist_url: str = node_runtime.NODE_DIST_URL,
+            node_version: str = node_version,
+            node_dist_url: str = url,
         ) -> None:
             super().__init__(base_dir, node_version, node_dist_url)
 
         def _node_archive(self) -> tuple[str, str]:
-            return (
-                node_runtime.NODE_DIST_URL.rpartition("/")[2],
-                node_runtime.NODE_DIST_URL,
-            )
+            return (filename, url)
 
+    node_runtime.NodeRuntimeLocal = MyNodeRuntimeLocal
     node_runtime.NodeInstaller = MyNodeInstaller
+
+    # ------------------------------------------------- #
+    # new path: _node.* (NodeManager-based pkgs)        #
+    # ------------------------------------------------- #
+
+    node_constants.NODE_DIST_URL = url
+    node_constants.NODE_RUNTIME_VERSION = node_version
+    node_installer.NODE_DIST_URL = url
+
+    class MyNodeManagerInstaller(node_installer.NodeInstaller):
+        def __init__(self, base_dir: Path, node_version: str = node_version) -> None:
+            super().__init__(base_dir, node_version)
+
+        def _node_archive(self) -> tuple[str, str]:
+            return (filename, url)
+
+    class MyNodeRunnerLocal(node_runner.NodeRunnerLocal):
+        # upstream's default node_version was baked in from node_constants at import
+        # time and NodeManager calls NodeRunnerLocal(runtime_dir) with no version,
+        # so the default itself must be replaced
+        def __init__(self, base_dir: Path, node_version: str = node_version) -> None:
+            super().__init__(base_dir, node_version)
+
+    node_installer.NodeInstaller = MyNodeManagerInstaller
+    node_runner.NodeInstaller = MyNodeManagerInstaller  # used by NodeRunnerLocal.install_node()
+    node_runner.NodeRunnerLocal = MyNodeRunnerLocal
+    node_manager.NodeRunnerLocal = MyNodeRunnerLocal  # used by NodeManager._resolve_node_runtime()
 
 
 try:
