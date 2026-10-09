@@ -32,9 +32,6 @@ def revise_node_version_centos7() -> None:
     if not GLIBC_VER or sublime.arch() != "x64":
         return
 
-    if not GLIBC_VER or sublime.arch() != "x64":
-        return
-
     settings = sublime.load_settings("lsp_utils.sublime-settings")
     settings.set("local_use_electron", False)  # Node.js is forced
 
