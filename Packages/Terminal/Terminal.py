@@ -58,7 +58,7 @@ def powershell(package_dir):
 
 
 def linux_terminal():
-    ps = 'ps -eo comm,args | grep -E "^(gnome-session|ksmserver|xfce4-session|lxsession|lxqt-session|mate-panel|cinnamon-sessio)" | grep -v grep'  # noqa: E501
+    ps = 'ps -eo comm,args | grep -E "^(gnome-session|ksmserver|xfce4-session|lxsession|mate-panel|cinnamon-sessio)" | grep -v grep'  # noqa: E501
     wm = [x.replace("\n", '') for x in os.popen(ps)]
     if wm:
         # elementary OS: `/usr/lib/gnome-session/gnome-session-binary --session=pantheon`
@@ -74,8 +74,6 @@ def linux_terminal():
             return 'konsole'
         if wm[0].startswith('lxsession'):
             return 'lxterminal'
-        if wm[0].startswith('lxqt-session'):
-            return 'qterminal'
         if wm[0].startswith('mate-panel'):
             return 'mate-terminal'
 
@@ -106,30 +104,17 @@ class TerminalSelector():
         default = None
 
         if os.name == 'nt':
-            # Windows Terminal
-            wt = os.environ['LOCALAPPDATA'] + R'\Microsoft\WindowsApps\wt.exe'
-            # git-bash
-            git_shells = {
-                'git-bash-x64': os.environ['ProgramFiles'] + R'\Git\git-bash.exe',
-                'git-bash-x86': os.environ['ProgramFiles(x86)'] + R'\Git\git-bash.exe',
-                'git-bash-local': os.environ['LOCALAPPDATA'] + R'\Programs\Git\git-bash.exe',
-            }
-
-            if os.path.isfile(wt):
-                default = wt
-            elif os.path.isfile(git_shells['git-bash-x64']):
-                default = git_shells['git-bash-x64']
-            elif os.path.isfile(git_shells['git-bash-x86']):
-                default = git_shells['git-bash-x86']
-            elif os.path.isfile(git_shells['git-bash-local']):
-                default = git_shells['git-bash-local']
-            elif os.path.isfile(os.environ['SYSTEMROOT'] + R'\System32\WindowsPowerShell\v1.0\powershell.exe'):
+            if os.path.exists(os.environ['SYSTEMROOT'] + '\\System32\\WindowsPowerShell\\v1.0\\powershell.exe'):
                 default = powershell(package_dir)
             else:
-                default = os.environ['SYSTEMROOT'] + R'\System32\cmd.exe'
+                default = os.environ['SYSTEMROOT'] + '\\System32\\cmd.exe'
 
         elif sys.platform == 'darwin':
-            default = os.path.join(package_dir, 'Terminal.sh')
+            script = 'Terminal.sh'
+            if get_setting('reuse_window', False):
+                script = 'TerminalReuse.sh'
+
+            default = os.path.join(package_dir, script)
             if not os.access(default, os.X_OK):
                 os.chmod(default, 0o755)
 
@@ -160,7 +145,7 @@ class TerminalCommand():
         sublime.status_message('Terminal: opening at home directory')
         return os.path.expanduser('~')
 
-    def open_terminal(self, location, terminal, parameters):
+    def terminal_open(self, location, terminal, parameters):
         try:
             for k, v in enumerate(parameters):
                 parameters[k] = v.replace('%CWD%', location)
@@ -186,8 +171,7 @@ class TerminalCommand():
             sublime.error_message('Terminal: ' + str(exception))
 
 
-# ST4302 introduces a "open_terminal" command, so we need to use a different name
-class MyOpenTerminalCommand(sublime_plugin.WindowCommand, TerminalCommand):
+class TerminalOpenCommand(sublime_plugin.WindowCommand, TerminalCommand):
     def is_visible(self, paths=[]):
         # remove the command if the view doesn't have a path to open at
         # taking is_visible over is_enabled to remove it from the context menu,
@@ -207,10 +191,10 @@ class MyOpenTerminalCommand(sublime_plugin.WindowCommand, TerminalCommand):
         if os.path.isfile(path):
             path = os.path.dirname(path)
 
-        self.open_terminal(path, terminal, parameters)
+        self.terminal_open(path, terminal, parameters)
 
 
-class OpenTerminalProjectFolderCommand(sublime_plugin.WindowCommand, TerminalCommand):
+class TerminalOpenProjectFolderCommand(sublime_plugin.WindowCommand, TerminalCommand):
     def is_visible(self):
         # remove the command if the current window doesn't have directories
         # i.e. it's a single file (use the other command)
@@ -227,5 +211,15 @@ class OpenTerminalProjectFolderCommand(sublime_plugin.WindowCommand, TerminalCom
         # See https://github.com/wbond/sublime_terminal/issues/86
         folders = [x for x in self.window.folders() if path.find(x + os.sep) == 0][0:1]
 
-        command = MyOpenTerminalCommand(self.window)
+        command = TerminalOpenCommand(self.window)
         command.run(folders, parameters=parameters)
+
+
+class TerminalSwitchCommand(sublime_plugin.WindowCommand, TerminalCommand):
+    def is_visible(self):
+        # only have an applescript to do this
+        return sys.platform == 'darwin'
+
+    def run(self, paths=[], parameters=None):
+        package_dir = os.path.join(sublime.packages_path(), INSTALLED_DIR)
+        subprocess.Popen(os.path.join(package_dir, 'TerminalSwitch.sh'))

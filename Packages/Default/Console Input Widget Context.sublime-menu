@@ -1,38 +1,38 @@
 [
     {
-        "caption": "剪切", 
-        "command": "cut"
-    }, 
+        "command": "cut",
+        "caption": "剪切"
+    },
     {
-        "caption": "复制", 
-        "command": "copy"
-    }, 
+        "command": "copy",
+        "caption": "复制"
+    },
     {
-        "caption": "粘贴", 
-        "command": "paste"
-    }, 
-    {
-        "caption": "-"
-    }, 
-    {
-        "caption": "全选", 
-        "command": "select_all"
-    }, 
+        "command": "paste",
+        "caption": "粘贴"
+    },
     {
         "caption": "-"
-    }, 
+    },
     {
-        "checkbox": true, 
+        "command": "select_all",
+        "caption": "全选"
+    },
+    {
+        "caption": "-"
+    },
+    {
+        "command": "console_python_version",
         "args": {
             "version": "3.8"
-        }, 
-        "command": "console_python_version"
-    }, 
+        },
+        "checkbox": true
+    },
     {
-        "checkbox": true, 
+        "command": "console_python_version",
         "args": {
             "version": "3.3"
-        }, 
-        "command": "console_python_version"
+        },
+        "checkbox": true
     }
 ]

@@ -5,22 +5,15 @@ import sys
 import re
 import subprocess
 import shutil
-from imp import reload
-
-print(sys.getdefaultencoding())
-reload(sys)
-# sys.setdefaultencoding('utf-8')
 
 if sys.platform == 'win32':
-	package_file = os.path.normpath(os.path.abspath(__file__))
-	package_path = os.path.dirname(package_file)
-	lib_path =  os.path.join(package_path, "lib")
-	if lib_path not in sys.path:
-	    sys.path.append(lib_path)
-	    print(sys.path)
-	from PIL import ImageGrab
-	from PIL import ImageFile
-	from PIL import Image
+	package_path = os.path.dirname(os.path.abspath(__file__))
+	lib_path = os.path.join(package_path, "lib")
+	# Vendored Pillow 3.1.1 is linked to python33.dll and cannot load on
+	# Sublime Text's current plugin host. Drop it if a previous load added it.
+	while lib_path in sys.path:
+		sys.path.remove(lib_path)
+	from .clipboard_image import read_clipboard_png
 
 class ImageCommand(object):
 	def __init__(self, *args, **kwgs):
@@ -107,11 +100,11 @@ class ImagePasteCommand(ImageCommand, sublime_plugin.TextCommand):
 			if out and out[:4] == "save":
 				return rel_fn
 		else: # win32
-			ImageFile.LOAD_TRUNCATED_IMAGES = True
-			im = ImageGrab.grabclipboard()
-			if im:
+			png = read_clipboard_png()
+			if png:
 				abs_fn, rel_fn = self.get_filename()
-				im.save(abs_fn,'PNG')	
+				with open(abs_fn, "wb") as fp:
+					fp.write(png)
 				return rel_fn
 
 		print('clipboard buffer is not image!')

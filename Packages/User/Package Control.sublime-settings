@@ -115,5 +115,6 @@
     "repositories": [
         "https://raw.githubusercontent.com/jfcherng-sublime/ST-my-package-control/master/repository.json",
     ],
-    "in_process_packages": ["Package Control"],
+    "in_process_packages": [
+    ],
 }
