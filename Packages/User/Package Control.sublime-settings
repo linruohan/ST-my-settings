@@ -100,7 +100,7 @@
         "ScopeHunter",
         "SelectUntil",
         "SideBarMenuAdvanced",
-        "sublimelint",
+        "SublimeLinter",
         "SublimeLinter-contrib-markdownlint",
         "SublimeLinter-contrib-sublime-syntax",
         "SublimeLinter-php",
