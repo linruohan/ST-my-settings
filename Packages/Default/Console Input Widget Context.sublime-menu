@@ -24,7 +24,7 @@
     {
         "command": "console_python_version",
         "args": {
-            "version": "3.8"
+            "version": "3.14"
         },
         "checkbox": true
     },

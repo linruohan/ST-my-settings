@@ -36,6 +36,13 @@
         }
     },
     {
+        "caption": "在终端中打开…",
+        "command": "open_terminal",
+        "args": {
+            "dirs": []
+        }
+    },
+    {
         "caption": "复制文件路径",
         "command": "copy_path_sidebar",
         "args": {
@@ -43,7 +50,7 @@
         }
     },
     {
-        "caption": "打开链接目录",
+        "caption": "显示链接目录",
         "command": "reveal_link_source",
         "args": {
             "dirs": []
@@ -75,7 +82,7 @@
         }
     },
     {
-        "caption": "审查文件…",
+        "caption": "追溯文件…",
         "command": "sublime_merge_blame_file",
         "args": {
             "files": []

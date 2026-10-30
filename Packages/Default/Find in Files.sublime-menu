@@ -12,7 +12,7 @@
         "args": {
             "snippet": "*.${0:txt}"
         },
-        "caption": "添加包括过滤(通配符)"
+        "caption": "添加包含过滤(通配符)"
     },
     {
         "command": "add_where_snippet",
@@ -26,7 +26,7 @@
         "args": {
             "snippet": "<project filters>"
         },
-        "caption": "添加排除过滤项目"
+        "caption": "添加项目过滤器"
     },
     {
         "command": "add_where_snippet",

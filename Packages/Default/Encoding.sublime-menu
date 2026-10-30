@@ -35,35 +35,35 @@
                 }
             },
             {
-                "caption": "西方语 (Windows 1252)",
+                "caption": "西欧语 (Windows 1252)",
                 "command": "set_encoding",
                 "args": {
                     "encoding": "Western (Windows 1252)"
                 }
             },
             {
-                "caption": "西方语 (ISO 8859-1)",
+                "caption": "西欧语 (ISO 8859-1)",
                 "command": "set_encoding",
                 "args": {
                     "encoding": "Western (ISO 8859-1)"
                 }
             },
             {
-                "caption": "西方语 (ISO 8859-3)",
+                "caption": "西欧语 (ISO 8859-3)",
                 "command": "set_encoding",
                 "args": {
                     "encoding": "Western (ISO 8859-3)"
                 }
             },
             {
-                "caption": "西方语 (ISO 8859-15)",
+                "caption": "西欧语 (ISO 8859-15)",
                 "command": "set_encoding",
                 "args": {
                     "encoding": "Western (ISO 8859-15)"
                 }
             },
             {
-                "caption": "西方语 (Mac Roman)",
+                "caption": "西欧语 (Mac Roman)",
                 "command": "set_encoding",
                 "args": {
                     "encoding": "Western (Mac Roman)"
@@ -91,14 +91,14 @@
                 }
             },
             {
-                "caption": "波罗海语 (Windows 1257)",
+                "caption": "波罗的海语 (Windows 1257)",
                 "command": "set_encoding",
                 "args": {
                     "encoding": "Baltic (Windows 1257)"
                 }
             },
             {
-                "caption": "波罗海语 (ISO 8859-4)",
+                "caption": "波罗的海语 (ISO 8859-4)",
                 "command": "set_encoding",
                 "args": {
                     "encoding": "Baltic (ISO 8859-4)"
@@ -299,35 +299,35 @@
                 }
             },
             {
-                "caption": "西方语 (Windows 1252)",
+                "caption": "西欧语 (Windows 1252)",
                 "command": "reopen",
                 "args": {
                     "encoding": "Western (Windows 1252)"
                 }
             },
             {
-                "caption": "西方语 (ISO 8859-1)",
+                "caption": "西欧语 (ISO 8859-1)",
                 "command": "reopen",
                 "args": {
                     "encoding": "Western (ISO 8859-1)"
                 }
             },
             {
-                "caption": "西方语 (ISO 8859-3)",
+                "caption": "西欧语 (ISO 8859-3)",
                 "command": "reopen",
                 "args": {
                     "encoding": "Western (ISO 8859-3)"
                 }
             },
             {
-                "caption": "西方语 (ISO 8859-15)",
+                "caption": "西欧语 (ISO 8859-15)",
                 "command": "reopen",
                 "args": {
                     "encoding": "Western (ISO 8859-15)"
                 }
             },
             {
-                "caption": "西方语 (Mac Roman)",
+                "caption": "西欧语 (Mac Roman)",
                 "command": "reopen",
                 "args": {
                     "encoding": "Western (Mac Roman)"
@@ -355,14 +355,14 @@
                 }
             },
             {
-                "caption": "波罗海语 (Windows 1257)",
+                "caption": "波罗的海语 (Windows 1257)",
                 "command": "reopen",
                 "args": {
                     "encoding": "Baltic (Windows 1257)"
                 }
             },
             {
-                "caption": "波罗海语 (ISO 8859-4)",
+                "caption": "波罗的海语 (ISO 8859-4)",
                 "command": "reopen",
                 "args": {
                     "encoding": "Baltic (ISO 8859-4)"
