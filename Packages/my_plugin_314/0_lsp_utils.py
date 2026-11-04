@@ -26,14 +26,10 @@ GLIBC_VER = get_glibc_version()
 
 
 def revise_node_version_centos7() -> None:
-    from lsp_utils import node_runtime
     from lsp_utils._node import node_constants, node_installer, node_manager, node_runner
 
     if not GLIBC_VER or sublime.arch() != "x64":
         return
-
-    settings = sublime.load_settings("lsp_utils.sublime-settings")
-    settings.set("local_use_electron", False)  # Node.js is forced
 
     node_min_reqs: tuple[tuple[GLIBC_VER_TUPLE, NODE_VER_STR, tuple[str, str] | None], ...] = (
         # (
@@ -46,7 +42,7 @@ def revise_node_version_centos7() -> None:
         # ),
         (
             (2, 34),
-            "24.15.0",
+            "26.13.0",
             (
                 "node-v{version}-linux-x64.tar.gz",
                 "https://github.com/sublimelsp/node-pointer-compression-builds/releases/download/v{version}/{filename}",
@@ -78,42 +74,8 @@ def revise_node_version_centos7() -> None:
     filename = filename.format(version=node_version)
     url = url.format(version=node_version, filename=filename)
 
-    # ------------------------------------------------------ #
-    # legacy path: node_runtime (NpmClientHandler-based pkgs) #
-    # ------------------------------------------------------ #
-
-    node_runtime.NODE_DIST_URL = url
-    node_runtime.NODE_RUNTIME_VERSION = node_version
-
-    node_runtime.CUSTOM_NODE_DIST_URL = url
-    node_runtime.CUSTOM_NODE_RUNTIME_VERSION = node_version
-
-    class MyNodeRuntimeLocal(node_runtime.NodeRuntimeLocal):
-        def __init__(
-            self,
-            base_dir: Path,
-            node_version: str = node_version,
-            node_dist_url: str = url,
-        ) -> None:
-            super().__init__(base_dir, node_version, node_dist_url)
-
-    class MyNodeInstaller(node_runtime.NodeInstaller):
-        def __init__(
-            self,
-            base_dir: Path,
-            node_version: str = node_version,
-            node_dist_url: str = url,
-        ) -> None:
-            super().__init__(base_dir, node_version, node_dist_url)
-
-        def _node_archive(self) -> tuple[str, str]:
-            return (filename, url)
-
-    node_runtime.NodeRuntimeLocal = MyNodeRuntimeLocal
-    node_runtime.NodeInstaller = MyNodeInstaller
-
     # ------------------------------------------------- #
-    # new path: _node.* (NodeManager-based pkgs)        #
+    # _node.* (NodeManager-based pkgs)                  #
     # ------------------------------------------------- #
 
     node_constants.NODE_DIST_URL = url

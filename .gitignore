@@ -26,3 +26,6 @@ docs/
 .venv/
 venv-*/
 venv/
+
+# caches
+__pycache__/
